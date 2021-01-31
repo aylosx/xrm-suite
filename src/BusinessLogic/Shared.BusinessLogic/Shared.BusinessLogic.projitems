@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>42049c3d-a286-49e9-af7d-2b22bf474cc4</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Shared.BusinessLogic</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Data\CrmService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Data\ICrmService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Account\IInitializeEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Account\IManageDeleteEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Account\InitializeEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Account\ManageDeleteEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\None\IInitializeEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\None\InitializeEntityService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Account\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Services\Data\" />
+  </ItemGroup>
+</Project>

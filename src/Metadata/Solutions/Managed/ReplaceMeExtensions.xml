@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<Mapping>
+	<FileToFile 
+		map="PluginAssemblies\**\GrgPluginsAccount.dll" 
+		to="..\..\..\..\Plugins\Grg.Plugins.Account\bin\Grg.Plugins.Account.dll" />  
+	<FileToFile 
+		map="PluginAssemblies\**\GrgPluginsAny.dll" 
+		to="..\..\..\..\Plugins\Grg.Plugins.Any\bin\Grg.Plugins.Any.dll" />  
+	<FileToFile 
+		map="PluginAssemblies\**\GrgPluginsContact.dll" 
+		to="..\..\..\..\Plugins\Grg.Plugins.Contact\bin\Grg.Plugins.Contact.dll" />  
+	<FileToFile 
+		map="PluginAssemblies\**\GrgPluginsLead.dll" 
+		to="..\..\..\..\Plugins\Grg.Plugins.Lead\bin\Grg.Plugins.Lead.dll" />  
+</Mapping>

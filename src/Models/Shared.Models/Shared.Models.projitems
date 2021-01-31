@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e51fcaac-be3f-4738-b994-f7e54f4d54f1</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Shared.Models</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Account.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAccountRating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressOneAddressType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressOneFreightTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressOneShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressTwoAddressType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressTwoFreightTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountAddressTwoShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountBusinessType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountCategory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountClassification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountCustomerSize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountIndustry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountOwnership.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountPaymentTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountPreferredDay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountPreferredMethodOfContact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountPreferredTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountRelationshipType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AccountTerritoryCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Activity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityAppointmentType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityParty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityPartyAppointmentType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityPartyParticipationType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityPriority.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ActivityStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Appointment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AppointmentAppointmentType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AppointmentAttachmentErrors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AppointmentPriority.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AppointmentState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\AppointmentStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Contact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressOneAddressType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressOneFreightTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressOneShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressThreeAddressType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressThreeFreightTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressThreeShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressTwoAddressType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressTwoFreightTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactAddressTwoShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactCustomerSize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactEducation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactGender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactHasChildren.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactLeadSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactMaritalStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPaymentTerms.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPreferredDay.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPreferredMethodOfContact.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPreferredTime.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactRelationshipType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactRole.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactShippingMethod.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactTerritory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\CrmServiceContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalDeliveryPriority.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSocialChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSyncDirection1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Task.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\TaskPriority.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\TaskState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\TaskStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Responses\Account\InitializedEntity.cs" />
+  </ItemGroup>
+</Project>

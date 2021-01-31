@@ -1,0 +1,135 @@
+<entities >
+  <entity name="aylos_country" displayname="Country" etc="10038" primaryidfield="aylos_countryid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field updateCompare="true" displayname="Country" name="aylos_countryid" type="guid" primaryKey="true" />
+      <field displayname="Eurozone" name="aylos_eurozone" type="bool" customfield="true" />
+      <field displayname="Holding Office" name="aylos_holdingoffice" type="entityreference" lookupType="aylos_offices" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Iso Code" name="aylos_code" type="string" customfield="true" />
+      <field displayname="Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="order" name="aylos_order" type="number" customfield="true" />
+      <field displayname="Phone Code" name="aylos_phonecode" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Servicing Office" name="aylos_servicingoffice" type="entityreference" lookupType="aylos_offices" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Time Zone Rule Version Number" name="timezoneruleversionnumber" type="number" />
+      <field displayname="type" name="aylos_type" type="bool" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_leadorigin" displayname="Lead Origin" etc="10117" primaryidfield="aylos_leadoriginid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Lead Origin" name="aylos_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Lead Origin" name="aylos_leadoriginid" type="guid" primaryKey="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Service Line" name="aylos_servicelineid" type="entityreference" lookupType="aylos_serviceline" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_legalentity" displayname="Legal Entity" etc="10142" primaryidfield="aylos_legalentityid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Client Code Letter" name="aylos_clientcodeletter" type="string" customfield="true" />
+      <field displayname="Legal Entity" name="aylos_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Legal Entity ID" name="aylos_legalentityid" type="guid" primaryKey="true" />
+      <field displayname="Office" name="aylos_officeid" type="entityreference" lookupType="aylos_offices" customfield="true" />
+      <field displayname="Product" name="aylos_productid" type="entityreference" lookupType="aylos_products" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Service Lines" name="aylos_servicelines" type="optionsetvaluecollection" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_mainsource" displayname="Main Source" etc="10118" primaryidfield="aylos_mainsourceid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Lead Origin" name="aylos_leadorigin" type="entityreference" lookupType="aylos_leadorigin" customfield="true" />
+      <field displayname="Main Source" name="aylos_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Main Source" name="aylos_mainsourceid" type="guid" primaryKey="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_offices" displayname="Office" etc="10141" primaryidfield="aylos_officesid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Default Currency" name="aylos_defaultcurrency" type="entityreference" lookupType="aylos_currency" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Office" name="aylos_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Office" name="aylos_officesid" type="guid" primaryKey="true" />
+      <field displayname="Office Type" name="aylos_officetype" type="optionsetvalue" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Short Code" name="aylos_shortcode" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_serviceline" displayname="Service Line" etc="10143" primaryidfield="aylos_servicelineid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Client Code Letter" name="aylos_clientcodeletter" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field updateCompare="true" displayname="Service Line" name="aylos_servicelineid" type="guid" primaryKey="true" />
+      <field displayname="Short Code" name="aylos_shortcode" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_subsource" displayname="Sub Source" etc="10119" primaryidfield="aylos_subsourceid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Lead Origin" name="aylos_leadorigin" type="entityreference" lookupType="aylos_leadorigin" customfield="true" />
+      <field displayname="Main Source" name="aylos_mainsource" type="entityreference" lookupType="aylos_mainsource" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Sub Source" name="aylos_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Sub Source" name="aylos_subsourceid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_products" displayname="GRG Product" etc="10155" primaryidfield="aylos_productsid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field updateCompare="true" displayname="Product" name="aylos_productsid" type="guid" primaryKey="true" />
+      <field displayname="Product Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Short Code" name="aylos_shortcode" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_currency" displayname="GRG Currency" etc="10136" primaryidfield="aylos_currencyid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Currency" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Currency Code" name="aylos_currencycode" type="string" customfield="true" />
+      <field displayname="Currency Type" name="aylos_type" type="optionsetvalue" customfield="true" />
+      <field updateCompare="true" displayname="GRG Currency" name="aylos_currencyid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Order" name="aylos_order" type="number" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="competitor" displayname="Competitor" etc="123" primaryidfield="competitorid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field updateCompare="true" displayname="Competitor " name="competitorid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Name" name="name" type="string" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+    </fields>
+    <relationships />
+  </entity>
+</entities>

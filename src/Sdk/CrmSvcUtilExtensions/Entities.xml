@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<filter>
+  <!-- 
+	  Add entities in alphabetical order that will 
+	  be included during the code generation.
+  	-->
+  <entities>
+    <entity>account</entity>
+    <entity>appointment</entity>
+    <entity>bookingstatus</entity>
+    <entity>contact</entity>
+    <entity>incident</entity>
+    <entity>lead</entity>
+    <entity>task</entity>
+  </entities>
+</filter>

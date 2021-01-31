@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E1F5306-0C6C-455C-ABB6-B34F51C7B54E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Scripts</RootNamespace>
+    <AssemblyName>Scripts</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdateSolutionVersion.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UpdateSolutionVersions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExportSolution.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExportSolutions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExtractSolution.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExtractSolutions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Build.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PackSolution.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PackSolutions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExtractConfigData.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExtractReferenceData.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Drop.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PublishCustomizations.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ImportSolution.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ImportSolutions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ImportConfigData.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ImportReferenceData.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommonFunctions.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Deploy.ps1" />
+    <Content Include="Build_v2.ps1" />
+    <Content Include="Deploy_v2.ps1" />
+    <Content Include="ExportSolution_v2.ps1" />
+    <Content Include="ExportSolutions_v2.ps1" />
+    <Content Include="ExtractConfigData_v2.ps1" />
+    <Content Include="ExtractReferenceData_v2.ps1" />
+    <Content Include="ImportConfigData_v2.ps1" />
+    <Content Include="ImportReferenceData_v2.ps1" />
+    <Content Include="ImportSolution_v2.ps1" />
+    <Content Include="ImportSolutions_v2.ps1" />
+    <Content Include="PublishCustomizations_v2.ps1" />
+    <Content Include="UpdateSolutionVersion_v2.ps1" />
+    <Content Include="UpdateSolutionVersions_v2.ps1" />
+    <Content Include="Backup.ps1" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:61885/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

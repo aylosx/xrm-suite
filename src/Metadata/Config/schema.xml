@@ -1,0 +1,200 @@
+<entities >
+  <entity name="businessunit" displayname="Business Unit" etc="10" primaryidfield="businessunitid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field updateCompare="true" displayname="Business Unit" name="businessunitid" type="guid" primaryKey="true" />
+      <field displayname="Cost Center" name="costcenter" type="string" />
+      <field displayname="Credit Limit" name="creditlimit" type="float" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Disable Reason" name="disabledreason" type="string" />
+      <field displayname="Division" name="divisionname" type="string" />
+      <field displayname="Email" name="emailaddress" type="string" />
+      <field displayname="File as Name" name="fileasname" type="string" />
+      <field displayname="FTP Site" name="ftpsiteurl" type="string" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Inheritance Mask" name="inheritancemask" type="number" />
+      <field displayname="Is Disabled" name="isdisabled" type="bool" />
+      <field displayname="Name" name="name" type="string" />
+      <field displayname="Parent Business" name="parentbusinessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Picture" name="picture" type="string" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Stock Exchange" name="stockexchange" type="string" />
+      <field displayname="Ticker Symbol" name="tickersymbol" type="string" />
+      <field displayname="UTC Offset" name="utcoffset" type="number" />
+      <field displayname="Website" name="websiteurl" type="string" />
+      <field displayname="Workflow Suspended" name="workflowsuspended" type="bool" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="team" displayname="Team" etc="9" primaryidfield="teamid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field displayname="Administrator" name="administratorid" type="entityreference" lookupType="systemuser" />
+      <field displayname="Business Unit" name="businessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Email" name="emailaddress" type="string" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Is Default" name="isdefault" type="bool" />
+      <field displayname="Is System Managed" name="systemmanaged" type="bool" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field updateCompare="true" displayname="Team" name="teamid" type="guid" primaryKey="true" />
+      <field displayname="Team Name" name="name" type="string" />
+      <field displayname="Team Type" name="teamtype" type="optionsetvalue" />
+    </fields>
+    <relationships>
+      <relationship name="teamprofiles" manyToMany="true" isreflexive="false" relatedEntityName="teamprofiles" m2mTargetEntity="fieldsecurityprofile" m2mTargetEntityPrimaryKey="fieldsecurityprofileid" />
+    </relationships>
+  </entity>
+  <entity name="queue" displayname="Queue" etc="2020" primaryidfield="queueid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field displayname="Business Unit" name="businessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Convert Incoming Email To Activities" name="incomingemailfilteringmethod" type="optionsetvalue" />
+      <field displayname="Convert To Email Activities" name="ignoreunsolicitedemail" type="bool" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Fax Queue" name="isfaxqueue" type="bool" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Incoming Email" name="emailaddress" type="string" />
+      <field displayname="Incoming Email Delivery Method" name="incomingemaildeliverymethod" type="optionsetvalue" />
+      <field displayname="Name" name="name" type="string" />
+      <field displayname="Outgoing Email Delivery Method" name="outgoingemaildeliverymethod" type="optionsetvalue" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Owning Business Unit" name="owningbusinessunit" type="entityreference" lookupType="businessunit" />
+      <field displayname="Owning Team" name="owningteam" type="entityreference" lookupType="team" />
+      <field displayname="Owning User" name="owninguser" type="entityreference" lookupType="systemuser" />
+      <field updateCompare="true" displayname="Queue" name="queueid" type="guid" primaryKey="true" />
+      <field displayname="Queue Type" name="queuetypecode" type="optionsetvalue" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Type" name="queueviewtype" type="optionsetvalue" />
+    </fields>
+  </entity>
+  <entity name="aylos_configuration" displayname="Configuration" etc="10093" primaryidfield="aylos_configurationid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Bullet API Endpoint" name="aylos_bulletapiendpoint" type="string" customfield="true" />
+      <field displayname="Bullet Mode" name="aylos_bulletmode" type="optionsetvalue" customfield="true" />
+      <field updateCompare="true" displayname="Configuration" name="aylos_configurationid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Tru Narrative API Endpoint" name="aylos_trunarrativeapiendpoint" type="string" customfield="true" />
+      <field displayname="True Narrative Mode" name="aylos_truenarrativemode" type="optionsetvalue" customfield="true" />
+      <field displayname="Version" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Bullet Security Key" name="aylos_bulletsecuritykey" type="string" customfield="true" />
+      <field displayname="Bullet Security Value" name="aylos_bulletsecurityvalue" type="string" customfield="true" />
+      <field displayname="TruNarrative Security Key" name="aylos_trunarrativesecuritykey" type="string" customfield="true" />
+      <field displayname="TruNarrative Security Value" name="aylos_trunarrativesecurityvalue" type="string" customfield="true" />
+      <field displayname="Web Form Prefix" name="aylos_webformprefix" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_defaultsetting" displayname="Default Value" etc="10153" primaryidfield="aylos_defaultsettingid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="xxx1_frequencyoftrade" name="aylos_xxx1_frequencyoftrade" type="optionsetvalue" customfield="true" />
+      <field updateCompare="true" displayname="Default Value" name="aylos_defaultsettingid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="leadoriginib" name="aylos_leadoriginib" type="entityreference" lookupType="aylos_leadorigin" customfield="true" />
+      <field displayname="leadoriginnoib" name="aylos_leadoriginnoib" type="entityreference" lookupType="aylos_leadorigin" customfield="true" />
+      <field displayname="mainsourceib" name="aylos_mainsourceib" type="entityreference" lookupType="aylos_mainsource" customfield="true" />
+      <field displayname="mainsourcenoib" name="aylos_mainsourcenoib" type="entityreference" lookupType="aylos_mainsource" customfield="true" />
+      <field displayname="Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="xxx2_frequencyoftrade" name="aylos_xxx2_frequencyoftrade" type="optionsetvalue" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="ServiceLineXXX1" name="aylos_servicelinexxx1" type="entityreference" lookupType="aylos_serviceline" customfield="true" />
+      <field displayname="ServiceLineXXX2" name="aylos_servicelinexxx2" type="entityreference" lookupType="aylos_serviceline" customfield="true" />
+      <field displayname="signupprogressdate" name="aylos_signupprogressdate" type="datetime" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="subsourceib" name="aylos_subsourceib" type="entityreference" lookupType="aylos_subsource" customfield="true" />
+      <field displayname="subsourcenoib" name="aylos_subsourcenoib" type="entityreference" lookupType="aylos_subsource" customfield="true" />
+      <field displayname="API User" name="aylos_apiuserid" type="entityreference" lookupType="systemuser" customfield="true" />
+      <field displayname="UK XXX1 Incoming" name="aylos_ukxxx1incomingid" type="entityreference" lookupType="team" customfield="true" />
+      <field displayname="UK XXX2 Incoming" name="aylos_ukxxx2incomingid" type="entityreference" lookupType="team" customfield="true" />
+      <field displayname="UK XXX2 Executive" name="aylos_ukxxx2executiveid" type="entityreference" lookupType="systemuser" customfield="true" />
+      <field displayname="UK XXX2 Dealer" name="aylos_ukxxx2dealerid" type="entityreference" lookupType="systemuser" customfield="true" />
+      <field displayname="Migration User" name="aylos_migrationuserid" type="entityreference" lookupType="systemuser" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_triggermappings" displayname="Trigger Mapping" etc="10125" primaryidfield="aylos_triggermappingsid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Attribute Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Causes Trigger" name="aylos_causestrigger" type="bool" customfield="true" />
+      <field displayname="Criteria" name="aylos_criteria" type="optionsetvalue" customfield="true" />
+      <field displayname="Entity" name="aylos_entity" type="optionsetvalue" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Integration" name="aylos_integration" type="optionsetvalue" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Required To Trigger" name="aylos_requiredtotrigger" type="bool" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field updateCompare="true" displayname="Trigger Mapping" name="aylos_triggermappingsid" type="guid" primaryKey="true" />
+      <field displayname="Value" name="aylos_value" type="string" customfield="true" />
+      <field displayname="Relationship Name" name="aylos_relationshipname" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="aylos_restrictedfield" displayname="Restricted Field" etc="10156" primaryidfield="aylos_restrictedfieldid" primarynamefield="aylos_name" disableplugins="true">
+    <fields>
+      <field displayname="Entity Name" name="aylos_entityname" type="string" customfield="true" />
+      <field displayname="Field Name" name="aylos_fieldname" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Name" name="aylos_name" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field updateCompare="true" displayname="Restricted Field" name="aylos_restrictedfieldid" type="guid" primaryKey="true" />
+      <field displayname="Security Role" name="aylos_securityrole" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Read Restricted" name="aylos_readrestricted" type="bool" customfield="true" />
+      <field displayname="Stage 2: Allow Updates" name="aylos_stage2allowupdates" type="bool" customfield="true" />
+      <field displayname="Stage 3: Allow Updates" name="aylos_stage3allowupdates" type="bool" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="data8_entitytpsconfiguration" displayname="Entity TPS Configuration" etc="10305" primaryidfield="data8_entitytpsconfigurationid" primarynamefield="data8_name" disableplugins="true">
+    <fields>
+      <field displayname="Entity Name" name="data8_name" type="string" customfield="true" />
+      <field updateCompare="true" displayname="Entity TPS Configuration" name="data8_entitytpsconfigurationid" type="guid" primaryKey="true" />
+      <field displayname="Icon" name="data8_icon" type="string" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Last Checked Logical Name" name="data8_lastcheckedlogicalname" type="string" customfield="true" />
+      <field displayname="Override Lookup Logical Name" name="data8_overridelookuplogicalname" type="string" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Source Logical Name" name="data8_sourcelogicalname" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Target Logical Name" name="data8_targetlogicalname" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="data8_globaltpsconfiguration" displayname="Global TPS Configuration" etc="10306" primaryidfield="data8_globaltpsconfigurationid" primarynamefield="data8_name" disableplugins="true">
+    <fields>
+      <field displayname="Alternate Key" name="data8_alternatekey" type="string" customfield="true" />
+      <field displayname="Batch Enabled" name="data8_batchenabled" type="bool" customfield="true" />
+      <field updateCompare="true" displayname="Global TPS Configuration" name="data8_globaltpsconfigurationid" type="guid" primaryKey="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Name" name="data8_name" type="string" customfield="true" />
+      <field displayname="Real Time Enabled" name="data8_realtimeenabled" type="bool" customfield="true" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Server API Key" name="data8_serverapikey" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Website API Key" name="data8_apikey" type="string" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="data8_tpsconsentstatement" displayname="TPS Consent Statement" etc="10308" primaryidfield="data8_tpsconsentstatementid" primarynamefield="data8_name" disableplugins="true">
+    <fields>
+      <field displayname="Active From" name="data8_activefrom" type="datetime" customfield="true" />
+      <field displayname="Active To" name="data8_activeto" type="datetime" customfield="true" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Name" name="data8_name" type="string" customfield="true" />
+      <field displayname="Owner" name="ownerid" type="owner" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Statement" name="data8_statement" type="string" customfield="true" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field updateCompare="true" displayname="TPS Consent Statement" name="data8_tpsconsentstatementid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships />
+  </entity>
+</entities>

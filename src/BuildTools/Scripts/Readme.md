@@ -1,0 +1,1 @@
+# This folder contains powershell scripts required for the build and release of PowerApps and Dynamics 364 systems.

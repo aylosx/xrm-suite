@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@types/xrm@9.0.33",
+      "destination": "lib/types/xrm/"
+    }
+  ]
+}

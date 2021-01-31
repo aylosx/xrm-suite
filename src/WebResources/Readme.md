@@ -1,0 +1,1 @@
+# This folder contains Power Platform Web Resources.

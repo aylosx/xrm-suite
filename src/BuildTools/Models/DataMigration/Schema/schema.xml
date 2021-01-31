@@ -1,0 +1,112 @@
+<entities >
+  <entity name="queue" displayname="Queue" etc="2020" primaryidfield="queueid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field displayname="Business Unit" name="businessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Convert Incoming Email To Activities" name="incomingemailfilteringmethod" type="optionsetvalue" />
+      <field displayname="Convert To Email Activities" name="ignoreunsolicitedemail" type="bool" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Fax Queue" name="isfaxqueue" type="bool" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Incoming Email" name="emailaddress" type="string" />
+      <field displayname="Incoming Email Delivery Method" name="incomingemaildeliverymethod" type="optionsetvalue" />
+      <field displayname="Name" name="name" type="string" />
+      <field displayname="Outgoing Email Delivery Method" name="outgoingemaildeliverymethod" type="optionsetvalue" />
+      <field displayname="Queue" name="queueid" type="guid" primaryKey="true" />
+      <field displayname="Queue Type" name="queuetypecode" type="optionsetvalue" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Status" name="statecode" type="state" />
+      <field displayname="Status Reason" name="statuscode" type="status" />
+      <field displayname="Type" name="queueviewtype" type="optionsetvalue" />
+    </fields>
+    <relationships>
+      <relationship name="queuemembership" manyToMany="true" isreflexive="false" relatedEntityName="queuemembership" m2mTargetEntity="systemuser" m2mTargetEntityPrimaryKey="systemuserid" />
+    </relationships>
+  </entity>
+  <entity name="businessunit" displayname="Business Unit" etc="10" primaryidfield="businessunitid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field displayname="Business Unit" name="businessunitid" type="guid" primaryKey="true" />
+      <field displayname="Cost Center" name="costcenter" type="string" />
+      <field displayname="Credit Limit" name="creditlimit" type="float" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Disable Reason" name="disabledreason" type="string" />
+      <field displayname="Division" name="divisionname" type="string" />
+      <field displayname="Email" name="emailaddress" type="string" />
+      <field displayname="File as Name" name="fileasname" type="string" />
+      <field displayname="FTP Site" name="ftpsiteurl" type="string" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Inheritance Mask" name="inheritancemask" type="number" />
+      <field displayname="Is Disabled" name="isdisabled" type="bool" />
+      <field displayname="Name" name="name" type="string" />
+      <field displayname="Parent Business" name="parentbusinessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Picture" name="picture" type="string" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Stock Exchange" name="stockexchange" type="string" />
+      <field displayname="Ticker Symbol" name="tickersymbol" type="string" />
+      <field displayname="UTC Offset" name="utcoffset" type="number" />
+      <field displayname="Website" name="websiteurl" type="string" />
+      <field displayname="Workflow Suspended" name="workflowsuspended" type="bool" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="team" displayname="Team" etc="9" primaryidfield="teamid" primarynamefield="name" disableplugins="true">
+    <fields>
+      <field displayname="Administrator" name="administratorid" type="entityreference" lookupType="systemuser" />
+      <field displayname="Business Unit" name="businessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Email" name="emailaddress" type="string" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Is Default" name="isdefault" type="bool" />
+      <field displayname="Is System Managed" name="systemmanaged" type="bool" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Team" name="teamid" type="guid" primaryKey="true" />
+      <field displayname="Team Name" name="name" type="string" />
+      <field displayname="Team Type" name="teamtype" type="optionsetvalue" />
+    </fields>
+    <relationships>
+      <relationship name="teammembership" manyToMany="true" isreflexive="false" relatedEntityName="teammembership" m2mTargetEntity="systemuser" m2mTargetEntityPrimaryKey="systemuserid" />
+      <relationship name="teamprofiles" manyToMany="true" isreflexive="false" relatedEntityName="teamprofiles" m2mTargetEntity="fieldsecurityprofile" m2mTargetEntityPrimaryKey="fieldsecurityprofileid" />
+      <!--<relationship name="teamroles" manyToMany="true" isreflexive="false" relatedEntityName="teamroles" m2mTargetEntity="role" m2mTargetEntityPrimaryKey="roleid" />-->
+      <!--<relationship name="teamsyncattributemappingprofiles" manyToMany="true" isreflexive="false" relatedEntityName="teamsyncattributemappingprofiles" m2mTargetEntity="syncattributemappingprofile" m2mTargetEntityPrimaryKey="syncattributemappingprofileid" />-->
+    </relationships>
+  </entity>
+  <entity name="systemuser" displayname="User" etc="8" primaryidfield="systemuserid" primarynamefield="fullname" disableplugins="true">
+    <fields>
+      <field displayname="Access Mode" name="accessmode" type="optionsetvalue" />
+      <field displayname="Application ID" name="applicationid" type="guid" />
+      <field displayname="Application ID URI" name="applicationiduri" type="string" />
+      <field displayname="Business Unit" name="businessunitid" type="entityreference" lookupType="businessunit" />
+      <field displayname="Full Name" name="fullname" type="string" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="User" name="systemuserid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships>
+      <relationship name="systemuserprofiles" manyToMany="true" isreflexive="false" relatedEntityName="systemuserprofiles" m2mTargetEntity="fieldsecurityprofile" m2mTargetEntityPrimaryKey="fieldsecurityprofileid" />
+      <!--<relationship name="systemuserroles" manyToMany="true" isreflexive="false" relatedEntityName="systemuserroles" m2mTargetEntity="role" m2mTargetEntityPrimaryKey="roleid" />-->
+      <!--<relationship name="systemusersyncmappingprofiles" manyToMany="true" isreflexive="false" relatedEntityName="systemusersyncmappingprofiles" m2mTargetEntity="syncattributemappingprofile" m2mTargetEntityPrimaryKey="syncattributemappingprofileid" />-->
+    </relationships>
+  </entity>
+  <entity name="category" displayname="Category" etc="9959" primaryidfield="categoryid" primarynamefield="title" disableplugins="true">
+    <fields>
+      <field displayname="Category ID" name="categoryid" type="guid" primaryKey="true" />
+      <field displayname="Category Number" name="categorynumber" type="string" />
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Display Order" name="sequencenumber" type="number" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Parent Category" name="parentcategoryid" type="entityreference" lookupType="category" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Title" name="title" type="string" />
+    </fields>
+  </entity>
+  <entity name="subject" displayname="Subject" etc="129" primaryidfield="subjectid" primarynamefield="title" disableplugins="true">
+    <fields>
+      <field displayname="Description" name="description" type="string" />
+      <field displayname="Feature Mask" name="featuremask" type="number" />
+      <field displayname="Import Sequence Number" name="importsequencenumber" type="number" />
+      <field displayname="Parent Subject" name="parentsubject" type="entityreference" lookupType="subject" />
+      <field displayname="Record Created On" name="overriddencreatedon" type="datetime" />
+      <field displayname="Subject" name="subjectid" type="guid" primaryKey="true" />
+      <field displayname="Title" name="title" type="string" />
+    </fields>
+  </entity>
+</entities>

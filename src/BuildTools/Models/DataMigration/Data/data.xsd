@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="entities">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" name="entity">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="records">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="record">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element maxOccurs="unbounded" name="field">
+                            <xsd:complexType>
+                              <xsd:attribute name="name" type="xsd:string" use="required" />
+                              <xsd:attribute name="value" type="xsd:string" use="required" />
+                              <xsd:attribute name="lookupentity" type="xsd:string" use="optional" />
+                              <xsd:attribute name="lookupentityname" type="xsd:string" use="optional" />
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="id" type="xsd:string" use="required" />
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="m2mrelationships">
+                <xsd:complexType>
+                  <xsd:sequence minOccurs="0">
+                    <xsd:element maxOccurs="unbounded" name="m2mrelationship">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="targetids">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element maxOccurs="unbounded" name="targetid" type="xsd:string" />
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                        <xsd:attribute name="sourceid" type="xsd:string" use="required" />
+                        <xsd:attribute name="targetentityname" type="xsd:string" use="required" />
+                        <xsd:attribute name="targetentitynameidfield" type="xsd:string" use="required" />
+                        <xsd:attribute name="m2mrelationshipname" type="xsd:string" use="required" />
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="name" type="xsd:string" use="required" />
+            <xsd:attribute name="displayname" type="xsd:string" use="required" />
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

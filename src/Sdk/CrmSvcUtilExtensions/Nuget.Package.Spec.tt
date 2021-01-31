@@ -1,0 +1,84 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ output extension=".nuspec" #>
+<#
+	major = string.Format("{0}", DateTime.Now.ToString("yy"));
+	minor = string.Format("{0}", DateTime.Now.Month.ToString("#0"));
+	revision = string.Format("{0}{1}", DateTime.Now.Day.ToString("#0"), DateTime.Now.Hour.ToString("00"));
+#>
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+	<metadata>
+		<id>Aylos.Xrm.Sdk.CrmSvcUtilExtensions</id>
+		<version><#= this.major #>.<#= this.minor #>.<#= this.revision #></version>
+		<authors>Vangelis Xanthakis</authors>
+		<title>Extensions for the Microsoft Dynamics 365 and PowerApps CrmSvcUtil tool</title>
+		<description>This package contains extensions for the CrmSvcUtil code generation tool contained in the Microsoft Dynamics 365 CE and PowerApps tools.</description>
+		<owners>Vangelis Xanthakis (AYLOS UK Ltd)</owners>
+		<copyright>Copyright © 2019-2020 AYLOS UK Ltd</copyright>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/aylosx/xrm-suite/tree/master/src/BuildTools/Aylos.Xrm.Sdk.CrmSvcUtilExtensions</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<releaseNotes>
+			Version - <#= this.major #>.<#= this.minor #>.<#= this.revision #>
+				Changes:
+				- Refactoring of the xrm-suite solutions and projects
+				- Introduced FxCop analyzers and reviewed the code as per the recommendations
+				- Updated the references to the latest versions of the nuget packages
+
+			Version - 19.5.1622
+				Changes:
+				- Rectified package issue with the .NET Framework 4.6.2 target
+
+			Version - 19.5.1421
+				Changes:
+				- Downgraded/targeting .NET Framework 4.6.2
+
+			Version - 19.5.120
+				Initial release contains the following features:
+				- Generates code for early bound entities
+				- Generates code for single-select option sets as enumerations fully integrated with the entity attributes
+				- Generates code for multi-select option sets as enumerations fully integrated with the entity attributes
+				- Supporting assembly compliance by using the Humanizer library and display names
+				- Reduces the size of the generated code by simplifying the namespaces on each type
+				- Option to generate all entities
+				- Option to generate separate files per type or a single file containing all types
+				- Option to generate either all or the referenced option sets by the generated entities only
+				- Option to generate setters for read-only attributes to help with mocking objects whilst implementing automated unit tests (should not be used in actual code)
+				- Option to define the suffix of primary key, status and status reason fields
+				- Option to define the prefix of the global option sets
+				- Option to define the maximum length of characters of entity, attribute or option set names
+				- Black list the entities that are to be excluded
+				- Black list the attributes that are to be excluded
+				- Define the entities to be generated
+				- Define the activity entities
+				- Does not generate entity relationships
+		</releaseNotes>
+		<tags>Microsoft Dynamics 365 CE CRM CrmSvcUtil Early Bound Generator</tags>
+		<dependencies>
+		    <group>
+				<dependency id="Humanizer.Core" version="2.8.26" />
+				<dependency id="Microsoft.IdentityModel" version="7.0.0" />
+			</group>
+		    <group targetFramework=".NETFramework4.6.2">
+				<dependency id="Microsoft.CrmSdk.CoreAssemblies" version="9.0.2.29" include="contentFiles, build" />
+				<dependency id="Microsoft.CrmSdk.CoreTools" version="9.1.0.64" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="Aylos.Xrm.Sdk.CrmSvcUtilExtensions.targets" target="build\" />
+		<file src="Aylos.Xrm.Sdk.CrmSvcUtilExtensions.dll" target="lib\net462\" />
+		<file src="Aylos.Xrm.Sdk.CrmSvcUtilExtensions.dll.config" target="content\" />
+		<file src="CrmSvcUtil.exe.config" target="content\" />
+		<file src="Entities.xml" target="content\" />
+		<file src="Generate.bat" target="content\" />
+		<file src="LICENCE" />
+		<file src="README.md" />
+	</files>
+</package>
+<#+
+	string major = "1";
+	string minor = "0";
+	string revision = "0";
+#>

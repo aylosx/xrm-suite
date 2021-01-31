@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<filter>
+  <!-- 
+	  Add entities in alphabetical order that will 
+	  be included during the code generation.
+  	-->
+  <entities>
+    <entity>annotation</entity>
+    <entity>adx_webfile</entity>
+    <entity>adx_webpage</entity>
+    <entity>adx_webtemplate</entity>
+    <entity>asyncoperation</entity>
+    <entity>importjob</entity>
+    <entity>organization</entity>
+    <entity>pluginassembly</entity>
+    <entity>plugintype</entity>
+    <entity>sdkmessage</entity>
+    <entity>sdkmessageprocessingstep</entity>
+    <entity>sdkmessageprocessingstepimage</entity>
+    <entity>serviceendpoint</entity>
+    <entity>solution</entity>
+    <entity>solutioncomponent</entity>
+  </entities>
+</filter>

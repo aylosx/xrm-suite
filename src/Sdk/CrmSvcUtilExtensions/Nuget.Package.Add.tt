@@ -1,0 +1,15 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System" #>
+<#@ output extension=".bat" #>
+<#
+	major = string.Format("{0}", DateTime.Now.ToString("yy"));
+	minor = string.Format("{0}", DateTime.Now.Month.ToString("#0"));
+	revision = string.Format("{0}{1}", DateTime.Now.Day.ToString("#0"), DateTime.Now.Hour.ToString("00"));
+#>
+@ECHO OFF
+"..\..\.nuget\nuget.exe" add "Aylos.Xrm.Sdk.CrmSvcUtilExtensions.<#= this.major #>.<#= this.minor #>.<#= this.revision #>.nupkg" -ConfigFile "..\..\.nuget\nuget.config" -Source "%CD:~0,2%\packages-aylos"
+<#+
+	string major = "1";
+	string minor = "0";
+	string revision = "0";
+#>

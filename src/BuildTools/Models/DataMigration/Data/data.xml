@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entity name="queue" displayname="Queue">
+    <records>
+      <record id="0069141f-e292-e911-a823-002248008476">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="description" value="WA Management" />
+        <field name="isfaxqueue" value="False" />
+        <field name="emailaddress" value="VG_WA_DL_WorkspaceAgilityManagementEmailAddress" />
+        <field name="incomingemaildeliverymethod" value="2" />
+        <field name="name" value="WA Management" />
+        <field name="outgoingemaildeliverymethod" value="2" />
+        <field name="queueid" value="0069141f-e292-e911-a823-002248008476" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="c448005e-e292-e911-a823-002248008476">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="description" value="Customer Management" />
+        <field name="isfaxqueue" value="False" />
+        <field name="emailaddress" value="VG_WA_DL_CustomerManagementEmailAddress" />
+        <field name="incomingemaildeliverymethod" value="2" />
+        <field name="name" value="Customer Management" />
+        <field name="outgoingemaildeliverymethod" value="2" />
+        <field name="queueid" value="c448005e-e292-e911-a823-002248008476" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="9f136592-e292-e911-a823-002248008476">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="description" value="Workspace Agility - Customer Technical Support Specialist team&amp;#39;s default queue" />
+        <field name="isfaxqueue" value="False" />
+        <field name="emailaddress" value="VG_WA_DL_CustomerTechnicalSupportSpecialistEmailAddress" />
+        <field name="incomingemaildeliverymethod" value="2" />
+        <field name="name" value="CTSS" />
+        <field name="outgoingemaildeliverymethod" value="2" />
+        <field name="queueid" value="9f136592-e292-e911-a823-002248008476" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="26177359-a6a0-e911-a826-0022480084d9">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="isfaxqueue" value="False" />
+        <field name="emailaddress" value="VG_WA_DL_OperationsManagementEmailAddress" />
+        <field name="incomingemaildeliverymethod" value="0" />
+        <field name="name" value="Operations Management" />
+        <field name="outgoingemaildeliverymethod" value="0" />
+        <field name="queueid" value="26177359-a6a0-e911-a826-0022480084d9" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="bd254c14-f377-e911-a819-0022480085f1">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="isfaxqueue" value="False" />
+        <field name="incomingemaildeliverymethod" value="2" />
+        <field name="name" value="Test Queue" />
+        <field name="outgoingemaildeliverymethod" value="2" />
+        <field name="queueid" value="bd254c14-f377-e911-a819-0022480085f1" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="1" />
+        <field name="statuscode" value="2" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="c625f717-eb82-e911-a81c-002248008902">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="isfaxqueue" value="False" />
+        <field name="incomingemaildeliverymethod" value="0" />
+        <field name="name" value="Call Back Requests" />
+        <field name="outgoingemaildeliverymethod" value="0" />
+        <field name="queueid" value="c625f717-eb82-e911-a81c-002248008902" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="VG_WA_D365_RootBusinessUnitTeamQueueId">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="description" value="Workspace Agility" />
+        <field name="isfaxqueue" value="False" />
+        <field name="incomingemaildeliverymethod" value="0" />
+        <field name="name" value="&amp;lt;Workspace Agility&amp;gt;" />
+        <field name="outgoingemaildeliverymethod" value="0" />
+        <field name="queueid" value="VG_WA_D365_RootBusinessUnitTeamQueueId" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+      <record id="d0ca23a7-3e93-e911-a823-002248008a67">
+        <field name="incomingemailfilteringmethod" value="0" />
+        <field name="ignoreunsolicitedemail" value="False" />
+        <field name="isfaxqueue" value="False" />
+        <field name="emailaddress" value="VG_WA_D365_NoReplyEmailAddress" />
+        <field name="incomingemaildeliverymethod" value="2" />
+        <field name="name" value="Automated Workflows" />
+        <field name="outgoingemaildeliverymethod" value="2" />
+        <field name="queueid" value="d0ca23a7-3e93-e911-a823-002248008a67" />
+        <field name="queuetypecode" value="1" />
+        <field name="statecode" value="0" />
+        <field name="statuscode" value="1" />
+        <field name="queueviewtype" value="0" />
+      </record>
+    </records>
+    <m2mrelationships />
+  </entity>
+  <entity name="businessunit" displayname="Business Unit">
+    <records>
+      <record id="VG_WA_D365_RootBusinessUnitId">
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" />
+        <field name="inheritancemask" value="1023" />
+        <field name="isdisabled" value="False" />
+        <field name="name" value="Workspace Agility" />
+        <field name="parentbusinessunitid" value="VG_WA_D365_OrganizationUnitId" lookupentity="businessunit" lookupentityname="VG_WA_D365_OrganizationName" />
+        <field name="workflowsuspended" value="False" />
+      </record>
+    </records>
+    <m2mrelationships />
+  </entity>
+  <entity name="team" displayname="Team">
+    <records>
+      <record id="bb9d9042-ef82-e911-a81e-002248008476">
+        <field name="administratorid" value="VG_WA_D365_AdministratorId" lookupentity="systemuser" lookupentityname="Dynamics 365CICD" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="description" value="Workspace Agility - Customer Technical Support Specialist&amp;#39;s team" />
+        <field name="isdefault" value="False" />
+        <field name="systemmanaged" value="False" />
+        <field name="teamid" value="bb9d9042-ef82-e911-a81e-002248008476" />
+        <field name="name" value="CTSS" />
+        <field name="teamtype" value="0" />
+      </record>
+      <record id="ff68141f-e292-e911-a823-002248008476">
+        <field name="administratorid" value="VG_WA_D365_AdministratorId" lookupentity="systemuser" lookupentityname="Dynamics 365CICD" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="isdefault" value="False" />
+        <field name="systemmanaged" value="False" />
+        <field name="teamid" value="ff68141f-e292-e911-a823-002248008476" />
+        <field name="name" value="WA Management" />
+        <field name="teamtype" value="0" />
+      </record>
+      <record id="c348005e-e292-e911-a823-002248008476">
+        <field name="administratorid" value="VG_WA_D365_AdministratorId" lookupentity="systemuser" lookupentityname="Dynamics 365CICD" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="isdefault" value="False" />
+        <field name="systemmanaged" value="False" />
+        <field name="teamid" value="c348005e-e292-e911-a823-002248008476" />
+        <field name="name" value="Customer Management" />
+        <field name="teamtype" value="0" />
+      </record>
+      <record id="cb6b9def-a5a0-e911-a826-0022480084d9">
+        <field name="administratorid" value="VG_WA_D365_AdministratorId" lookupentity="systemuser" lookupentityname="Dynamics 365CICD" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="isdefault" value="False" />
+        <field name="systemmanaged" value="False" />
+        <field name="teamid" value="cb6b9def-a5a0-e911-a826-0022480084d9" />
+        <field name="name" value="Operations Management" />
+        <field name="teamtype" value="0" />
+      </record>
+      <record id="VG_WA_D365_RootBusinessUnitTeamId">
+        <field name="administratorid" value="VG_WA_D365_AdministratorId" lookupentity="systemuser" lookupentityname="Dynamics 365CICD" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="description" value="Default team for the parent business unit. The name and membership for default team are inherited from their parent business unit." />
+        <field name="isdefault" value="True" />
+        <field name="systemmanaged" value="False" />
+        <field name="teamid" value="VG_WA_D365_RootBusinessUnitTeamId" />
+        <field name="name" value="Workspace Agility" />
+        <field name="teamtype" value="0" />
+      </record>
+    </records>
+    <m2mrelationships>
+      <m2mrelationship sourceid="bb9d9042-ef82-e911-a81e-002248008476" targetentityname="systemuser" targetentitynameidfield="systemuserid" m2mrelationshipname="teammembership">
+        <targetids>
+          <targetid>5940d11a-c289-e911-a820-00224800854c</targetid>
+          <targetid>fb045862-c289-e911-a820-00224800854c</targetid>
+          <targetid>VG_WA_D365_User_Test03Id</targetid>
+          <targetid>VG_WA_D365_User_Test02Id</targetid>
+          <targetid>VG_WA_D365_User_Test01Id</targetid>
+          <targetid>VG_WA_D365_User_Test04Id</targetid>
+          <targetid>VG_WA_D365_User_Test05Id</targetid>
+        </targetids>
+      </m2mrelationship>
+      <m2mrelationship sourceid="ff68141f-e292-e911-a823-002248008476" targetentityname="systemuser" targetentitynameidfield="systemuserid" m2mrelationshipname="teammembership">
+        <targetids>
+          <targetid>19af27ae-cf7e-e911-a81f-00224800854c</targetid>
+          <targetid>33af27ae-cf7e-e911-a81f-00224800854c</targetid>
+          <targetid>040d35b4-cf7e-e911-a81f-00224800854c</targetid>
+          <targetid>7d772eba-cf7e-e911-a81f-00224800854c</targetid>
+        </targetids>
+      </m2mrelationship>
+      <m2mrelationship sourceid="VG_WA_D365_RootBusinessUnitTeamId" targetentityname="systemuser" targetentitynameidfield="systemuserid" m2mrelationshipname="teammembership">
+        <targetids>
+          <targetid>5940d11a-c289-e911-a820-00224800854c</targetid>
+          <targetid>fb045862-c289-e911-a820-00224800854c</targetid>
+          <targetid>VG_WA_D365_User_Test03Id</targetid>
+          <targetid>VG_WA_D365_User_Test02Id</targetid>
+          <targetid>VG_WA_D365_User_Test01Id</targetid>
+          <targetid>VG_WA_D365_User_Test04Id</targetid>
+          <targetid>VG_WA_D365_User_Test05Id</targetid>
+        </targetids>
+      </m2mrelationship>
+    </m2mrelationships>
+  </entity>
+  <entity name="systemuser" displayname="User">
+    <records>
+      <record id="5940d11a-c289-e911-a820-00224800854c">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="# Andy Jones" />
+        <field name="systemuserid" value="5940d11a-c289-e911-a820-00224800854c" />
+      </record>
+      <record id="fb045862-c289-e911-a820-00224800854c">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="Steve Gough" />
+        <field name="systemuserid" value="fb045862-c289-e911-a820-00224800854c" />
+      </record>
+      <record id="VG_WA_D365_User_Test03Id">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="TEST Krishna Mudragarda" />
+        <field name="systemuserid" value="VG_WA_D365_User_Test03Id" />
+      </record>
+      <record id="VG_WA_D365_User_Test02Id">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="TEST Colin Budd" />
+        <field name="systemuserid" value="VG_WA_D365_User_Test02Id" />
+      </record>
+      <record id="VG_WA_D365_User_Test01Id">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="TEST Arif Syed" />
+        <field name="systemuserid" value="VG_WA_D365_User_Test01Id" />
+      </record>
+      <record id="VG_WA_D365_User_Test04Id">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="TEST Vangelis Xanthakis" />
+        <field name="systemuserid" value="VG_WA_D365_User_Test04Id" />
+      </record>
+      <record id="VG_WA_D365_User_Test05Id">
+        <field name="accessmode" value="0" />
+        <field name="businessunitid" value="VG_WA_D365_RootBusinessUnitId" lookupentity="businessunit" lookupentityname="Workspace Agility" />
+        <field name="fullname" value="TEST Verica Hodder" />
+        <field name="systemuserid" value="VG_WA_D365_User_Test05Id" />
+      </record>
+    </records>
+    <m2mrelationships />
+  </entity>
+  <entity name="category" displayname="Category">
+    <records>
+      <record id="95db069c-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="95db069c-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01000" />
+        <field name="title" value="Application Delivery" />
+      </record>
+      <record id="90f6a1a8-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="90f6a1a8-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01001" />
+        <field name="title" value="Customer Service" />
+      </record>
+      <record id="09ab51b2-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="09ab51b2-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01002" />
+        <field name="title" value="Device" />
+      </record>
+      <record id="d7ddbcb8-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="d7ddbcb8-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01003" />
+        <field name="title" value="Enterprise Content" />
+      </record>
+      <record id="78fb3dc5-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="78fb3dc5-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01004" />
+        <field name="title" value="Identity &amp;amp; Access" />
+      </record>
+      <record id="6aa1eccc-b782-e911-a81e-0022480084d9">
+        <field name="categoryid" value="6aa1eccc-b782-e911-a81e-0022480084d9" />
+        <field name="categorynumber" value="CAT-01005" />
+        <field name="title" value="Platform" />
+      </record>
+    </records>
+    <m2mrelationships />
+  </entity>
+  <entity name="subject" displayname="Subject">
+    <records>
+      <record id="f601b8e4-5e7e-e911-a81f-0022480070e0">
+        <field name="description" value="Default Subject populated for migration. You can change this to suit your organization." />
+        <field name="featuremask" value="1" />
+        <field name="subjectid" value="f601b8e4-5e7e-e911-a81f-0022480070e0" />
+        <field name="title" value="Knowledge Articles" />
+      </record>
+      <record id="ffde66f3-ae82-e911-a81e-0022480084d9">
+        <field name="featuremask" value="1" />
+        <field name="parentsubject" value="f601b8e4-5e7e-e911-a81f-0022480070e0" lookupentity="subject" lookupentityname="Knowledge Articles" />
+        <field name="subjectid" value="ffde66f3-ae82-e911-a81e-0022480084d9" />
+        <field name="title" value="Help and Support" />
+      </record>
+      <record id="57af30fa-ae82-e911-a81e-0022480084d9">
+        <field name="featuremask" value="1" />
+        <field name="parentsubject" value="f601b8e4-5e7e-e911-a81f-0022480070e0" lookupentity="subject" lookupentityname="Knowledge Articles" />
+        <field name="subjectid" value="57af30fa-ae82-e911-a81e-0022480084d9" />
+        <field name="title" value="News and Updates" />
+      </record>
+      <record id="6229ce7a-dc86-e911-a820-002248008a67">
+        <field name="description" value="Default Subject populated for migration. You can change this to suit your organization." />
+        <field name="featuremask" value="1" />
+        <field name="subjectid" value="6229ce7a-dc86-e911-a820-002248008a67" />
+        <field name="title" value="Default Subject" />
+      </record>
+      <record id="5db06197-a7a5-e911-a829-002248008be1">
+        <field name="description" value="Default Subject populated for migration. You can change this to suit your organization." />
+        <field name="featuremask" value="1" />
+        <field name="subjectid" value="5db06197-a7a5-e911-a829-002248008be1" />
+        <field name="title" value="Default Subject" />
+      </record>
+    </records>
+    <m2mrelationships />
+  </entity>
+</entities>

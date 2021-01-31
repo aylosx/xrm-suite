@@ -1,0 +1,68 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Aylos.Xrm.Sdk.CrmSvcUtilExtensions.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ActivityLogicalNames" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">appointment,bulkoperation,campaignactivity,campaignresponse,email,fax,incidentresolution,letter,opportunityclose,orderclose,phonecall,quoteclose,recurringappointmentmaster,serviceappointment,socialactivity,task,untrackedemail
+appointment,bulkoperation,campaignactivity,campaignresponse,email,fax,incidentresolution,letter,opportunityclose,orderclose,phonecall,quoteclose,recurringappointmentmaster,serviceappointment,socialactivity,task,untrackedemail
+</Value>
+    </Setting>
+    <Setting Name="EntityBlackList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">knowledgearticleincident,knowledgearticleviews,languagelocale,officedocument,personaldocumenttemplate,rollupjob,socialinsightsconfiguration</Value>
+    </Setting>
+    <Setting Name="EntityWhiteListFilename" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Entities.xml</Value>
+    </Setting>
+    <Setting Name="FieldStructName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Fields</Value>
+    </Setting>
+    <Setting Name="Filename" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">CrmServiceContext.cs</Value>
+    </Setting>
+    <Setting Name="GenerateAllEntities" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GenerateFieldStructures" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GenerateOnlyReferencedGlobalOptionSets" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GenerateSeparateFilesPerType" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GenerateSettersFor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">createdby,modifiedby,createdon,modifiedon,</Value>
+    </Setting>
+    <Setting Name="GlobalFieldBlackList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">createdonbehalfby,importsequencenumber,modifiedonbehalfby,overriddencreatedon,timezoneruleversionnumber,utcconversiontimezonecode,versionnumber,entitylogicalname,entitytypecode</Value>
+    </Setting>
+    <Setting Name="GlobalOptionSetPrefix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Global</Value>
+    </Setting>
+    <Setting Name="MetadataMaxCharacterCount" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="OutputPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\..\Models\Shared.Models\Domain</Value>
+    </Setting>
+    <Setting Name="PrimaryKeySuffix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Id</Value>
+    </Setting>
+    <Setting Name="RegexAllowedCharacters" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[^a-zA-Z0-9\s]</Value>
+    </Setting>
+    <Setting Name="ReplaceDigits" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="StateCodeSuffix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">State</Value>
+    </Setting>
+    <Setting Name="StatusReasonSuffix" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">StatusReason</Value>
+    </Setting>
+    <Setting Name="TextToRemove" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">aylos_</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

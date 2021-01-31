@@ -1,0 +1,32 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System" #>
+<#
+	major = string.Format("{0}", DateTime.Now.ToString("yy"));
+	minor = string.Format("{0}", DateTime.Now.Month.ToString("#0"));
+	revision = string.Format("{0}{1}", DateTime.Now.Day.ToString("#0"), DateTime.Now.Hour.ToString("00"));
+	build = string.Format("{0}{1}", DateTime.Now.Minute.ToString("#0"), DateTime.Now.Second.ToString("00"));
+#>
+using System; 
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("Extensions for the Microsoft Dynamics 365 and PowerApps CrmSvcUtil tool")]
+[assembly: AssemblyDescription("This package contains extensions for the CrmSvcUtil code generation tool contained in the Microsoft Dynamics 365 CE and PowerApps tools.")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("AYLOS UK Ltd")]
+[assembly: AssemblyProduct("CrmSvcUtil Extensions")]
+[assembly: AssemblyCopyright("Copyright © 2019 AYLOS UK Ltd")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: AssemblyVersion("<#= this.major #>.<#= this.minor #>.<#= this.revision #>.<#= this.build #>")]
+[assembly: AssemblyFileVersion("<#= this.major #>.<#= this.minor #>.<#= this.revision #>.<#= this.build #>")]
+[assembly: CLSCompliant(true)]
+[assembly: ComVisible(false)]
+[assembly: Guid("008559ad-71be-4c82-92de-7f85830bc951")]
+<#+
+	string major = "1";
+	string minor = "0";
+	string revision = "0";
+	string build = "0";
+#>
