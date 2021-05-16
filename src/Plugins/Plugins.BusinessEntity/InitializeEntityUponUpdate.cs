@@ -81,6 +81,8 @@
         /// </summary>
         public override void Validate()
         {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
             // Check if the plugin execution context contains target entity
             if (!(PluginExecutionContext.InputParameters.Contains(PlatformConstants.TargetText)) ||
                 !(PluginExecutionContext.InputParameters[PlatformConstants.TargetText] is Entity))
@@ -119,6 +121,8 @@
                 throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
                     TraceMessageHelper.MaxDepthViolation, UnderlyingSystemTypeName, MaximumAllowedExecutionDepth, PluginExecutionContext.Depth));
             }
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
         #endregion

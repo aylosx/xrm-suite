@@ -11,7 +11,7 @@
 
     using Aylos.Xrm.Sdk.Common;
 
-    using Shared.Models.Domain;
+    using Models.Domain;
     using Data;
 
     public class ManageDeleteEntityService : GenericService<CrmServiceContext, Account>, IManageDeleteEntityService
@@ -100,13 +100,13 @@
         }
 
         /// <summary>
-        /// Called by the plugin and dissassociates the descendants of the account. 
+        /// Called by the plugin and disassociates the descendants of the account. 
         /// </summary>
         public void DisassociateDescendants()
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            IEnumerable<Account> descendants = CrmService.GetAccountDescendants(PreBusinessEntity.Id);
+            IList<Account> descendants = CrmService.GetAccountDescendants(PreBusinessEntity.Id).ToList();
 
             foreach (Account account in descendants)
             {
@@ -155,7 +155,6 @@
             }
 
             // TODO: free unmanaged resources (unmanaged objects).
-            
 
             _disposed = true;
         }

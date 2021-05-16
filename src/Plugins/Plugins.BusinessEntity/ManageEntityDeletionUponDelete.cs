@@ -15,7 +15,7 @@
     /// <summary>
     /// Manages deletion tasks of the business entity.
     /// - Blocks deletion. 
-    /// - Dissassociates descendants upon delete.
+    /// - Disassociates descendants upon delete.
     /// </summary>
     public class ManageEntityDeletionUponDelete : CustomPlugin
     {
@@ -86,6 +86,8 @@
         /// </summary>
         public override void Validate()
         {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
             // Check if the plugin execution context contains target entity reference
             if (!(PluginExecutionContext.InputParameters.Contains(PlatformConstants.TargetEntityReferenceText)) ||
                 !(PluginExecutionContext.InputParameters[PlatformConstants.TargetEntityReferenceText] is EntityReference))
@@ -103,7 +105,7 @@
             }
 
             // Check if the pre entity logical name is the expected one
-            Entity preEntity = (Entity)PluginExecutionContext.PreEntityImages[PlatformConstants.PreBusinessEntityText];
+            Entity preEntity = PluginExecutionContext.PreEntityImages[PlatformConstants.PreBusinessEntityText];
             if (preEntity.LogicalName != PrimaryEntityLogicalName)
             {
                 throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
@@ -132,6 +134,8 @@
                 throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
                     TraceMessageHelper.MaxDepthViolation, UnderlyingSystemTypeName, MaximumAllowedExecutionDepth, PluginExecutionContext.Depth));
             }
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
         #endregion

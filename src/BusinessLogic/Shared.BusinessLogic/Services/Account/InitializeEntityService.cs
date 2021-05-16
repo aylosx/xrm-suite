@@ -134,7 +134,6 @@
             }
 
             // TODO: free unmanaged resources (unmanaged objects).
-            
 
             _disposed = true;
         }
