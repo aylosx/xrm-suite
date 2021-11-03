@@ -6,7 +6,7 @@
     <members>
         <member name="T:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters">
             <summary>
-            Command Line Properties for the CrmSvcUtil Instance. 
+            Command Line Properties for the CrmSvcUtil Instance.
             </summary>
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.SuppressGenVersionAttribute">
@@ -41,17 +41,17 @@
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.UseInteractiveLogin">
             <summary>
-            Used to raise the interactive dialog to login. 
+            Used to raise the interactive dialog to login.
             </summary>
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ConnectionString">
             <summary>
-            Used to create a connection utilizing a passed in connection string. 
+            Used to create a connection utilizing a passed in connection string.
             </summary>
         </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.UseOAuth">
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.AccessToken">
             <summary>
-            Used to login via OAuth to CRM Online, Hidden for initial ship... but here to allow for complex auth situations. 
+            Used to login via OAuth to Dataverse, Hidden for initial ship... but here to allow for complex auth situations.
             </summary>
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.UserName">
@@ -136,17 +136,17 @@
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ConnectionProfileName">
             <summary>
-            Used by devToolkit to set the Connection profile to use for this call. 
+            Used by devToolkit to set the Connection profile to use for this call.
             </summary>
         </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ConnectionAppName">
             <summary>
-            Used by the devToolkit to set the appName whos connection is being used. 
+            Used by the devToolkit to set the appName whos connection is being used.
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ToDictionary">
             <summary>
-            Gets Dictionary of parameters 
+            Gets Dictionary of parameters
             </summary>
             <returns></returns>
         </member>
@@ -257,7 +257,7 @@
         </member>
         <member name="F:Microsoft.Crm.Services.Utility.CommandLineParser._arguments">
             <summary>
-            A list of all of the arguments that are supported 
+            A list of all of the arguments that are supported
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.CommandLineParser.#ctor(Microsoft.Crm.Services.Utility.ICommandLineArgumentSource)">
@@ -735,7 +735,7 @@
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.CodeWriterFilterService.IsNotExposedChildAttribute(Microsoft.Xrm.Sdk.Metadata.AttributeMetadata)">
             <summary>
-            If true a child attribute cannot be published or externally consumed. 
+            If true a child attribute cannot be published or externally consumed.
             </summary>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.DeviceIdManager">
@@ -1075,17 +1075,17 @@
         </member>
         <member name="F:Microsoft.Crm.Services.Utility.NamingService._reservedSystemAttributeNames">
             <summary>
-            List of attribute names that will conflict with system properties. 
+            List of attribute names that will conflict with system properties.
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.SetConnectionTimeoutValues">
             <summary>
-            Updates the timeout value to extend the amount of item that a request will wait. 
+            Updates the timeout value to extend the amount of item that a request will wait.
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.GetConnectionString">
             <summary>
-            Builds a connection string from the passed in parameters. 
+            Builds a connection string from the passed in parameters.
             </summary>
             <returns></returns>
         </member>
@@ -1443,27 +1443,27 @@
         </member>
         <member name="F:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.bIsConnectedComplete">
             <summary>
-            Bool flag to determine if there is a connection 
+            Bool flag to determine if there is a connection
             </summary>
         </member>
         <member name="F:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.mgr">
             <summary>
-            CRM Connection Manager component. 
+            CRM Connection Manager component.
             </summary>
         </member>
         <member name="F:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.resetUiFlag">
             <summary>
-             This is used to allow the UI to reset w/out closing 
+             This is used to allow the UI to reset w/out closing
             </summary>
         </member>
         <member name="P:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.CrmConnectionMgr">
             <summary>
-            CRM Connection Manager 
+            CRM Connection Manager
             </summary>
         </member>
         <member name="P:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.HostApplicatioNameOveride">
             <summary>
-            Host Name to use.. 
+            Host Name to use..
             </summary>
         </member>
         <member name="P:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.HostProfileName">
@@ -1473,12 +1473,12 @@
         </member>
         <member name="P:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.ForceDirectLogin">
             <summary>
-            When set to true, forces a user login, 
+            When set to true, forces a user login,
             </summary>
         </member>
         <member name="E:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.ConnectionToCrmCompleted">
             <summary>
-            Raised when a connection to CRM has completed. 
+            Raised when a connection to CRM has completed.
             </summary>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.#ctor">
@@ -1488,19 +1488,19 @@
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.Window_Loaded(System.Object,System.Windows.RoutedEventArgs)">
             <summary>
-            Raised when the window loads for the first time. 
+            Raised when the window loads for the first time.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.ExecuteLoginProcess">
             <summary>
-            Run Login process. 
+            Run Login process.
             </summary>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.mgr_ServerConnectionStatusUpdate(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ServerConnectStatusEventArgs)">
             <summary>
-            Updates from the Auto Login process. 
+            Updates from the Auto Login process.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
@@ -1514,28 +1514,28 @@
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.CrmLoginCtrl_ConnectionCheckBegining(System.Object,System.EventArgs)">
             <summary>
-             Login control connect check starting. 
+             Login control connect check starting.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.CrmLoginCtrl_ConnectionStatusEvent(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ConnectStatusEventArgs)">
             <summary>
-            Login control connect check status event. 
+            Login control connect check status event.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.CrmLoginCtrl_ConnectErrorEvent(System.Object,Microsoft.Xrm.Tooling.CrmConnectControl.ConnectErrorEventArgs)">
             <summary>
-            Login control Error event. 
+            Login control Error event.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
         <member name="M:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin.CrmLoginCtrl_UserCancelClicked(System.Object,System.EventArgs)">
             <summary>
-            Login Control Cancel event raised. 
+            Login Control Cancel event raised.
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
