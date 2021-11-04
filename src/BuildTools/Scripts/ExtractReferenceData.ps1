@@ -35,7 +35,7 @@ $DataFile = "$DataFolder\data\data.xml"
 
 <# Export Data #>
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
-Write-Host "Exporting configuration data"
+Write-Host "Exporting reference data"
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
 
 CD "$BuildToolsPath\ExportData\bin\"
@@ -44,7 +44,7 @@ CD "$BuildToolsPath\ExportData\bin\"
 
 if ($LastExitCode -gt 0) {
 	CD $CurrentPath
-	throw "An error occurred whilst exporting the configuration data."
+	throw "An error occurred whilst exporting the reference data."
 }
 
 CD $CurrentPath
