@@ -1,4 +1,6 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Microsoft.PowerPlatform.Tooling.BatchedTelemetry;
+using Microsoft.PowerPlatform.Tooling.Crm.Telemetry;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using Microsoft.Xrm.Tooling.Dmt.DataMigCommon.DataInteraction;
@@ -13,6 +15,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using System.Web;
 
 namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
@@ -81,27 +85,16 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return progressItemEventArg;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "results")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "relationship")]
-#pragma warning disable IDE0060 // Remove unused parameter
 #pragma warning disable IDE0060 // Remove unused parameter
 #pragma warning disable IDE0051 // Remove unused private members
         private string ConstructDataStructure(DataMigCommon.DataModel.Schema.entitiesEntityRelationship relationship, Dictionary<string, Dictionary<string, object>> results)
 #pragma warning restore IDE0051 // Remove unused private members
-#pragma warning restore IDE0060 // Remove unused parameter
 #pragma warning restore IDE0060 // Remove unused parameter
         {
             return null;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ConstructDataStructure")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.DateTime.ToString(System.String)")]
         private DataMigCommon.DataModel.Data.entitiesEntity ConstructExportDataStructure(DataMigCommon.DataModel.Schema.entitiesEntity entity, Dictionary<string, Dictionary<string, object>> results)
         {
             entitiesEntityRecordFieldActivitypointerrecords[] array;
@@ -210,9 +203,19 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return _entitiesEntity;
         }
 
+        internal bool ExportData(string schemaFileName, string outputFileName, IAppTelemetryClient telemetry)
+        {
+            bool flag;
+            using (StartStopEventsTracker nullable = telemetry.StartTrackingWorkload("export", new Guid?(CrmServiceClient.ConnectedOrgId), null))
+            {
+                bool flag1 = this.ExportData(schemaFileName, outputFileName);
+                nullable.Success = new bool?(flag1);
+                flag = flag1;
+            }
+            return flag;
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ExportData")]
         internal bool ExportData(string schemaFileName, string outputFileName)
         {
             TimeSpan timeSpan;
@@ -268,9 +271,7 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             {
                 CultureInfo currentUICulture1 = CultureInfo.CurrentUICulture;
                 string eXPORTCRMCOMPLETEEXPORTEDENTITIES = Resources.EXPORT_CRM_COMPLETE_EXPORTED_ENTITIES;
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
                 object obj = _exportEntitiesDataObject.Count<DataMigCommon.DataModel.Data.entitiesEntity>();
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
                 timeSpan = utcNow.Subtract(DateTime.UtcNow);
                 timeSpan = timeSpan.Duration();
                 AddProgressItem(string.Format(currentUICulture1, eXPORTCRMCOMPLETEEXPORTEDENTITIES, obj, timeSpan.ToString()), ProgressItemStatus.Complete);
@@ -282,9 +283,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return disk;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.IFormatProvider,System.String,System.Object,System.Object,System.Object)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.IFormatProvider,System.String,System.Object,System.Object)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.IFormatProvider,System.String,System.Object)")]
         private void FetchDataFromCrm(DataMigCommon.DataModel.Schema.entitiesEntity entity, ProgressItemEventArgs progressArgs)
         {
             List<string> strs = new List<string>();
@@ -303,7 +301,7 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.READING_RECORDS, itemText), ProgressItemStatus.Working);
             while (flag)
             {
-                Dictionary<string, Dictionary<string, object>> strs2 = PageEnabledFetchFromCRM(entity.name, strs, ref empty, ref flag, num, num1, CrmServiceClient);
+                Dictionary<string, Dictionary<string, object>> strs2 = PageEnabledFetchFromCRM(entity.name, strs, entity.filter, ref empty, ref flag, num, num1, CrmServiceClient);
                 if (strs2 != null && strs2.Count > 0)
                 {
                     foreach (KeyValuePair<string, Dictionary<string, object>> keyValuePair in strs2)
@@ -313,16 +311,12 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 }
                 if (!flag)
                 {
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
                     UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.READING_RECORDS_READ_COMPLETE, itemText, strs1.Count<KeyValuePair<string, Dictionary<string, object>>>()), ProgressItemStatus.Working);
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
                 }
                 else
                 {
                     num1++;
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
                     UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.READING_RECORDS_FOUND_RECORDS_REQUESTING_NEXT, itemText, strs1.Count<KeyValuePair<string, Dictionary<string, object>>>(), num), ProgressItemStatus.Working);
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
                 }
             }
             if (strs1 == null || strs1.Count == 0)
@@ -342,24 +336,17 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             {
                 _exportEntitiesDataObject = new List<DataMigCommon.DataModel.Data.entitiesEntity>();
             }
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
             UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.ADDING_RECORDS_EXPORT_SET, itemText, strs1.Count<KeyValuePair<string, Dictionary<string, object>>>()), ProgressItemStatus.Working);
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
             DataMigCommon.DataModel.Data.entitiesEntity _entitiesEntity = ConstructExportDataStructure(entity, strs1);
             if (_entitiesEntity == null)
             {
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
                 UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.FAILED_TO_ADD_RECORDS_TO_EXPORT_SET, entity.displayname, strs1.Count<KeyValuePair<string, Dictionary<string, object>>>()), ProgressItemStatus.Failed);
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
                 return;
             }
             _exportEntitiesDataObject.Add(_entitiesEntity);
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
             UpdateProgress(progressArgs, string.Format(CultureInfo.CurrentUICulture, Resources.RECORDS_ADDED_TO_EXPORT_SET, entity.displayname, strs1.Count<KeyValuePair<string, Dictionary<string, object>>>()), ProgressItemStatus.Complete);
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         private entitiesEntityM2mrelationship FetchManyToManyRelationshipData(Guid guRootId, DataMigCommon.DataModel.Schema.entitiesEntity entity, DataMigCommon.DataModel.Schema.entitiesEntityRelationship m2mRel)
         {
             entitiesEntityM2mrelationship _entitiesEntityM2mrelationship = new entitiesEntityM2mrelationship();
@@ -407,18 +394,13 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 }
                 _entitiesEntityM2mrelationship.targetids = strs1.ToArray();
             }
-#pragma warning disable CA1829 // Use Length/Count property instead of Count() when available
             if (_entitiesEntityM2mrelationship.targetids != null && _entitiesEntityM2mrelationship.targetids.Count<string>() > 0)
-#pragma warning restore CA1829 // Use Length/Count property instead of Count() when available
             {
                 return _entitiesEntityM2mrelationship;
             }
             return null;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "relationships")]
 #pragma warning disable IDE0060 // Remove unused parameter
 #pragma warning disable IDE0051 // Remove unused private members
         private string FetchRelationshipData(List<DataMigCommon.DataModel.Schema.entitiesEntityRelationship> relationships)
@@ -503,8 +485,13 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 HashSet<Guid> guids = new HashSet<Guid>();
                 foreach (KeyValuePair<string, Dictionary<string, object>> dynamicPropertyAssociation in GetDynamicPropertyAssociations(client))
                 {
-                    EntityReference item = (EntityReference)dynamicPropertyAssociation.Value["regardingobjectid"];
-                    if (guids.Contains(item.Id))
+                    object item = dynamicPropertyAssociation.Value["regardingobjectid"];
+                    if (item is string)
+                    {
+                        item = ((KeyValuePair<string, object>)dynamicPropertyAssociation.Value["regardingobjectid_Property"]).Value;
+                    }
+                    EntityReference entityReference = (EntityReference)item;
+                    if (guids.Contains(entityReference.Id))
                     {
                         continue;
                     }
@@ -512,9 +499,9 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                     {
                         FieldName = "productid",
                         FieldOperator = ConditionOperator.NotEqual,
-                        FieldValue = item.Id
+                        FieldValue = entityReference.Id
                     });
-                    guids.Add(item.Id);
+                    guids.Add(entityReference.Id);
                 }
             }
             _addProductIdFilters = false;
@@ -523,11 +510,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return crmSearchFilters;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1809:AvoidExcessiveLocals")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)")]
         private object GetDataItemFromResult(Dictionary<string, object> result, string fieldName, string fieldType, out string lookupEntity, out string lookupEntityName)
         {
             KeyValuePair<string, object> dataByKeyFromResultsSet;
@@ -633,11 +615,11 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 {
                     return null;
                 }
-                return string.Format("[-1,{0},-1]", string.Join<int>(",",
+                return string.Concat("[-1,", string.Join<int>(",",
                     from v in optionSetValueCollection
                     select v.Value into v
                     orderby v
-                    select v));
+                    select v), ",-1]");
             }
             EntityCollection entityCollection = CrmServiceClient.GetDataByKeyFromResultsSet<EntityCollection>(result, fieldName);
             if (entityCollection == null)
@@ -808,7 +790,7 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             int num1 = 1;
             while (flag)
             {
-                Dictionary<string, Dictionary<string, object>> strs2 = PageEnabledFetchFromCRM("dynamicpropertyassociation", strs, ref empty, ref flag, num, num1, client);
+                Dictionary<string, Dictionary<string, object>> strs2 = PageEnabledFetchFromCRM("dynamicpropertyassociation", strs, null, ref empty, ref flag, num, num1, client);
                 if (strs2 != null && strs2.Count > 0)
                 {
                     foreach (KeyValuePair<string, Dictionary<string, object>> keyValuePair in strs2)
@@ -845,13 +827,55 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return false;
         }
 
-        private static Dictionary<string, Dictionary<string, object>> PageEnabledFetchFromCRM(string logicalName, List<string> fieldList, ref string pageCookie, ref bool isMoreRecords, int iPageCount, int iPageNumber, CrmServiceClient client)
+        private static string MergeFetchXmlWithFields(string fetchXml, List<string> fieldList, string logicalName)
         {
+            XDocument xDocument = XDocument.Parse(fetchXml);
+            XElement xElement = xDocument.XPathSelectElements("//fetch/entity").FirstOrDefault<XElement>();
+            if (xElement == null)
+            {
+                xDocument = XDocument.Parse(string.Concat(new string[] { "<fetch mapping='logical' version='1.0' distinct='false' output-format='xml-platform'> <entity name='", logicalName, "'>", xDocument.Root.ToString(), "</entity></fetch>" }));
+                xElement = xDocument.XPathSelectElements("//fetch/entity").FirstOrDefault<XElement>();
+                foreach (string str in fieldList)
+                {
+                    XElement xElement1 = new XElement("attribute", new XAttribute("name", str));
+                    xElement.Add(xElement1);
+                }
+            }
+            else if (xElement != null)
+            {
+                foreach (string str1 in fieldList)
+                {
+                    XElement xElement2 = new XElement("attribute", new XAttribute("name", str1));
+                    xElement.Add(xElement2);
+                }
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            xDocument.Save(new StringWriter(stringBuilder));
+            return stringBuilder.ToString();
+        }
+
+        private static Dictionary<string, Dictionary<string, object>> PageEnabledFetchFromCRM(string logicalName, List<string> fieldList, string fetchXml, ref string pageCookie, ref bool isMoreRecords, int iPageCount, int iPageNumber, CrmServiceClient client)
+        {
+            Dictionary<string, Dictionary<string, object>> entityDataBySearchParams;
+            Guid guid;
             List<CrmServiceClient.CrmSearchFilter> crmSearchFilters = GenerateSpecialFiltersList(logicalName, client);
             CrmServiceClient crmServiceClient = client;
-            Dictionary<string, CrmServiceClient.LogicalSortOrder> strs = new Dictionary<string, CrmServiceClient.LogicalSortOrder>();
-            Guid guid = new Guid();
-            Dictionary<string, Dictionary<string, object>> entityDataBySearchParams = crmServiceClient.GetEntityDataBySearchParams(logicalName, crmSearchFilters, CrmServiceClient.LogicalSearchOperator.None, fieldList, strs, iPageCount, iPageNumber, pageCookie, out pageCookie, out isMoreRecords, guid);
+            string empty = string.Empty;
+            if (crmSearchFilters == null && !string.IsNullOrEmpty(fetchXml))
+            {
+                empty = MergeFetchXmlWithFields(fetchXml, fieldList, logicalName);
+            }
+            if (crmSearchFilters != null || string.IsNullOrEmpty(empty))
+            {
+                Dictionary<string, CrmServiceClient.LogicalSortOrder> strs = new Dictionary<string, CrmServiceClient.LogicalSortOrder>();
+                guid = new Guid();
+                entityDataBySearchParams = crmServiceClient.GetEntityDataBySearchParams(logicalName, crmSearchFilters, CrmServiceClient.LogicalSearchOperator.None, fieldList, strs, iPageCount, iPageNumber, pageCookie, out pageCookie, out isMoreRecords, guid);
+            }
+            else
+            {
+                guid = new Guid();
+                entityDataBySearchParams = crmServiceClient.GetEntityDataByFetchSearch(empty, iPageCount, iPageNumber, pageCookie, out pageCookie, out isMoreRecords, guid);
+            }
             if (crmSearchFilters != null)
             {
                 crmSearchFilters.Clear();
@@ -867,9 +891,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ReadDataFromCrm")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.IFormatProvider,System.String,System.Object)")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private bool ReadDataFromCrm(string schemaFileName)
         {
@@ -956,8 +977,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "SaveOutputToDisk")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.DateTime.ToString")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private bool SaveOutputToDisk(string schemaFileName, string outputFileName)
         {
@@ -974,7 +993,7 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 string str1 = Helper.Serialize<DataMigCommon.DataModel.Data.entities>(new DataMigCommon.DataModel.Data.entities()
                 {
                     entity = _exportEntitiesDataObject.ToArray(),
-                    timestamp = DateTime.Now.ToString()
+                    timestamp = DateTime.UtcNow.ToString("o")
                 }).Replace("lookupentity=\"\" lookupentityname=\"\" ", string.Empty).Replace("<?xml version=\"1.0\"?>", string.Empty);
                 if (!string.IsNullOrWhiteSpace(str1))
                 {
