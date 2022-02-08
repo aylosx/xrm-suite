@@ -100,6 +100,7 @@ namespace Aylos.Xrm.Sdk.Plugins.RhinoMocks
         {
             PluginExecutionContext pec = CreatePluginExecutionContext(messageName, depth, primaryEntityName, pipelineStage);
             pec.InputParameters[PlatformConstants.TargetText] = targetEntity;
+            pec.PrimaryEntityId = targetEntity.Id;
             return pec;
         }
 

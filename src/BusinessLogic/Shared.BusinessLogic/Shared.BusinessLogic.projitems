@@ -15,6 +15,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Account\IManageDeleteEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Account\InitializeEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Account\ManageDeleteEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExecutionContext\IPostMessageService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExecutionContext\IManageExecutionContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExecutionContext\PostMessageService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ExecutionContext\ManageExecutionContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\None\IInitializeEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\None\InitializeEntityService.cs" />
   </ItemGroup>

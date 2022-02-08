@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("activityparty")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class ActivityParty : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -332,6 +332,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Unique identifier of the resource specification for the activity party.
+		/// </summary>
+		[AttributeLogicalNameAttribute("resourcespecid")]
+		public EntityReference ResourceSpecification
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("resourcespecid");
+			}
+			set
+			{
+				this.OnPropertyChanging("ResourceSpecification");
+				this.SetAttributeValue("resourcespecid", value);
+				this.OnPropertyChanged("ResourceSpecification");
+			}
+		}
+		
+		/// <summary>
 		/// Scheduled end time of the activity.
 		/// </summary>
 		[AttributeLogicalNameAttribute("scheduledend")]
@@ -389,6 +407,8 @@ namespace Shared.Models.Domain
 			public static string ParticipationType = "participationtypemask";
 			
 			public static string Party = "partyid";
+			
+			public static string ResourceSpecification = "resourcespecid";
 			
 			public static string ScheduledEnd = "scheduledend";
 			

@@ -12,6 +12,7 @@
     using Aylos.Xrm.Sdk.Common;
 
     using Shared.Models.Domain;
+    using Microsoft.Xrm.Sdk.Messages;
 
     /// <summary>
     /// This class service provides access to the CRM database.
@@ -67,6 +68,31 @@
 
         #region Methods
 
+        /**
+         * <summary>    Deletes the entity. </summary>
+         *
+         * <remarks>    Vangelis Xanthakis, 07/02/2022. </remarks>
+         *
+         * <exception cref="ArgumentNullException"> Thrown when one or more required arguments are null. </exception>
+         *
+         * <param name="logicalName">   Name of the logical. </param>
+         * <param name="primaryKey">    The primary key. </param>
+         */
+
+        public virtual void DeleteEntity(string logicalName, Guid primaryKey)
+        {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            if (string.IsNullOrWhiteSpace(logicalName)) throw new ArgumentNullException(nameof(logicalName));
+            if (Guid.Empty.Equals(primaryKey)) throw new ArgumentNullException(nameof(primaryKey));
+
+            DeleteRequest req = new DeleteRequest { Target = new EntityReference (logicalName, primaryKey) };
+
+            OrganizationServiceContext.Execute(req);
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+        }
+
         /// <summary>
         /// Retrieves Account entity for the given primary key
         /// </summary>
@@ -119,6 +145,29 @@
             IQueryable<Account> entities =
                 from x in OrganizationServiceContext.AccountSet
                 where x.Id == primaryKey && x.State == AccountState.Active
+                select x;
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            return entities;
+        }
+
+        /// <summary>
+        /// Retrieves the execution context records for the given correlation and operation identifiers.
+        /// </summary>
+        /// <param name="correlationId">The correlation identifier</param>
+        /// <param name="operationId">The operation identifier</param>
+        /// <returns>A list of execution contexts.</returns>
+        public virtual IEnumerable<ExecutionContext> GetExecutionContexts(string correlationId, string operationId)
+        {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            if (string.IsNullOrWhiteSpace(correlationId)) throw new ArgumentNullException(nameof(correlationId));
+            if (string.IsNullOrWhiteSpace(operationId)) throw new ArgumentNullException(nameof(operationId));
+
+            IQueryable<ExecutionContext> entities =
+                from x in OrganizationServiceContext.ExecutionContextSet
+                where x.CorrelationId == correlationId && x.OperationId == operationId
                 select x;
 
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));

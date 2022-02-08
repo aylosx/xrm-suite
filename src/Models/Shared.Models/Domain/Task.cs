@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("task")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class Task : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -606,6 +606,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Choose the service that is associated with this activity.
+		/// </summary>
+		[AttributeLogicalNameAttribute("serviceid")]
+		public EntityReference Service
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("serviceid");
+			}
+			set
+			{
+				this.OnPropertyChanging("Service");
+				this.SetAttributeValue("serviceid", value);
+				this.OnPropertyChanged("Service");
+			}
+		}
+		
+		/// <summary>
 		/// Choose the service level agreement (SLA) that you want to apply to the Task record.
 		/// </summary>
 		[AttributeLogicalNameAttribute("slaid")]
@@ -873,6 +891,8 @@ namespace Shared.Models.Domain
 			public static string DueDate = "scheduledend";
 			
 			public static string StartDate = "scheduledstart";
+			
+			public static string Service = "serviceid";
 			
 			public static string SLA = "slaid";
 			

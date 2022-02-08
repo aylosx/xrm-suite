@@ -15,7 +15,7 @@ namespace Shared.Models.Domain
 	
 	
 	[DataContractAttribute()]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public enum AppointmentPriority
 	{
 		

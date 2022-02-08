@@ -12,6 +12,7 @@ namespace Aylos.Xrm.Sdk.Common
         Unknown = 0,
         PreValidation = 10,
         PreOperation = 20,
+        MainOperation = 30,
         PostOperation = 40,
     }
 }

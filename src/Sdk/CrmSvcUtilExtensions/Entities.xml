@@ -9,7 +9,8 @@
     <entity>appointment</entity>
     <entity>bookingstatus</entity>
     <entity>contact</entity>
-    <entity>incident</entity>
+	<entity>aylos_executioncontext</entity>
+	<entity>incident</entity>
     <entity>lead</entity>
     <entity>task</entity>
   </entities>

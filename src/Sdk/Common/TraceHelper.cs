@@ -510,7 +510,7 @@ namespace Aylos.Xrm.Sdk.Common
         private const string OutputParametersText = "OutputParameters {0}";
         private const string PreEntityImagesText = "PreEntityImages {0}";
         private const string PostEntityImagesText = "PostEntityImages {0}";
-        private const string ParentContextText = "Parent Context {0}";
+        private const string ParentContextText = "Parent Context\n============== {0}";
         private const string MoreText = " ...";
     }
 }

@@ -23,7 +23,7 @@ namespace Shared.Models.Domain
 	/// <summary>
 	/// Represents a source of entities bound to a CRM service. It tracks and manages changes made to the retrieved entities.
 	/// </summary>
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class CrmServiceContext : OrganizationServiceContext
 	{
 		
@@ -76,6 +76,17 @@ namespace Shared.Models.Domain
 			get
 			{
 				return this.CreateQuery<Appointment>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="ExecutionContext"/> entities.
+		/// </summary>
+		public IQueryable<ExecutionContext> ExecutionContextSet
+		{
+			get
+			{
+				return this.CreateQuery<ExecutionContext>();
 			}
 		}
 		

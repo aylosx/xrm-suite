@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("appointment")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class Appointment : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -434,6 +434,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Displays whether or not this is an online meeting.
+		/// </summary>
+		[AttributeLogicalNameAttribute("isonlinemeeting")]
+		public Nullable<bool> IsOnlineMeeting
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<bool>>("isonlinemeeting");
+			}
+			set
+			{
+				this.OnPropertyChanging("IsOnlineMeeting");
+				this.SetAttributeValue("isonlinemeeting", value);
+				this.OnPropertyChanged("IsOnlineMeeting");
+			}
+		}
+		
+		/// <summary>
 		/// Information regarding whether the activity is a regular activity type or event type.
 		/// </summary>
 		[AttributeLogicalNameAttribute("isregularactivity")]
@@ -566,6 +584,186 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_call_summary_control_field")]
+		public Nullable<int> CiCallSummaryControlField
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("msdyn_ci_call_summary_control_field");
+			}
+			set
+			{
+				this.OnPropertyChanging("CiCallSummaryControlField");
+				this.SetAttributeValue("msdyn_ci_call_summary_control_field", value);
+				this.OnPropertyChanged("CiCallSummaryControlField");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_id")]
+		public string ConversationId
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_id");
+			}
+			set
+			{
+				this.OnPropertyChanging("ConversationId");
+				this.SetAttributeValue("msdyn_ci_id", value);
+				this.OnPropertyChanged("ConversationId");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_insights_json")]
+		public string InsightsJson
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_insights_json");
+			}
+			set
+			{
+				this.OnPropertyChanging("InsightsJson");
+				this.SetAttributeValue("msdyn_ci_insights_json", value);
+				this.OnPropertyChanged("InsightsJson");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_keywords")]
+		public string ConversationKeywords
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_keywords");
+			}
+			set
+			{
+				this.OnPropertyChanging("ConversationKeywords");
+				this.SetAttributeValue("msdyn_ci_keywords", value);
+				this.OnPropertyChanged("ConversationKeywords");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_media_reference_id")]
+		public string MediaReferenceId
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_media_reference_id");
+			}
+			set
+			{
+				this.OnPropertyChanging("MediaReferenceId");
+				this.SetAttributeValue("msdyn_ci_media_reference_id", value);
+				this.OnPropertyChanged("MediaReferenceId");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_transcript")]
+		public string CITranscript
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_transcript");
+			}
+			set
+			{
+				this.OnPropertyChanging("CITranscript");
+				this.SetAttributeValue("msdyn_ci_transcript", value);
+				this.OnPropertyChanged("CITranscript");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_transcript_json")]
+		public string TranscriptJson
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_transcript_json");
+			}
+			set
+			{
+				this.OnPropertyChanging("TranscriptJson");
+				this.SetAttributeValue("msdyn_ci_transcript_json", value);
+				this.OnPropertyChanged("TranscriptJson");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_translated_transcript")]
+		public string CITranslatedTranscript
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_translated_transcript");
+			}
+			set
+			{
+				this.OnPropertyChanging("CITranslatedTranscript");
+				this.SetAttributeValue("msdyn_ci_translated_transcript", value);
+				this.OnPropertyChanged("CITranslatedTranscript");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_translated_transcript_json")]
+		public string TranslatedTranscriptJson
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_translated_transcript_json");
+			}
+			set
+			{
+				this.OnPropertyChanging("TranslatedTranscriptJson");
+				this.SetAttributeValue("msdyn_ci_translated_transcript_json", value);
+				this.OnPropertyChanged("TranslatedTranscriptJson");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_ci_url")]
+		public string ConversationUrl
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("msdyn_ci_url");
+			}
+			set
+			{
+				this.OnPropertyChanging("ConversationUrl");
+				this.SetAttributeValue("msdyn_ci_url", value);
+				this.OnPropertyChanged("ConversationUrl");
+			}
+		}
+		
+		/// <summary>
 		/// Shows how long, in minutes, that the record was on hold.
 		/// </summary>
 		[AttributeLogicalNameAttribute("onholdtime")]
@@ -574,6 +772,93 @@ namespace Shared.Models.Domain
 			get
 			{
 				return this.GetAttributeValue<Nullable<int>>("onholdtime");
+			}
+		}
+		
+		/// <summary>
+		/// Shows the online meeting chat id.
+		/// </summary>
+		[AttributeLogicalNameAttribute("onlinemeetingchatid")]
+		public string OnlineMeetingChatId
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("onlinemeetingchatid");
+			}
+			set
+			{
+				this.OnPropertyChanging("OnlineMeetingChatId");
+				this.SetAttributeValue("onlinemeetingchatid", value);
+				this.OnPropertyChanged("OnlineMeetingChatId");
+			}
+		}
+		
+		/// <summary>
+		/// Shows the online meeting id.
+		/// </summary>
+		[AttributeLogicalNameAttribute("onlinemeetingid")]
+		public string OnlineMeetingId
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("onlinemeetingid");
+			}
+			set
+			{
+				this.OnPropertyChanging("OnlineMeetingId");
+				this.SetAttributeValue("onlinemeetingid", value);
+				this.OnPropertyChanged("OnlineMeetingId");
+			}
+		}
+		
+		/// <summary>
+		/// Shows the online meeting join url.
+		/// </summary>
+		[AttributeLogicalNameAttribute("onlinemeetingjoinurl")]
+		public string OnlineMeetingJoinUrl
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("onlinemeetingjoinurl");
+			}
+			set
+			{
+				this.OnPropertyChanging("OnlineMeetingJoinUrl");
+				this.SetAttributeValue("onlinemeetingjoinurl", value);
+				this.OnPropertyChanged("OnlineMeetingJoinUrl");
+			}
+		}
+		
+		/// <summary>
+		/// Displays the online meeting type.
+		/// </summary>
+		[AttributeLogicalNameAttribute("onlinemeetingtype")]
+		public Nullable<GlobalOnlineMeetingType> OnlineMeetingType
+		{
+			get
+			{
+				var optionSet = this.GetAttributeValue<OptionSetValue>("onlinemeetingtype");
+				if (optionSet == null)
+				{
+					return null;
+				}
+				else
+				{
+					return (GlobalOnlineMeetingType)(Enum.ToObject(typeof(GlobalOnlineMeetingType), optionSet.Value));
+				}
+			}
+			set
+			{
+				this.OnPropertyChanging("OnlineMeetingType");
+				if (value == null)
+				{
+					this.SetAttributeValue("onlinemeetingtype", null);
+				}
+				else
+				{
+					this.SetAttributeValue("onlinemeetingtype", new OptionSetValue((int)value));
+				}
+				this.OnPropertyChanged("OnlineMeetingType");
 			}
 		}
 		
@@ -899,6 +1184,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Unique identifier for an associated service.
+		/// </summary>
+		[AttributeLogicalNameAttribute("serviceid")]
+		public EntityReference Service
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("serviceid");
+			}
+			set
+			{
+				this.OnPropertyChanging("Service");
+				this.SetAttributeValue("serviceid", value);
+				this.OnPropertyChanged("Service");
+			}
+		}
+		
+		/// <summary>
 		/// Choose the service level agreement (SLA) that you want to apply to the appointment record.
 		/// </summary>
 		[AttributeLogicalNameAttribute("slaid")]
@@ -1145,6 +1448,8 @@ namespace Shared.Models.Domain
 			
 			public static string IsPrivate = "ismapiprivate";
 			
+			public static string IsOnlineMeeting = "isonlinemeeting";
+			
 			public static string IsRegularActivity = "isregularactivity";
 			
 			public static string IsUnsafe = "isunsafe";
@@ -1161,7 +1466,35 @@ namespace Shared.Models.Domain
 			
 			public static string ModifiedOn = "modifiedon";
 			
+			public static string CiCallSummaryControlField = "msdyn_ci_call_summary_control_field";
+			
+			public static string ConversationId = "msdyn_ci_id";
+			
+			public static string InsightsJson = "msdyn_ci_insights_json";
+			
+			public static string ConversationKeywords = "msdyn_ci_keywords";
+			
+			public static string MediaReferenceId = "msdyn_ci_media_reference_id";
+			
+			public static string CITranscript = "msdyn_ci_transcript";
+			
+			public static string TranscriptJson = "msdyn_ci_transcript_json";
+			
+			public static string CITranslatedTranscript = "msdyn_ci_translated_transcript";
+			
+			public static string TranslatedTranscriptJson = "msdyn_ci_translated_transcript_json";
+			
+			public static string ConversationUrl = "msdyn_ci_url";
+			
 			public static string OnHoldTimeMinutes = "onholdtime";
+			
+			public static string OnlineMeetingChatId = "onlinemeetingchatid";
+			
+			public static string OnlineMeetingId = "onlinemeetingid";
+			
+			public static string OnlineMeetingJoinUrl = "onlinemeetingjoinurl";
+			
+			public static string OnlineMeetingType = "onlinemeetingtype";
 			
 			public static string OptionalAttendees = "optionalattendees";
 			
@@ -1194,6 +1527,8 @@ namespace Shared.Models.Domain
 			public static string StartTime = "scheduledstart";
 			
 			public static string SeriesId = "seriesid";
+			
+			public static string Service = "serviceid";
 			
 			public static string SLA = "slaid";
 			

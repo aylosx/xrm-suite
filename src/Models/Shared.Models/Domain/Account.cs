@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("account")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class Account : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1164,78 +1164,6 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_createdbyipaddress")]
-		public string CreatedByIPAddress
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_createdbyipaddress");
-			}
-			set
-			{
-				this.OnPropertyChanging("CreatedByIPAddress");
-				this.SetAttributeValue("adx_createdbyipaddress", value);
-				this.OnPropertyChanged("CreatedByIPAddress");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_createdbyusername")]
-		public string CreatedByUserName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_createdbyusername");
-			}
-			set
-			{
-				this.OnPropertyChanging("CreatedByUserName");
-				this.SetAttributeValue("adx_createdbyusername", value);
-				this.OnPropertyChanged("CreatedByUserName");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_modifiedbyipaddress")]
-		public string ModifiedByIPAddress
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_modifiedbyipaddress");
-			}
-			set
-			{
-				this.OnPropertyChanging("ModifiedByIPAddress");
-				this.SetAttributeValue("adx_modifiedbyipaddress", value);
-				this.OnPropertyChanged("ModifiedByIPAddress");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_modifiedbyusername")]
-		public string ModifiedByUserName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_modifiedbyusername");
-			}
-			set
-			{
-				this.OnPropertyChanging("ModifiedByUserName");
-				this.SetAttributeValue("adx_modifiedbyusername", value);
-				this.OnPropertyChanged("ModifiedByUserName");
-			}
-		}
-		
-		/// <summary>
 		/// For system use only.
 		/// </summary>
 		[AttributeLogicalNameAttribute("aging30")]
@@ -1505,6 +1433,24 @@ namespace Shared.Models.Domain
 					this.SetAttributeValue("customertypecode", new OptionSetValue((int)value));
 				}
 				this.OnPropertyChanged("RelationshipType");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the default price list associated with the account to make sure the correct product prices for this customer are applied in sales opportunities, quotes, and orders.
+		/// </summary>
+		[AttributeLogicalNameAttribute("defaultpricelevelid")]
+		public EntityReference PriceList
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("defaultpricelevelid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PriceList");
+				this.SetAttributeValue("defaultpricelevelid", value);
+				this.OnPropertyChanged("PriceList");
 			}
 		}
 		
@@ -1980,20 +1926,20 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
-		/// Unique identifier for Account associated with Account.
+		/// Describes whether account is opted out or not
 		/// </summary>
-		[AttributeLogicalNameAttribute("msa_managingpartnerid")]
-		public EntityReference ManagingPartner
+		[AttributeLogicalNameAttribute("msdyn_gdproptout")]
+		public Nullable<bool> GDPROptout
 		{
 			get
 			{
-				return this.GetAttributeValue<EntityReference>("msa_managingpartnerid");
+				return this.GetAttributeValue<Nullable<bool>>("msdyn_gdproptout");
 			}
 			set
 			{
-				this.OnPropertyChanging("ManagingPartner");
-				this.SetAttributeValue("msa_managingpartnerid", value);
-				this.OnPropertyChanged("ManagingPartner");
+				this.OnPropertyChanging("GDPROptout");
+				this.SetAttributeValue("msdyn_gdproptout", value);
+				this.OnPropertyChanged("GDPROptout");
 			}
 		}
 		
@@ -2042,6 +1988,108 @@ namespace Shared.Models.Domain
 			get
 			{
 				return this.GetAttributeValue<Nullable<int>>("onholdtime");
+			}
+		}
+		
+		/// <summary>
+		/// Number of open opportunities against an account and its child accounts.
+		/// </summary>
+		[AttributeLogicalNameAttribute("opendeals")]
+		public Nullable<int> OpenDeals
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("opendeals");
+			}
+		}
+		
+		/// <summary>
+		/// Last Updated time of rollup field Open Deals.
+		/// </summary>
+		[AttributeLogicalNameAttribute("opendeals_date")]
+		public Nullable<DateTime> OpenDealsLastUpdatedOn
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("opendeals_date");
+			}
+		}
+		
+		/// <summary>
+		/// State of rollup field Open Deals.
+		/// </summary>
+		[AttributeLogicalNameAttribute("opendeals_state")]
+		public Nullable<int> OpenDealsState
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("opendeals_state");
+			}
+		}
+		
+		/// <summary>
+		/// Sum of open revenue against an account and its child accounts.
+		/// </summary>
+		[AttributeLogicalNameAttribute("openrevenue")]
+		public Money OpenRevenue
+		{
+			get
+			{
+				return this.GetAttributeValue<Money>("openrevenue");
+			}
+		}
+		
+		/// <summary>
+		/// Value of the Open Revenue in base currency.
+		/// </summary>
+		[AttributeLogicalNameAttribute("openrevenue_base")]
+		public Money OpenRevenueBase
+		{
+			get
+			{
+				return this.GetAttributeValue<Money>("openrevenue_base");
+			}
+		}
+		
+		/// <summary>
+		/// Last Updated time of rollup field Open Revenue.
+		/// </summary>
+		[AttributeLogicalNameAttribute("openrevenue_date")]
+		public Nullable<DateTime> OpenRevenueLastUpdatedOn
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("openrevenue_date");
+			}
+		}
+		
+		/// <summary>
+		/// State of rollup field Open Revenue.
+		/// </summary>
+		[AttributeLogicalNameAttribute("openrevenue_state")]
+		public Nullable<int> OpenRevenueState
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("openrevenue_state");
+			}
+		}
+		
+		/// <summary>
+		/// Shows the lead that the account was created from if the account was created by converting a lead in Microsoft Dynamics 365. This is used to relate the account to data on the originating lead for use in reporting and analytics.
+		/// </summary>
+		[AttributeLogicalNameAttribute("originatingleadid")]
+		public EntityReference OriginatingLead
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("originatingleadid");
+			}
+			set
+			{
+				this.OnPropertyChanging("OriginatingLead");
+				this.SetAttributeValue("originatingleadid", value);
+				this.OnPropertyChanged("OriginatingLead");
 			}
 		}
 		
@@ -2297,6 +2345,42 @@ namespace Shared.Models.Domain
 					this.SetAttributeValue("preferredcontactmethodcode", new OptionSetValue((int)value));
 				}
 				this.OnPropertyChanged("PreferredMethodOfContact");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the account's preferred service facility or equipment to make sure services are scheduled correctly for the customer.
+		/// </summary>
+		[AttributeLogicalNameAttribute("preferredequipmentid")]
+		public EntityReference PreferredFacilityEquipment
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("preferredequipmentid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PreferredFacilityEquipment");
+				this.SetAttributeValue("preferredequipmentid", value);
+				this.OnPropertyChanged("PreferredFacilityEquipment");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the account's preferred service for reference when you schedule service activities.
+		/// </summary>
+		[AttributeLogicalNameAttribute("preferredserviceid")]
+		public EntityReference PreferredService
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("preferredserviceid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PreferredService");
+				this.SetAttributeValue("preferredserviceid", value);
+				this.OnPropertyChanged("PreferredService");
 			}
 		}
 		
@@ -2622,6 +2706,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Number of users or conversations followed the record
+		/// </summary>
+		[AttributeLogicalNameAttribute("teamsfollowed")]
+		public Nullable<int> TeamsFollowed
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("teamsfollowed");
+			}
+			set
+			{
+				this.OnPropertyChanging("TeamsFollowed");
+				this.SetAttributeValue("teamsfollowed", value);
+				this.OnPropertyChanged("TeamsFollowed");
+			}
+		}
+		
+		/// <summary>
 		/// Type the main phone number for this account.
 		/// </summary>
 		[AttributeLogicalNameAttribute("telephone1")]
@@ -2705,6 +2807,24 @@ namespace Shared.Models.Domain
 					this.SetAttributeValue("territorycode", new OptionSetValue((int)value));
 				}
 				this.OnPropertyChanged("TerritoryCode");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the sales region or territory for the account to make sure the account is assigned to the correct representative and for use in segmentation and analysis.
+		/// </summary>
+		[AttributeLogicalNameAttribute("territoryid")]
+		public EntityReference Territory
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("territoryid");
+			}
+			set
+			{
+				this.OnPropertyChanging("Territory");
+				this.SetAttributeValue("territoryid", value);
+				this.OnPropertyChanged("Territory");
 			}
 		}
 		
@@ -2921,14 +3041,6 @@ namespace Shared.Models.Domain
 			
 			public static string AddressTwoUTCOffset = "address2_utcoffset";
 			
-			public static string CreatedByIPAddress = "adx_createdbyipaddress";
-			
-			public static string CreatedByUserName = "adx_createdbyusername";
-			
-			public static string ModifiedByIPAddress = "adx_modifiedbyipaddress";
-			
-			public static string ModifiedByUserName = "adx_modifiedbyusername";
-			
 			public static string AgingThirty = "aging30";
 			
 			public static string AgingThirtyBase = "aging30_base";
@@ -2958,6 +3070,8 @@ namespace Shared.Models.Domain
 			public static string CustomerSize = "customersizecode";
 			
 			public static string RelationshipType = "customertypecode";
+			
+			public static string PriceList = "defaultpricelevelid";
 			
 			public static string Description = "description";
 			
@@ -3013,13 +3127,29 @@ namespace Shared.Models.Domain
 			
 			public static string ModifiedOn = "modifiedon";
 			
-			public static string ManagingPartner = "msa_managingpartnerid";
+			public static string GDPROptout = "msdyn_gdproptout";
 			
 			public static string AccountName = "name";
 			
 			public static string NumberOfEmployees = "numberofemployees";
 			
 			public static string OnHoldTimeMinutes = "onholdtime";
+			
+			public static string OpenDeals = "opendeals";
+			
+			public static string OpenDealsLastUpdatedOn = "opendeals_date";
+			
+			public static string OpenDealsState = "opendeals_state";
+			
+			public static string OpenRevenue = "openrevenue";
+			
+			public static string OpenRevenueBase = "openrevenue_base";
+			
+			public static string OpenRevenueLastUpdatedOn = "openrevenue_date";
+			
+			public static string OpenRevenueState = "openrevenue_state";
+			
+			public static string OriginatingLead = "originatingleadid";
 			
 			public static string Owner = "ownerid";
 			
@@ -3042,6 +3172,10 @@ namespace Shared.Models.Domain
 			public static string PreferredTime = "preferredappointmenttimecode";
 			
 			public static string PreferredMethodOfContact = "preferredcontactmethodcode";
+			
+			public static string PreferredFacilityEquipment = "preferredequipmentid";
+			
+			public static string PreferredService = "preferredserviceid";
 			
 			public static string PreferredUser = "preferredsystemuserid";
 			
@@ -3075,6 +3209,8 @@ namespace Shared.Models.Domain
 			
 			public static string StockExchange = "stockexchange";
 			
+			public static string TeamsFollowed = "teamsfollowed";
+			
 			public static string MainPhone = "telephone1";
 			
 			public static string OtherPhone = "telephone2";
@@ -3082,6 +3218,8 @@ namespace Shared.Models.Domain
 			public static string TelephoneThree = "telephone3";
 			
 			public static string TerritoryCode = "territorycode";
+			
+			public static string Territory = "territoryid";
 			
 			public static string TickerSymbol = "tickersymbol";
 			

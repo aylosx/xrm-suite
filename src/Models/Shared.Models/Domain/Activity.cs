@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("activitypointer")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class Activity : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -797,6 +797,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Unique identifier of an associated service.
+		/// </summary>
+		[AttributeLogicalNameAttribute("serviceid")]
+		public EntityReference Service
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("serviceid");
+			}
+			set
+			{
+				this.OnPropertyChanging("Service");
+				this.SetAttributeValue("serviceid", value);
+				this.OnPropertyChanged("Service");
+			}
+		}
+		
+		/// <summary>
 		/// Choose the service level agreement (SLA) that you want to apply to the case record.
 		/// </summary>
 		[AttributeLogicalNameAttribute("slaid")]
@@ -1066,6 +1084,8 @@ namespace Shared.Models.Domain
 			public static string DateSent = "senton";
 			
 			public static string SeriesId = "seriesid";
+			
+			public static string Service = "serviceid";
 			
 			public static string SLA = "slaid";
 			

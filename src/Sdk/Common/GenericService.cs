@@ -64,8 +64,8 @@ namespace Aylos.Xrm.Sdk.Common
         public void Trace(string message)
         {
             if (TracingService == null || string.IsNullOrWhiteSpace(message)) return;
-            var utcNow = DateTime.UtcNow; message = utcNow.ToString("HHmmss.fff | ", CultureInfo.InvariantCulture) + message;
-            TracingService.Trace(message);
+            var utcNow = DateTime.UtcNow;
+            TracingService.Trace(message + utcNow.ToString(" | HHmmss.fff", CultureInfo.InvariantCulture));
         }
     }
 

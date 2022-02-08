@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("contact")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.71")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
 	public partial class Contact : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1524,510 +1524,6 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_confirmremovepassword")]
-		public Nullable<bool> ConfirmRemovePassword
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_confirmremovepassword");
-			}
-			set
-			{
-				this.OnPropertyChanging("ConfirmRemovePassword");
-				this.SetAttributeValue("adx_confirmremovepassword", value);
-				this.OnPropertyChanged("ConfirmRemovePassword");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_createdbyipaddress")]
-		public string CreatedByIPAddress
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_createdbyipaddress");
-			}
-			set
-			{
-				this.OnPropertyChanging("CreatedByIPAddress");
-				this.SetAttributeValue("adx_createdbyipaddress", value);
-				this.OnPropertyChanged("CreatedByIPAddress");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_createdbyusername")]
-		public string CreatedByUsername
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_createdbyusername");
-			}
-			set
-			{
-				this.OnPropertyChanging("CreatedByUsername");
-				this.SetAttributeValue("adx_createdbyusername", value);
-				this.OnPropertyChanged("CreatedByUsername");
-			}
-		}
-		
-		/// <summary>
-		/// Shows the current count of failed password attempts for the contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_accessfailedcount")]
-		public Nullable<int> AccessFailedCount
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<int>>("adx_identity_accessfailedcount");
-			}
-			set
-			{
-				this.OnPropertyChanging("AccessFailedCount");
-				this.SetAttributeValue("adx_identity_accessfailedcount", value);
-				this.OnPropertyChanged("AccessFailedCount");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if the email is confirmed by the contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_emailaddress1confirmed")]
-		public Nullable<bool> EmailConfirmed
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_emailaddress1confirmed");
-			}
-			set
-			{
-				this.OnPropertyChanging("EmailConfirmed");
-				this.SetAttributeValue("adx_identity_emailaddress1confirmed", value);
-				this.OnPropertyChanged("EmailConfirmed");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates the last date and time the user successfully signed in to a portal.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_lastsuccessfullogin")]
-		public Nullable<DateTime> LastSuccessfulLogin
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("adx_identity_lastsuccessfullogin");
-			}
-			set
-			{
-				this.OnPropertyChanging("LastSuccessfulLogin");
-				this.SetAttributeValue("adx_identity_lastsuccessfullogin", value);
-				this.OnPropertyChanged("LastSuccessfulLogin");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates that the contact can no longer sign in to the portal using the local account.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_locallogindisabled")]
-		public Nullable<bool> LocalLoginDisabled
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_locallogindisabled");
-			}
-			set
-			{
-				this.OnPropertyChanging("LocalLoginDisabled");
-				this.SetAttributeValue("adx_identity_locallogindisabled", value);
-				this.OnPropertyChanged("LocalLoginDisabled");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if this contact will track failed access attempts and become locked after too many failed attempts. To prevent the contact from becoming locked, you can disable this setting.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_lockoutenabled")]
-		public Nullable<bool> LockoutEnabled
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_lockoutenabled");
-			}
-			set
-			{
-				this.OnPropertyChanging("LockoutEnabled");
-				this.SetAttributeValue("adx_identity_lockoutenabled", value);
-				this.OnPropertyChanged("LockoutEnabled");
-			}
-		}
-		
-		/// <summary>
-		/// Shows the moment in time when the locked contact becomes unlocked again.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_lockoutenddate")]
-		public Nullable<DateTime> LockoutEndDate
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("adx_identity_lockoutenddate");
-			}
-			set
-			{
-				this.OnPropertyChanging("LockoutEndDate");
-				this.SetAttributeValue("adx_identity_lockoutenddate", value);
-				this.OnPropertyChanged("LockoutEndDate");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if web authentication is enabled for the contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_logonenabled")]
-		public Nullable<bool> LoginEnabled
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_logonenabled");
-			}
-			set
-			{
-				this.OnPropertyChanging("LoginEnabled");
-				this.SetAttributeValue("adx_identity_logonenabled", value);
-				this.OnPropertyChanged("LoginEnabled");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if the phone number is confirmed by the contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_mobilephoneconfirmed")]
-		public Nullable<bool> MobilePhoneConfirmed
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_mobilephoneconfirmed");
-			}
-			set
-			{
-				this.OnPropertyChanging("MobilePhoneConfirmed");
-				this.SetAttributeValue("adx_identity_mobilephoneconfirmed", value);
-				this.OnPropertyChanged("MobilePhoneConfirmed");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_newpassword")]
-		public string NewPasswordInput
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_identity_newpassword");
-			}
-			set
-			{
-				this.OnPropertyChanging("NewPasswordInput");
-				this.SetAttributeValue("adx_identity_newpassword", value);
-				this.OnPropertyChanged("NewPasswordInput");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_passwordhash")]
-		public string PasswordHash
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_identity_passwordhash");
-			}
-			set
-			{
-				this.OnPropertyChanging("PasswordHash");
-				this.SetAttributeValue("adx_identity_passwordhash", value);
-				this.OnPropertyChanged("PasswordHash");
-			}
-		}
-		
-		/// <summary>
-		/// A token used to manage the web authentication session.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_securitystamp")]
-		public string SecurityStamp
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_identity_securitystamp");
-			}
-			set
-			{
-				this.OnPropertyChanging("SecurityStamp");
-				this.SetAttributeValue("adx_identity_securitystamp", value);
-				this.OnPropertyChanged("SecurityStamp");
-			}
-		}
-		
-		/// <summary>
-		/// Determines if two-factor authentication is enabled for the contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_twofactorenabled")]
-		public Nullable<bool> TwoFactorEnabled
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_identity_twofactorenabled");
-			}
-			set
-			{
-				this.OnPropertyChanging("TwoFactorEnabled");
-				this.SetAttributeValue("adx_identity_twofactorenabled", value);
-				this.OnPropertyChanged("TwoFactorEnabled");
-			}
-		}
-		
-		/// <summary>
-		/// Shows the user identity for local web authentication.
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_identity_username")]
-		public string UserName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_identity_username");
-			}
-			set
-			{
-				this.OnPropertyChanging("UserName");
-				this.SetAttributeValue("adx_identity_username", value);
-				this.OnPropertyChanged("UserName");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_modifiedbyipaddress")]
-		public string ModifiedByIPAddress
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_modifiedbyipaddress");
-			}
-			set
-			{
-				this.OnPropertyChanging("ModifiedByIPAddress");
-				this.SetAttributeValue("adx_modifiedbyipaddress", value);
-				this.OnPropertyChanged("ModifiedByIPAddress");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_modifiedbyusername")]
-		public string ModifiedByUsername
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_modifiedbyusername");
-			}
-			set
-			{
-				this.OnPropertyChanging("ModifiedByUsername");
-				this.SetAttributeValue("adx_modifiedbyusername", value);
-				this.OnPropertyChanged("ModifiedByUsername");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_organizationname")]
-		public string OrganizationName
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_organizationname");
-			}
-			set
-			{
-				this.OnPropertyChanging("OrganizationName");
-				this.SetAttributeValue("adx_organizationname", value);
-				this.OnPropertyChanged("OrganizationName");
-			}
-		}
-		
-		/// <summary>
-		/// User’s preferred portal language
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_preferredlanguageid")]
-		public EntityReference PreferredLanguage
-		{
-			get
-			{
-				return this.GetAttributeValue<EntityReference>("adx_preferredlanguageid");
-			}
-			set
-			{
-				this.OnPropertyChanging("PreferredLanguage");
-				this.SetAttributeValue("adx_preferredlanguageid", value);
-				this.OnPropertyChanged("PreferredLanguage");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profilealert")]
-		public Nullable<bool> ProfileAlert
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_profilealert");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileAlert");
-				this.SetAttributeValue("adx_profilealert", value);
-				this.OnPropertyChanged("ProfileAlert");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profilealertdate")]
-		public Nullable<DateTime> ProfileAlertDate
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("adx_profilealertdate");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileAlertDate");
-				this.SetAttributeValue("adx_profilealertdate", value);
-				this.OnPropertyChanged("ProfileAlertDate");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profilealertinstructions")]
-		public string ProfileAlertInstructions
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_profilealertinstructions");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileAlertInstructions");
-				this.SetAttributeValue("adx_profilealertinstructions", value);
-				this.OnPropertyChanged("ProfileAlertInstructions");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profileisanonymous")]
-		public Nullable<bool> ProfileIsAnonymous
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("adx_profileisanonymous");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileIsAnonymous");
-				this.SetAttributeValue("adx_profileisanonymous", value);
-				this.OnPropertyChanged("ProfileIsAnonymous");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profilelastactivity")]
-		public Nullable<DateTime> ProfileLastActivity
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("adx_profilelastactivity");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileLastActivity");
-				this.SetAttributeValue("adx_profilelastactivity", value);
-				this.OnPropertyChanged("ProfileLastActivity");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_profilemodifiedon")]
-		public Nullable<DateTime> ProfileModifiedOn
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("adx_profilemodifiedon");
-			}
-			set
-			{
-				this.OnPropertyChanging("ProfileModifiedOn");
-				this.SetAttributeValue("adx_profilemodifiedon", value);
-				this.OnPropertyChanged("ProfileModifiedOn");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_publicprofilecopy")]
-		public string PublicProfileCopy
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adx_publicprofilecopy");
-			}
-			set
-			{
-				this.OnPropertyChanging("PublicProfileCopy");
-				this.SetAttributeValue("adx_publicprofilecopy", value);
-				this.OnPropertyChanged("PublicProfileCopy");
-			}
-		}
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		[AttributeLogicalNameAttribute("adx_timezone")]
-		public Nullable<int> TimeZone
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<int>>("adx_timezone");
-			}
-			set
-			{
-				this.OnPropertyChanging("TimeZone");
-				this.SetAttributeValue("adx_timezone", value);
-				this.OnPropertyChanged("TimeZone");
-			}
-		}
-		
-		/// <summary>
 		/// For system use only.
 		/// </summary>
 		[AttributeLogicalNameAttribute("aging30")]
@@ -2184,6 +1680,129 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Business sector for the lead
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_businesssectorforthelead")]
+		public Nullable<GlobalBusinessSector> BusinessSector
+		{
+			get
+			{
+				var optionSet = this.GetAttributeValue<OptionSetValue>("aylos_businesssectorforthelead");
+				if (optionSet == null)
+				{
+					return null;
+				}
+				else
+				{
+					return (GlobalBusinessSector)(Enum.ToObject(typeof(GlobalBusinessSector), optionSet.Value));
+				}
+			}
+			set
+			{
+				this.OnPropertyChanging("BusinessSector");
+				if (value == null)
+				{
+					this.SetAttributeValue("aylos_businesssectorforthelead", null);
+				}
+				else
+				{
+					this.SetAttributeValue("aylos_businesssectorforthelead", new OptionSetValue((int)value));
+				}
+				this.OnPropertyChanged("BusinessSector");
+			}
+		}
+		
+		/// <summary>
+		/// Business sector lead - if selected you will have to select the business sector too
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_businesssectorlead")]
+		public Nullable<bool> BusinessSectorLead
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<bool>>("aylos_businesssectorlead");
+			}
+			set
+			{
+				this.OnPropertyChanging("BusinessSectorLead");
+				this.SetAttributeValue("aylos_businesssectorlead", value);
+				this.OnPropertyChanged("BusinessSectorLead");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_clone")]
+		public Nullable<bool> Clone
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<bool>>("aylos_clone");
+			}
+			set
+			{
+				this.OnPropertyChanging("Clone");
+				this.SetAttributeValue("aylos_clone", value);
+				this.OnPropertyChanged("Clone");
+			}
+		}
+		
+		/// <summary>
+		/// The External Parent lookup refers to the CRM Parent record that refers to the specific ProtonId
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_externalparent")]
+		public EntityReference ExternalParent
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("aylos_externalparent");
+			}
+			set
+			{
+				this.OnPropertyChanging("ExternalParent");
+				this.SetAttributeValue("aylos_externalparent", value);
+				this.OnPropertyChanged("ExternalParent");
+			}
+		}
+		
+		/// <summary>
+		/// Is MP (member of parliament)
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_memberofparliament")]
+		public Nullable<bool> MemberOfParliamentMP
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<bool>>("aylos_memberofparliament");
+			}
+			set
+			{
+				this.OnPropertyChanging("MemberOfParliamentMP");
+				this.SetAttributeValue("aylos_memberofparliament", value);
+				this.OnPropertyChanged("MemberOfParliamentMP");
+			}
+		}
+		
+		/// <summary>
+		/// Is minister (including prime minister)
+		/// </summary>
+		[AttributeLogicalNameAttribute("aylos_minister")]
+		public Nullable<bool> Minister
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<bool>>("aylos_minister");
+			}
+			set
+			{
+				this.OnPropertyChanging("Minister");
+				this.SetAttributeValue("aylos_minister", value);
+				this.OnPropertyChanged("Minister");
+			}
+		}
+		
+		/// <summary>
 		/// Enter the contact's birthday for use in customer gift programs or other communications.
 		/// </summary>
 		[AttributeLogicalNameAttribute("birthdate")]
@@ -2216,6 +1835,42 @@ namespace Shared.Models.Domain
 				this.OnPropertyChanging("BusinessPhoneTwo");
 				this.SetAttributeValue("business2", value);
 				this.OnPropertyChanged("BusinessPhoneTwo");
+			}
+		}
+		
+		/// <summary>
+		/// Stores Image of the Business Card
+		/// </summary>
+		[AttributeLogicalNameAttribute("businesscard")]
+		public string BusinessCard
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("businesscard");
+			}
+			set
+			{
+				this.OnPropertyChanging("BusinessCard");
+				this.SetAttributeValue("businesscard", value);
+				this.OnPropertyChanged("BusinessCard");
+			}
+		}
+		
+		/// <summary>
+		/// Stores Business Card Control Properties.
+		/// </summary>
+		[AttributeLogicalNameAttribute("businesscardattributes")]
+		public string BusinessCardAttributes
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("businesscardattributes");
+			}
+			set
+			{
+				this.OnPropertyChanging("BusinessCardAttributes");
+				this.SetAttributeValue("businesscardattributes", value);
+				this.OnPropertyChanged("BusinessCardAttributes");
 			}
 		}
 		
@@ -2477,6 +2132,24 @@ namespace Shared.Models.Domain
 					this.SetAttributeValue("customertypecode", new OptionSetValue((int)value));
 				}
 				this.OnPropertyChanged("RelationshipType");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the default price list associated with the contact to make sure the correct product prices for this customer are applied in sales opportunities, quotes, and orders.
+		/// </summary>
+		[AttributeLogicalNameAttribute("defaultpricelevelid")]
+		public EntityReference PriceList
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("defaultpricelevelid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PriceList");
+				this.SetAttributeValue("defaultpricelevelid", value);
+				this.OnPropertyChanged("PriceList");
 			}
 		}
 		
@@ -3300,92 +2973,53 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
-		/// Unique identifier for Account associated with Contact.
+		/// Describes whether contact is opted out or not
 		/// </summary>
-		[AttributeLogicalNameAttribute("msa_managingpartnerid")]
-		public EntityReference ManagingPartner
+		[AttributeLogicalNameAttribute("msdyn_gdproptout")]
+		public Nullable<bool> GDPROptout
 		{
 			get
 			{
-				return this.GetAttributeValue<EntityReference>("msa_managingpartnerid");
+				return this.GetAttributeValue<Nullable<bool>>("msdyn_gdproptout");
 			}
 			set
 			{
-				this.OnPropertyChanging("ManagingPartner");
-				this.SetAttributeValue("msa_managingpartnerid", value);
-				this.OnPropertyChanged("ManagingPartner");
+				this.OnPropertyChanging("GDPROptout");
+				this.SetAttributeValue("msdyn_gdproptout", value);
+				this.OnPropertyChanged("GDPROptout");
 			}
 		}
 		
 		/// <summary>
-		/// Indicates that the contact has opted out of web tracking.
+		/// Whether or not the contact belongs to the associated account
 		/// </summary>
-		[AttributeLogicalNameAttribute("msdyn_disablewebtracking")]
-		public Nullable<bool> DisableWebTracking
+		[AttributeLogicalNameAttribute("msdyn_orgchangestatus")]
+		public Nullable<ContactNotAtCompanyFlag> NotAtCompanyFlag
 		{
 			get
 			{
-				return this.GetAttributeValue<Nullable<bool>>("msdyn_disablewebtracking");
+				var optionSet = this.GetAttributeValue<OptionSetValue>("msdyn_orgchangestatus");
+				if (optionSet == null)
+				{
+					return null;
+				}
+				else
+				{
+					return (ContactNotAtCompanyFlag)(Enum.ToObject(typeof(ContactNotAtCompanyFlag), optionSet.Value));
+				}
 			}
 			set
 			{
-				this.OnPropertyChanging("DisableWebTracking");
-				this.SetAttributeValue("msdyn_disablewebtracking", value);
-				this.OnPropertyChanged("DisableWebTracking");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates that the contact is considered a minor in their jurisdiction.
-		/// </summary>
-		[AttributeLogicalNameAttribute("msdyn_isminor")]
-		public Nullable<bool> IsMinor
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("msdyn_isminor");
-			}
-			set
-			{
-				this.OnPropertyChanging("IsMinor");
-				this.SetAttributeValue("msdyn_isminor", value);
-				this.OnPropertyChanged("IsMinor");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates that the contact is considered a minor in their jurisdiction and has parental consent.
-		/// </summary>
-		[AttributeLogicalNameAttribute("msdyn_isminorwithparentalconsent")]
-		public Nullable<bool> IsMinorWithParentalConsent
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<bool>>("msdyn_isminorwithparentalconsent");
-			}
-			set
-			{
-				this.OnPropertyChanging("IsMinorWithParentalConsent");
-				this.SetAttributeValue("msdyn_isminorwithparentalconsent", value);
-				this.OnPropertyChanged("IsMinorWithParentalConsent");
-			}
-		}
-		
-		/// <summary>
-		/// Indicates the date and time that the person agreed to the portal terms and conditions.
-		/// </summary>
-		[AttributeLogicalNameAttribute("msdyn_portaltermsagreementdate")]
-		public Nullable<DateTime> PortalTermsAgreementDate
-		{
-			get
-			{
-				return this.GetAttributeValue<Nullable<DateTime>>("msdyn_portaltermsagreementdate");
-			}
-			set
-			{
-				this.OnPropertyChanging("PortalTermsAgreementDate");
-				this.SetAttributeValue("msdyn_portaltermsagreementdate", value);
-				this.OnPropertyChanged("PortalTermsAgreementDate");
+				this.OnPropertyChanging("NotAtCompanyFlag");
+				if (value == null)
+				{
+					this.SetAttributeValue("msdyn_orgchangestatus", null);
+				}
+				else
+				{
+					this.SetAttributeValue("msdyn_orgchangestatus", new OptionSetValue((int)value));
+				}
+				this.OnPropertyChanged("NotAtCompanyFlag");
 			}
 		}
 		
@@ -3434,6 +3068,24 @@ namespace Shared.Models.Domain
 			get
 			{
 				return this.GetAttributeValue<Nullable<int>>("onholdtime");
+			}
+		}
+		
+		/// <summary>
+		/// Shows the lead that the contact was created if the contact was created by converting a lead in Microsoft Dynamics 365. This is used to relate the contact to the data on the originating lead for use in reporting and analytics.
+		/// </summary>
+		[AttributeLogicalNameAttribute("originatingleadid")]
+		public EntityReference OriginatingLead
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("originatingleadid");
+			}
+			set
+			{
+				this.OnPropertyChanging("OriginatingLead");
+				this.SetAttributeValue("originatingleadid", value);
+				this.OnPropertyChanged("OriginatingLead");
 			}
 		}
 		
@@ -3690,6 +3342,42 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Choose the contact's preferred service facility or equipment to make sure services are scheduled correctly for the customer.
+		/// </summary>
+		[AttributeLogicalNameAttribute("preferredequipmentid")]
+		public EntityReference PreferredFacilityEquipment
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("preferredequipmentid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PreferredFacilityEquipment");
+				this.SetAttributeValue("preferredequipmentid", value);
+				this.OnPropertyChanged("PreferredFacilityEquipment");
+			}
+		}
+		
+		/// <summary>
+		/// Choose the contact's preferred service to make sure services are scheduled correctly for the customer.
+		/// </summary>
+		[AttributeLogicalNameAttribute("preferredserviceid")]
+		public EntityReference PreferredService
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("preferredserviceid");
+			}
+			set
+			{
+				this.OnPropertyChanging("PreferredService");
+				this.SetAttributeValue("preferredserviceid", value);
+				this.OnPropertyChanged("PreferredService");
+			}
+		}
+		
+		/// <summary>
 		/// Choose the regular or preferred customer service representative for reference when scheduling service activities for the contact.
 		/// </summary>
 		[AttributeLogicalNameAttribute("preferredsystemuserid")]
@@ -3740,24 +3428,6 @@ namespace Shared.Models.Domain
 				this.OnPropertyChanging("Salutation");
 				this.SetAttributeValue("salutation", value);
 				this.OnPropertyChanged("Salutation");
-			}
-		}
-		
-		/// <summary>
-		/// Unique identifier for Idea associated with Contact.
-		/// </summary>
-		[AttributeLogicalNameAttribute("sample_contributorsid")]
-		public EntityReference Contributors
-		{
-			get
-			{
-				return this.GetAttributeValue<EntityReference>("sample_contributorsid");
-			}
-			set
-			{
-				this.OnPropertyChanging("Contributors");
-				this.SetAttributeValue("sample_contributorsid", value);
-				this.OnPropertyChanged("Contributors");
 			}
 		}
 		
@@ -3941,6 +3611,24 @@ namespace Shared.Models.Domain
 				this.OnPropertyChanging("Suffix");
 				this.SetAttributeValue("suffix", value);
 				this.OnPropertyChanged("Suffix");
+			}
+		}
+		
+		/// <summary>
+		/// Number of users or conversations followed the record
+		/// </summary>
+		[AttributeLogicalNameAttribute("teamsfollowed")]
+		public Nullable<int> TeamsFollowed
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<int>>("teamsfollowed");
+			}
+			set
+			{
+				this.OnPropertyChanging("TeamsFollowed");
+				this.SetAttributeValue("teamsfollowed", value);
+				this.OnPropertyChanged("TeamsFollowed");
 			}
 		}
 		
@@ -4314,62 +4002,6 @@ namespace Shared.Models.Domain
 			
 			public static string AddressThreeUTCOffset = "address3_utcoffset";
 			
-			public static string ConfirmRemovePassword = "adx_confirmremovepassword";
-			
-			public static string CreatedByIPAddress = "adx_createdbyipaddress";
-			
-			public static string CreatedByUsername = "adx_createdbyusername";
-			
-			public static string AccessFailedCount = "adx_identity_accessfailedcount";
-			
-			public static string EmailConfirmed = "adx_identity_emailaddress1confirmed";
-			
-			public static string LastSuccessfulLogin = "adx_identity_lastsuccessfullogin";
-			
-			public static string LocalLoginDisabled = "adx_identity_locallogindisabled";
-			
-			public static string LockoutEnabled = "adx_identity_lockoutenabled";
-			
-			public static string LockoutEndDate = "adx_identity_lockoutenddate";
-			
-			public static string LoginEnabled = "adx_identity_logonenabled";
-			
-			public static string MobilePhoneConfirmed = "adx_identity_mobilephoneconfirmed";
-			
-			public static string NewPasswordInput = "adx_identity_newpassword";
-			
-			public static string PasswordHash = "adx_identity_passwordhash";
-			
-			public static string SecurityStamp = "adx_identity_securitystamp";
-			
-			public static string TwoFactorEnabled = "adx_identity_twofactorenabled";
-			
-			public static string UserName = "adx_identity_username";
-			
-			public static string ModifiedByIPAddress = "adx_modifiedbyipaddress";
-			
-			public static string ModifiedByUsername = "adx_modifiedbyusername";
-			
-			public static string OrganizationName = "adx_organizationname";
-			
-			public static string PreferredLanguage = "adx_preferredlanguageid";
-			
-			public static string ProfileAlert = "adx_profilealert";
-			
-			public static string ProfileAlertDate = "adx_profilealertdate";
-			
-			public static string ProfileAlertInstructions = "adx_profilealertinstructions";
-			
-			public static string ProfileIsAnonymous = "adx_profileisanonymous";
-			
-			public static string ProfileLastActivity = "adx_profilelastactivity";
-			
-			public static string ProfileModifiedOn = "adx_profilemodifiedon";
-			
-			public static string PublicProfileCopy = "adx_publicprofilecopy";
-			
-			public static string TimeZone = "adx_timezone";
-			
 			public static string AgingThirty = "aging30";
 			
 			public static string AgingThirtyBase = "aging30_base";
@@ -4392,9 +4024,25 @@ namespace Shared.Models.Domain
 			
 			public static string AssistantPhone = "assistantphone";
 			
+			public static string BusinessSector = "aylos_businesssectorforthelead";
+			
+			public static string BusinessSectorLead = "aylos_businesssectorlead";
+			
+			public static string Clone = "aylos_clone";
+			
+			public static string ExternalParent = "aylos_externalparent";
+			
+			public static string MemberOfParliamentMP = "aylos_memberofparliament";
+			
+			public static string Minister = "aylos_minister";
+			
 			public static string Birthday = "birthdate";
 			
 			public static string BusinessPhoneTwo = "business2";
+			
+			public static string BusinessCard = "businesscard";
+			
+			public static string BusinessCardAttributes = "businesscardattributes";
 			
 			public static string CallbackNumber = "callback";
 			
@@ -4421,6 +4069,8 @@ namespace Shared.Models.Domain
 			public static string CustomerSize = "customersizecode";
 			
 			public static string RelationshipType = "customertypecode";
+			
+			public static string PriceList = "defaultpricelevelid";
 			
 			public static string Department = "department";
 			
@@ -4508,21 +4158,17 @@ namespace Shared.Models.Domain
 			
 			public static string ModifiedOn = "modifiedon";
 			
-			public static string ManagingPartner = "msa_managingpartnerid";
+			public static string GDPROptout = "msdyn_gdproptout";
 			
-			public static string DisableWebTracking = "msdyn_disablewebtracking";
-			
-			public static string IsMinor = "msdyn_isminor";
-			
-			public static string IsMinorWithParentalConsent = "msdyn_isminorwithparentalconsent";
-			
-			public static string PortalTermsAgreementDate = "msdyn_portaltermsagreementdate";
+			public static string NotAtCompanyFlag = "msdyn_orgchangestatus";
 			
 			public static string Nickname = "nickname";
 			
 			public static string NoOfChildren = "numberofchildren";
 			
 			public static string OnHoldTimeMinutes = "onholdtime";
+			
+			public static string OriginatingLead = "originatingleadid";
 			
 			public static string Owner = "ownerid";
 			
@@ -4548,13 +4194,15 @@ namespace Shared.Models.Domain
 			
 			public static string PreferredMethodOfContact = "preferredcontactmethodcode";
 			
+			public static string PreferredFacilityEquipment = "preferredequipmentid";
+			
+			public static string PreferredService = "preferredserviceid";
+			
 			public static string PreferredUser = "preferredsystemuserid";
 			
 			public static string Process = "processid";
 			
 			public static string Salutation = "salutation";
-			
-			public static string Contributors = "sample_contributorsid";
 			
 			public static string ShippingMethod = "shippingmethodcode";
 			
@@ -4571,6 +4219,8 @@ namespace Shared.Models.Domain
 			public static string StatusReason = "statuscode";
 			
 			public static string Suffix = "suffix";
+			
+			public static string TeamsFollowed = "teamsfollowed";
 			
 			public static string BusinessPhone = "telephone1";
 			

@@ -62,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactHasChildren.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactLeadSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactMaritalStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactNotAtCompanyFlag.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPaymentTerms.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPreferredDay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactPreferredMethodOfContact.cs" />
@@ -73,7 +74,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactStatusReason.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\ContactTerritory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\CrmServiceContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ExecutionContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ExecutionContextState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\ExecutionContextStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalBusinessSector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalDeliveryPriority.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalObjectType1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalOnlineMeetingType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSelectAnActivityType1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSendDirectEmailTo1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSkipPriceCalculationOptionSet1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSocialChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalSyncDirection1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\Task.cs" />
