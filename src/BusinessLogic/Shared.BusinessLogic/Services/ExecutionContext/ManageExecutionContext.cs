@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.Reflection;
+
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Client;
 
@@ -95,6 +96,8 @@
         public void StoreExecutionContext()
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            // System.Threading.Thread.Sleep(5000); // intentional delay for testing purposes - to be removed
 
             if (PluginExecutionContext.MessageName.Equals(PlatformMessageHelper.Update)) System.Threading.Thread.Sleep(100 * PluginExecutionContext.Depth);
 
