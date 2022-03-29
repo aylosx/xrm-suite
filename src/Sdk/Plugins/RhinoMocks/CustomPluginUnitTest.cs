@@ -139,9 +139,10 @@ namespace Aylos.Xrm.Sdk.Plugins.RhinoMocks
         protected void SetupMockObjects()
         {
             Plugin = MockRepository.GenerateMock<T>();
-            Plugin.ElevatedOrganizationService = MockRepository.GenerateStub<IOrganizationService>();
-            Plugin.OrganizationService = MockRepository.GenerateStub<IOrganizationService>();
+            Plugin.SystemUserService = MockRepository.GenerateStub<IOrganizationService>();
+            Plugin.CurrentUserService = MockRepository.GenerateStub<IOrganizationService>();
             Plugin.OrganizationServiceFactory = MockRepository.GenerateStub<IOrganizationServiceFactory>();
+            Plugin.NotificationService = MockRepository.GenerateStub<IServiceEndpointNotificationService>();
             Plugin.TracingService = MockRepository.GenerateStub<ITracingService>();
             Plugin.PluginExecutionContext = MockRepository.GenerateStub<IPluginExecutionContext>();
             Plugin.ServiceProvider = MockRepository.GenerateStub<IServiceProvider>();
@@ -153,12 +154,13 @@ namespace Aylos.Xrm.Sdk.Plugins.RhinoMocks
             Plugin.ServiceProvider.Stub(x => x.GetService(typeof(ITracingService))).Return(Plugin.TracingService);
             Plugin.ServiceProvider.Stub(x => x.GetService(typeof(IPluginExecutionContext))).Return(Plugin.PluginExecutionContext);
             Plugin.ServiceProvider.Stub(x => x.GetService(typeof(IOrganizationServiceFactory))).Return(Plugin.OrganizationServiceFactory);
+            Plugin.ServiceProvider.Stub(x => x.GetService(typeof(IServiceEndpointNotificationService))).Return(Plugin.NotificationService);
         }
 
         protected void SetupMockResponseForOrganizationServiceFactory()
         {
-            Plugin.OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(Plugin.PluginExecutionContext.UserId)).Return(Plugin.OrganizationService);
-            Plugin.OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(null)).Return(Plugin.ElevatedOrganizationService);
+            Plugin.OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(Plugin.PluginExecutionContext.UserId)).Return(Plugin.CurrentUserService);
+            Plugin.OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(null)).Return(Plugin.SystemUserService);
         }
 
         protected void SetupMockResponseForPluginExecutionContext(PluginExecutionContext context)

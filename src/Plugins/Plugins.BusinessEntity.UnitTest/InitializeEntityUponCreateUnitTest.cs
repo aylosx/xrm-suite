@@ -34,7 +34,7 @@
         /// </summary>
         public override void SetupMockObjectsForPlugin()
         {
-            Plugin.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(Plugin.OrganizationService);
+            Plugin.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(Plugin.CurrentUserService);
             Plugin.CrmService = MockRepository.GenerateMock<CrmService>(Plugin.OrganizationServiceContext, Plugin.TracingService);
             Plugin.InitializeEntityService = MockRepository.GenerateMock<InitializeEntityService>(Plugin.CrmService, Plugin.OrganizationServiceContext, Plugin.PluginExecutionContext, Plugin.TracingService);
         }

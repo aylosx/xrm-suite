@@ -63,7 +63,7 @@
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            using (OrganizationServiceContext = OrganizationServiceContext ?? new CrmServiceContext(OrganizationService))
+            using (OrganizationServiceContext = OrganizationServiceContext ?? new CrmServiceContext(CurrentUserService))
             using (CrmService = CrmService ?? new CrmService(OrganizationServiceContext, TracingService))
             using (PostMessageService = PostMessageService ?? new PostMessageService(CrmService, OrganizationServiceContext, PluginExecutionContext, TracingService))
             {

@@ -13,8 +13,9 @@ namespace Aylos.Xrm.Sdk.Plugins
         public const string TracingServiceMessage = "Unable to get tracing service from the service manager.";
         public const string PluginExecutionContextMessage = "Unable to get plugin execution context from the service manager.";
         public const string OrganizationServiceFactoryMessage = "Unable to get organization service factory from the service manager.";
-        public const string OrganizationServiceMessage = "Unable to create the organization service.";
-        public const string ImpersonatedOrganizationServiceMessage = "Unable to create the impersonated organization service.";
+        public const string NotificationServiceMessage = "Unable to get service endpoint notification service from the service manager.";
+        public const string CurrentUserServiceMessage = "Unable to create the current user service.";
+        public const string SystemUserServiceMessage = "Unable to create the system user service.";
 
         public static string PrimaryEntityLogicalName { get; set; }
 
@@ -26,11 +27,13 @@ namespace Aylos.Xrm.Sdk.Plugins
         
         public IOrganizationServiceFactory OrganizationServiceFactory { get; set; }
         
-        public IOrganizationService OrganizationService { get; set; }
+        public IOrganizationService CurrentUserService { get; set; }
         
-        public IOrganizationService ElevatedOrganizationService { get; set; }
+        public IOrganizationService SystemUserService { get; set; }
         
         public IPluginExecutionContext PluginExecutionContext { get; set; }
+
+        public IServiceEndpointNotificationService NotificationService { get; set; }
 
         public PluginExecutionContext ExecutionContext
         {
@@ -93,11 +96,14 @@ namespace Aylos.Xrm.Sdk.Plugins
             OrganizationServiceFactory = (IOrganizationServiceFactory)ServiceProvider.GetService(typeof(IOrganizationServiceFactory));
             if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryMessage);
 
-            OrganizationService = OrganizationServiceFactory.CreateOrganizationService(PluginExecutionContext.UserId);
-            if (OrganizationService == null) throw new InvalidPluginExecutionException(OrganizationServiceMessage);
+            NotificationService = (IServiceEndpointNotificationService)ServiceProvider.GetService(typeof(IServiceEndpointNotificationService));
+            if (NotificationService == null) throw new InvalidPluginExecutionException(NotificationServiceMessage);
 
-            ElevatedOrganizationService = OrganizationServiceFactory.CreateOrganizationService(null);
-            if (ElevatedOrganizationService == null) throw new InvalidPluginExecutionException(ImpersonatedOrganizationServiceMessage);
+            CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(PluginExecutionContext.UserId);
+            if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
+
+            SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
+            if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
         }
 
         public void Execute(IServiceProvider serviceProvider)

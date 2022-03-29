@@ -16,16 +16,16 @@ namespace Aylos.Xrm.Sdk.CodeActivities
         public const string TracingExtensionMessage = "Unable to get tracing service extension from the code activity context.";
         public const string WorkflowExtensionMessage = "Unable to get workflow context extension from the code activity context.";
         public const string OrganizationServiceFactoryExtensionMessage = "Unable to get organization service factory extension from the code activity context.";
-        public const string OrganizationServiceMessage = "Unable to create the organization service.";
-        public const string ImpersonatedOrganizationServiceMessage = "Unable to create the impersonated organization service.";
+        public const string CurrentUserServiceMessage = "Unable to create the organization service.";
+        public const string SystemUserServiceMessage = "Unable to create the impersonated organization service.";
 
         public CodeActivityContext CodeActivityContext { get; private set; }
 
         public IOrganizationServiceFactory OrganizationServiceFactory { get; private set; }
 
-        public IOrganizationService OrganizationService { get; set; }
+        public IOrganizationService CurrentUserService { get; set; }
 
-        public IOrganizationService ElevatedOrganizationService { get; set; }
+        public IOrganizationService SystemUserService { get; set; }
 
         public IWorkflowContext WorkflowContext { get; private set; }
 
@@ -52,11 +52,11 @@ namespace Aylos.Xrm.Sdk.CodeActivities
             OrganizationServiceFactory = CodeActivityContext.GetExtension<IOrganizationServiceFactory>();
             if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryExtensionMessage);
 
-            OrganizationService = OrganizationServiceFactory.CreateOrganizationService(WorkflowContext.UserId);
-            if (OrganizationService == null) throw new InvalidPluginExecutionException(OrganizationServiceMessage);
+            CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(WorkflowContext.UserId);
+            if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
 
-            ElevatedOrganizationService = OrganizationServiceFactory.CreateOrganizationService(null);
-            if (ElevatedOrganizationService == null) throw new InvalidPluginExecutionException(ImpersonatedOrganizationServiceMessage);
+            SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
+            if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
         }
 
         protected override void Execute(CodeActivityContext context)
