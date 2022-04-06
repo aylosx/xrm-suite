@@ -83,29 +83,6 @@ namespace Aylos.Xrm.Sdk.Plugins
 
         public string ExceptionMessage { get; set; }
 
-        private void Initialize()
-        {
-            ThrowsException = ThrowsException.HasValue ? ThrowsException.Value : true;
-            Stopwatch = Stopwatch.StartNew();
-            TracingService = (ITracingService)ServiceProvider.GetService(typeof(ITracingService));
-            if (TracingService == null) throw new InvalidPluginExecutionException(TracingServiceMessage);
-
-            PluginExecutionContext = (IPluginExecutionContext)ServiceProvider.GetService(typeof(IPluginExecutionContext));
-            if (PluginExecutionContext == null) throw new InvalidPluginExecutionException(PluginExecutionContextMessage);
-
-            OrganizationServiceFactory = (IOrganizationServiceFactory)ServiceProvider.GetService(typeof(IOrganizationServiceFactory));
-            if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryMessage);
-
-            NotificationService = (IServiceEndpointNotificationService)ServiceProvider.GetService(typeof(IServiceEndpointNotificationService));
-            if (NotificationService == null) throw new InvalidPluginExecutionException(NotificationServiceMessage);
-
-            CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(PluginExecutionContext.UserId);
-            if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
-
-            SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
-            if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
-        }
-
         public void Execute(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
@@ -113,12 +90,35 @@ namespace Aylos.Xrm.Sdk.Plugins
             try
             {
                 ServiceProvider = serviceProvider;
-                Initialize();
+
+                ThrowsException = ThrowsException.HasValue ? ThrowsException.Value : true;
+                Stopwatch = Stopwatch.StartNew();
+
+                TracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+                if (TracingService == null) throw new InvalidPluginExecutionException(TracingServiceMessage);
+
+                PluginExecutionContext = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
+                if (PluginExecutionContext == null) throw new InvalidPluginExecutionException(PluginExecutionContextMessage);
+
+                OrganizationServiceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+                if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryMessage);
+
+                NotificationService = (IServiceEndpointNotificationService)serviceProvider.GetService(typeof(IServiceEndpointNotificationService));
+                if (NotificationService == null) throw new InvalidPluginExecutionException(NotificationServiceMessage);
+
+                CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(PluginExecutionContext.UserId);
+                if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
+
+                SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
+                if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
+
                 Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.StartTracing, UnderlyingSystemTypeName, Stopwatch.ElapsedMilliseconds));
-                Trace(TraceHelper.Trace(PluginExecutionContext)); // Trace the plugin execution context: Check CRM trace logs for the output
+                Trace(TraceHelper.Trace(PluginExecutionContext)); // Trace the plugin execution context
                 Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExecutionContextTracingCompleted, UnderlyingSystemTypeName, Stopwatch.ElapsedMilliseconds));
-                Validate();
-                Execute();
+
+                Validate(); // Call the overriden validate method
+
+                Execute(); // Call the overriden execute method
             }
             catch (InvalidPluginExecutionException ex)
             {

@@ -37,28 +37,6 @@ namespace Aylos.Xrm.Sdk.CodeActivities
 
         public bool? ThrowsException { get; set; }
 
-        private void Initialize()
-        {
-            ThrowsException = ThrowsException.HasValue ? ThrowsException.Value : true;
-
-            Stopwatch = Stopwatch.StartNew();
-
-            TracingService = CodeActivityContext.GetExtension<ITracingService>();
-            if (TracingService == null) throw new InvalidPluginExecutionException(TracingExtensionMessage);
-
-            WorkflowContext = CodeActivityContext.GetExtension<IWorkflowContext>();
-            if (WorkflowContext == null) throw new InvalidPluginExecutionException(WorkflowExtensionMessage);
-
-            OrganizationServiceFactory = CodeActivityContext.GetExtension<IOrganizationServiceFactory>();
-            if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryExtensionMessage);
-
-            CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(WorkflowContext.UserId);
-            if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
-
-            SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
-            if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
-        }
-
         protected override void Execute(CodeActivityContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
@@ -66,12 +44,33 @@ namespace Aylos.Xrm.Sdk.CodeActivities
             try
             {
                 CodeActivityContext = context;
-                Initialize();
+
+                ThrowsException = ThrowsException.HasValue ? ThrowsException.Value : true;
+
+                Stopwatch = Stopwatch.StartNew();
+
+                TracingService = CodeActivityContext.GetExtension<ITracingService>();
+                if (TracingService == null) throw new InvalidPluginExecutionException(TracingExtensionMessage);
+
+                WorkflowContext = CodeActivityContext.GetExtension<IWorkflowContext>();
+                if (WorkflowContext == null) throw new InvalidPluginExecutionException(WorkflowExtensionMessage);
+
+                OrganizationServiceFactory = CodeActivityContext.GetExtension<IOrganizationServiceFactory>();
+                if (OrganizationServiceFactory == null) throw new InvalidPluginExecutionException(OrganizationServiceFactoryExtensionMessage);
+
+                CurrentUserService = OrganizationServiceFactory.CreateOrganizationService(WorkflowContext.UserId);
+                if (CurrentUserService == null) throw new InvalidPluginExecutionException(CurrentUserServiceMessage);
+
+                SystemUserService = OrganizationServiceFactory.CreateOrganizationService(null);
+                if (SystemUserService == null) throw new InvalidPluginExecutionException(SystemUserServiceMessage);
+
                 Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.StartTracing, SystemTypeName, Stopwatch.ElapsedMilliseconds));
-                Trace(TraceHelper.Trace(WorkflowContext));
+                Trace(TraceHelper.Trace(WorkflowContext)); // Trace the workflow context
                 Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExecutionContextTracingCompleted, SystemTypeName, Stopwatch.ElapsedMilliseconds));
-                Validate();
-                Execute();
+
+                Validate(); // Call the overriden validate method
+
+                Execute(); // Call the overriden execute method
             }
             catch (InvalidPluginExecutionException ex)
             {
@@ -169,6 +168,7 @@ namespace Aylos.Xrm.Sdk.CodeActivities
                     Stopwatch.Stop(); 
                     Stopwatch = null;
                 }
+
                 Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.StopTracing, SystemTypeName));
             }
         }
