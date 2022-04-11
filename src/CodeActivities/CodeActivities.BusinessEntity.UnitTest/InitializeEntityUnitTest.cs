@@ -41,7 +41,7 @@
         /// </summary>
         public override void SetupMockObjectsForCustomCodeActivity()
         {
-            CustomCodeActivity.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(OrganizationService);
+            CustomCodeActivity.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(CurrentUserService);
             CustomCodeActivity.CrmService = MockRepository.GenerateMock<CrmService>(CustomCodeActivity.OrganizationServiceContext, TracingService);
             CustomCodeActivity.InitializeEntityService = MockRepository.GenerateMock<InitializeEntityService>(CustomCodeActivity.CrmService, CustomCodeActivity.OrganizationServiceContext, WorkflowContext, TracingService);
         }

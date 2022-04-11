@@ -11,15 +11,15 @@ namespace Aylos.Xrm.Sdk.Common
     public abstract class GenericService
     {
         
-        public IOrganizationService OrganizationService { get; set; }
+        public IOrganizationService CurrentUserService { get; set; }
 
-        
-        public IOrganizationService ImpersonatedOrganizationService { get; set; }
+        public IOrganizationService SystemUserService { get; set; }
 
-        
         public IWorkflowContext WorkflowContext { get; set; }
 
         public IPluginExecutionContext PluginExecutionContext { get; set; }
+
+        public IServiceEndpointNotificationService NotificationService { get; set; }
 
         public PluginExecutionContext ExecutionContext
         {

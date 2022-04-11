@@ -68,17 +68,12 @@
 
         #region Methods
 
-        /**
-         * <summary>    Deletes the entity. </summary>
-         *
-         * <remarks>    Vangelis Xanthakis, 07/02/2022. </remarks>
-         *
-         * <exception cref="ArgumentNullException"> Thrown when one or more required arguments are null. </exception>
-         *
-         * <param name="logicalName">   Name of the logical. </param>
-         * <param name="primaryKey">    The primary key. </param>
-         */
-
+        /// <summary>
+        /// Deletes the entity for the given primary key and logical name.
+        /// </summary>
+        /// <param name="logicalName">The entity's logical name</param>
+        /// <param name="primaryKey">The entity's primary key</param>
+        /// <returns>BusinessEntity entity</returns>
         public virtual void DeleteEntity(string logicalName, Guid primaryKey)
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));

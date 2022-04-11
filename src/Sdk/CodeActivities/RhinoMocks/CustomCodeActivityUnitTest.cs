@@ -16,9 +16,9 @@ namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
 
         protected IOrganizationServiceFactory OrganizationServiceFactory { get; set; }
 
-        protected IOrganizationService OrganizationService { get; set; }
+        protected IOrganizationService CurrentUserService { get; set; }
 
-        protected IOrganizationService ImpersonatedOrganizationService { get; set; }
+        protected IOrganizationService SystemUserService { get; set; }
 
         protected ITracingService TracingService { get; set; }
 
@@ -115,8 +115,8 @@ namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
 
         protected void SetupMockObjects()
         {
-            ImpersonatedOrganizationService = MockRepository.GenerateStub<IOrganizationService>();
-            OrganizationService = MockRepository.GenerateStub<IOrganizationService>();
+            SystemUserService = MockRepository.GenerateStub<IOrganizationService>();
+            CurrentUserService = MockRepository.GenerateStub<IOrganizationService>();
             OrganizationServiceFactory = MockRepository.GenerateStub<IOrganizationServiceFactory>();
             TracingService = MockRepository.GenerateStub<ITracingService>();
             WorkflowContext = MockRepository.GenerateStub<IWorkflowContext>();
@@ -169,8 +169,8 @@ namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
 
         protected void SetupMockResponseForOrganizationServiceFactory()
         {
-            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(WorkflowContext.UserId)).Return(OrganizationService);
-            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(null)).Return(ImpersonatedOrganizationService);
+            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(WorkflowContext.UserId)).Return(CurrentUserService);
+            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(null)).Return(SystemUserService);
         }
 
         public abstract void SetupMockObjectsForCustomCodeActivity();
