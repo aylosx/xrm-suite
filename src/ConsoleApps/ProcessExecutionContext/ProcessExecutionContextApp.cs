@@ -1,15 +1,11 @@
 ﻿namespace Aylos.Xrm.Sdk.ConsoleApps.ProcessExecutionContext
 {
+    using Aylos.Xrm.Sdk.ConsoleApps.Services;
     using Aylos.Xrm.Sdk.Common;
     using Aylos.Xrm.Sdk.ConsoleApps;
-    using Aylos.Xrm.Sdk.ConsoleApps.Services;
-
-    using Shared.Models.Domain;
-
     using CommandLine;
-
     using NLog;
-
+    using Shared.Models.Domain;
     using System;
     using System.Globalization;
     using System.Threading;

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{44D7B900-BE55-4D8F-8091-7BB83657A9C5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Aylos.Xrm.Sdk.BuildTools.ProcessExecutionContext</RootNamespace>
+    <RootNamespace>Aylos.Xrm.Sdk.ConsoleApps.ProcessExecutionContext</RootNamespace>
     <AssemblyName>ProcessExecutionContextApp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
