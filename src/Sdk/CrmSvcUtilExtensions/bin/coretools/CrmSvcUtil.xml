@@ -134,6 +134,56 @@
             Generate messages
             </summary>
         </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.EmitFieldClasses">
+            <summary>
+            Generate Field Constants for entities
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.EntityNamesFilter">
+            <summary>
+            Provides a means to provide a filtered list of entities. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.MessageNamesFilter">
+            <summary>
+            Provides a means to provide a filtered list of entities. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.SplitFilesByObject">
+            <summary>
+            Askes the system to emit a file per type. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.OutDirectory">
+            <summary>
+            Sets the output directory for files when split files are setup
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.EntityFolderName">
+            <summary>
+            Sets the folder name for Entity files. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.MessagesFolderName">
+            <summary>
+            Sets the folder name for Messages files. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.OptionSetFolderName">
+            <summary>
+            Sets the folder name for OptionSets files. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.GenerateGlobalOptionSets">
+            <summary>
+            If set, Causes Global optionsets to be read from the server and emitted. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.LegacyMode">
+            <summary>
+            if Set, Causes the system to behave as the CrmServiceUtil did pre Feb/2022. 
+            </summary>
+        </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ConnectionProfileName">
             <summary>
             Used by devToolkit to set the Connection profile to use for this call.
@@ -149,6 +199,17 @@
             Gets Dictionary of parameters
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Microsoft.Crm.Services.Utility.IOrganizationMetadata2">
+            <summary>
+            Extends the OrganizationServiceMetadata interface to allow for adding optionsets. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.IOrganizationMetadata2.AddOptionSetInfo(Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata)">
+            <summary>
+            Adds an OptionSet Metadata Object to the Global OptionSets array 
+            </summary>
+            <param name="optionSet"></param>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.ArgumentType">
             <remarks>
@@ -290,6 +351,12 @@
             <summary>
             All SdkMessages for the Organization.
             </summary>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.OrganizationMetadata.AddOptionSetInfo(Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata)">
+            <summary>
+            Add OptionSet to OptionSets list. 
+            </summary>
+            <param name="optionSet"></param>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.Result">
             <summary>
@@ -733,9 +800,92 @@
             Gets the message paging info from a set of message results
             </summary>
         </member>
+        <member name="T:Microsoft.Crm.Services.Utility.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.Properties.Resources.RetrieveAllSDKMessages">
+            <summary>
+              Looks up a localized string similar to &lt;fetch distinct=&apos;true&apos; version=&apos;1.0&apos;&gt;
+            &lt;entity name=&apos;sdkmessage&apos;&gt;
+            	&lt;attribute name=&apos;name&apos;/&gt;
+            	&lt;attribute name=&apos;isprivate&apos;/&gt;
+            	&lt;attribute name=&apos;sdkmessageid&apos;/&gt;
+            	&lt;attribute name=&apos;customizationlevel&apos;/&gt;
+            	&lt;link-entity name=&apos;sdkmessagepair&apos; alias=&apos;sdkmessagepair&apos; to=&apos;sdkmessageid&apos; from=&apos;sdkmessageid&apos; link-type=&apos;inner&apos;&gt;
+            		&lt;filter&gt;
+            			&lt;condition alias=&apos;sdkmessagepair&apos; attribute=&apos;endpoint&apos; operator=&apos;eq&apos; value=&apos;2011/Organization.svc&apos; /&gt;
+            		&lt;/filter&gt;
+            		&lt;attribute name=&apos;sdkmessagepairid&apos;/&gt;
+            		&lt;attribut [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.Services.Utility.Properties.Resources.RetrieveFilterdListOfSdkMessages">
+            <summary>
+              Looks up a localized string similar to &lt;fetch distinct=&apos;true&apos; version=&apos;1.0&apos; returntotalrecordcount=&apos;true&apos; &gt;
+               &lt;entity name=&apos;sdkmessage&apos; &gt;
+                   &lt;attribute name=&apos;name&apos; /&gt;
+                   &lt;attribute name=&apos;isprivate&apos; /&gt;
+                   &lt;attribute name=&apos;sdkmessageid&apos; /&gt;
+                   &lt;attribute name=&apos;customizationlevel&apos; /&gt;
+                   &lt;link-entity name=&apos;sdkmessagepair&apos; alias=&apos;sdkmessagepair&apos; to=&apos;sdkmessageid&apos; from=&apos;sdkmessageid&apos; link-type=&apos;inner&apos; &gt;
+                       &lt;filter&gt;
+                           &lt;condition alias=&apos;sdkmessagepair&apos; attribute=&apos;endpoint&apos; operator=&apos;eq&apos; value=&apos;201 [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.BuildAttributeOptionSet(Microsoft.Xrm.Sdk.Metadata.EntityMetadata,Microsoft.Xrm.Sdk.Metadata.AttributeMetadata,System.CodeDom.CodeTypeMember,Microsoft.Crm.Services.Utility.ServiceProvider,System.Boolean)">
+            <summary>
+            Builds OptionSet Enum and returns that class. 
+            </summary>
+            <param name="entity"></param>
+            <param name="attribute"></param>
+            <param name="attributeMember"></param>
+            <param name="serviceProvider"></param>
+            <param name="useLegacyMode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.GetAttributeConstantLogicalName(System.CodeDom.CodeMemberProperty)">
+            <summary>
+            Generate the Constant name for an attribute property.
+            </summary>
+            <param name="prop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.IsConstGeneratingAttribute(System.CodeDom.CodeMemberProperty,System.CodeDom.CodeAttributeDeclaration)">
+            <summary>
+            Determine if this should be generated for the constants lists.
+            </summary>
+            <param name="prop"></param>
+            <param name="att"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.GenerateTypeWithoutEmptyLines(System.CodeDom.CodeTypeDeclaration)">
+            <summary>
+            Removes the blank lines spaces by generating the code as a string without BlankLinesBetweenMembers
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
         <member name="M:Microsoft.Crm.Services.Utility.CodeWriterFilterService.IsNotExposedChildAttribute(Microsoft.Xrm.Sdk.Metadata.AttributeMetadata)">
             <summary>
             If true a child attribute cannot be published or externally consumed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.DefaultCustomziations.EnumPropertyGenerator.#ctor">
+            <summary>
+            default implementation. 
             </summary>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.DeviceIdManager">
@@ -1076,11 +1226,6 @@
         <member name="F:Microsoft.Crm.Services.Utility.NamingService._reservedSystemAttributeNames">
             <summary>
             List of attribute names that will conflict with system properties.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.SetConnectionTimeoutValues">
-            <summary>
-            Updates the timeout value to extend the amount of item that a request will wait.
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.GetConnectionString">
@@ -1427,6 +1572,13 @@
             <param name="objException">Exception to be written.</param>
             <param name="sw">Stream writer to use to write the exception.</param>
             <param name="level">level of the exception, this deals with inner exceptions.</param>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.Utility.Utilites.WriteObjectToDisk(System.Object,System.String)">
+            <summary>
+            Writes a binary object to disk
+            </summary>
+            <param name="o">object to write</param>
+            <param name="filename">fileName to write too.</param>
         </member>
         <member name="T:CrmSvcUtil.InteractiveLogin.CRMInteractiveLogin">
             <summary>
