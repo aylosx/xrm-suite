@@ -24,7 +24,7 @@
     using Shared.Models.Responses.Account;
 
     [TestClass]
-    public class InitializeEntityUnitTest : CustomCodeActivityUnitTest<InitializeEntity>
+    public class InitializeEntityRMocksUnitTest : CustomCodeActivityUnitTest<InitializeEntity>
     {
         #region Constants and Static Members
 

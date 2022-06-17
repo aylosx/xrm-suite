@@ -6,11 +6,11 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xrm.Sdk;
 
-    using Rhino.Mocks;
+    using Moq;
 
     using Aylos.Xrm.Sdk.Common;
     using Aylos.Xrm.Sdk.Plugins;
-    using Aylos.Xrm.Sdk.Plugins.RhinoMocks;
+    using Aylos.Xrm.Sdk.Plugins.MoqTests;
 
     using BusinessEntity;
     using Shared.Models.Domain;
@@ -18,7 +18,7 @@
     using Shared.BusinessLogic.Services.Data;
 
     [TestClass]
-    public class InitializeEntityUponUpdateUnitTest : CustomPluginUnitTest<InitializeEntityUponUpdate>
+    public class InitializeEntityUponUpdateMoqUnitTest : CustomPluginUnitTest<InitializeEntityUponUpdate>
     {
         #region Constants and Static Members
 
@@ -34,9 +34,14 @@
         /// </summary>
         public override void SetupMockObjectsForPlugin()
         {
-            Plugin.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(Plugin.CurrentUserService);
-            Plugin.CrmService = MockRepository.GenerateMock<CrmService>(Plugin.OrganizationServiceContext, Plugin.TracingService);
-            Plugin.InitializeEntityService = MockRepository.GenerateMock<InitializeEntityService>(Plugin.CrmService, Plugin.OrganizationServiceContext, Plugin.PluginExecutionContext, Plugin.TracingService);
+            var cscMock = new Mock<CrmServiceContext>(Plugin.CurrentUserService).SetupAllProperties();
+            Plugin.OrganizationServiceContext = cscMock.Object;
+
+            var csMock = new Mock<CrmService>(Plugin.OrganizationServiceContext, Plugin.TracingService).SetupAllProperties();
+            Plugin.CrmService = csMock.Object;
+
+            var iesMock = new Mock<InitializeEntityService>(Plugin.CrmService, Plugin.OrganizationServiceContext, Plugin.PluginExecutionContext, Plugin.TracingService).SetupAllProperties();
+            Plugin.InitializeEntityService = iesMock.Object;
         }
 
         #endregion

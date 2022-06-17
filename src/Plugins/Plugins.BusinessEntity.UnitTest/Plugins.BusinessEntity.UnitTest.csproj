@@ -44,6 +44,9 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>\packages\Castle.Core.5.0.0\lib\net462\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -59,6 +62,9 @@
     <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>\packages\Microsoft.CrmSdk.Workflow.9.0.2.45\lib\net462\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
     </Reference>
+    <Reference Include="Moq, Version=4.18.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>\packages\Moq.4.18.1\lib\net462\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
@@ -70,6 +76,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.IdentityModel" />
@@ -119,12 +126,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\..\Sdk\Plugins\Moq\CustomPluginUnitTest.cs">
+      <Link>Sdk\Plugins\Moq\CustomPluginUnitTest.cs</Link>
+    </Compile>
     <Compile Include="..\..\Sdk\Plugins\RhinoMocks\CustomPluginUnitTest.cs">
       <Link>Sdk\Plugins\RhinoMocks\CustomPluginUnitTest.cs</Link>
     </Compile>
-    <Compile Include="InitializeEntityUponUpdateUnitTest.cs" />
-    <Compile Include="InitializeEntityUponCreateUnitTest.cs" />
-    <Compile Include="ManageEntityDeletionUponDeleteUnitTest.cs" />
+    <Compile Include="InitializeEntityUponCreateMoqUnitTest.cs" />
+    <Compile Include="InitializeEntityUponUpdateMoqUnitTest.cs" />
+    <Compile Include="InitializeEntityUponUpdateRMocksUnitTest.cs" />
+    <Compile Include="InitializeEntityUponCreateRMocksUnitTest.cs" />
+    <Compile Include="ManageEntityDeletionUponDeleteMoqUnitTest.cs" />
+    <Compile Include="ManageEntityDeletionUponDeleteRMocksUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +145,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Sdk\Plugins\Moq\readme" />
     <None Include="Sdk\Plugins\RhinoMocks\readme" />
   </ItemGroup>
   <ItemGroup>

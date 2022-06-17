@@ -1,4 +1,4 @@
-﻿namespace Plugins.ExecutionContext.UnitTest
+﻿namespace Plugins.BusinessEntity.UnitTest
 {
     using System;
     using System.Globalization;
@@ -6,19 +6,19 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xrm.Sdk;
 
-    using Rhino.Mocks;
+    using Moq;
 
     using Aylos.Xrm.Sdk.Common;
     using Aylos.Xrm.Sdk.Plugins;
-    using Aylos.Xrm.Sdk.Plugins.RhinoMocks;
+    using Aylos.Xrm.Sdk.Plugins.MoqTests;
 
-    using ExecutionContext;
+    using BusinessEntity;
     using Shared.Models.Domain;
-    using Shared.BusinessLogic.Services.ExecutionContext;
+    using Shared.BusinessLogic.Services.Account;
     using Shared.BusinessLogic.Services.Data;
 
     [TestClass]
-    public class PostMessageUponCreateUnitTest : CustomPluginUnitTest<PostMessageUponCreate>
+    public class InitializeEntityUponCreateMoqUnitTest : CustomPluginUnitTest<InitializeEntityUponCreate>
     {
         #region Constants and Static Members
 
@@ -34,9 +34,14 @@
         /// </summary>
         public override void SetupMockObjectsForPlugin()
         {
-            Plugin.OrganizationServiceContext = MockRepository.GenerateStub<CrmServiceContext>(Plugin.CurrentUserService);
-            Plugin.CrmService = MockRepository.GenerateMock<CrmService>(Plugin.OrganizationServiceContext, Plugin.TracingService);
-            Plugin.PostMessageService = MockRepository.GenerateMock<PostMessageService>(Plugin.CrmService, Plugin.OrganizationServiceContext, Plugin.PluginExecutionContext, Plugin.TracingService);
+            var cscMock = new Mock<CrmServiceContext>(Plugin.CurrentUserService).SetupAllProperties();
+            Plugin.OrganizationServiceContext = cscMock.Object;
+
+            var csMock = new Mock<CrmService>(Plugin.OrganizationServiceContext, Plugin.TracingService).SetupAllProperties();
+            Plugin.CrmService = csMock.Object;
+
+            var iesMock = new Mock<InitializeEntityService>(Plugin.CrmService, Plugin.OrganizationServiceContext, Plugin.PluginExecutionContext, Plugin.TracingService).SetupAllProperties();
+            Plugin.InitializeEntityService = iesMock.Object;
         }
 
         #endregion
@@ -47,25 +52,26 @@
 
         #region Helper Methods
 
-        private static ExecutionContext CreateExecutionContext(string accountNumber)
+        private static Account CreateAccount(string accountNumber)
         {
-            var entity = new ExecutionContext
+            var entity = new Account
             {
                 Id = Guid.NewGuid(),
-                CreatedOn = PostMessageService.DateTimeNow
+                AccountNumber = accountNumber,
+                CreatedOn = InitializeEntityService.DateTimeNow
             };
             return entity;
         }
 
-        private static Entity CreateExecutionContextEntity()
+        private static Entity CreateAccountEntity()
         {
             return new Entity
             {
-                LogicalName = ExecutionContext.EntityLogicalName
+                LogicalName = Account.EntityLogicalName
             };
         }
 
-        private static Entity CreateExecutionContextEntity(ExecutionContext account)
+        private static Entity CreateAccountEntity(Account account)
         {
             return account.ToEntity<Entity>();
         }
@@ -78,7 +84,7 @@
         /// Tests the exception thrown when a target entity is not available in the plugin execution context.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_ExceptionHandling_TargetEntityIsRequired()
+        public void InitializeEntityUponCreate_ExceptionHandling_TargetEntityIsRequired()
         {
             #region ARRANGE
 
@@ -117,7 +123,7 @@
         /// Tests the exception thrown when the target entity is not the expected.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_ExceptionHandling_WrongRegisteredEntity()
+        public void InitializeEntityUponCreate_ExceptionHandling_WrongRegisteredEntity()
         {
             #region ARRANGE
 
@@ -159,12 +165,12 @@
         /// Tests the exception thrown when the plugin message is not the expected.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_ExceptionHandling_IncorrectMessageName()
+        public void InitializeEntityUponCreate_ExceptionHandling_IncorrectMessageName()
         {
             #region ARRANGE
 
             // Prepare the unit test mock target entity
-            Entity targetEntity = CreateExecutionContextEntity();
+            Entity targetEntity = CreateAccountEntity();
 
             // Setup the unit test mock context
             PluginExecutionContext context = CreatePluginExecutionContext(_dummyText, 
@@ -202,12 +208,12 @@
         /// Tests the exception thrown when the plugin pipeline stage is not the expected.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_ExceptionHandling_IncorrectPipelineStage()
+        public void InitializeEntityUponCreate_ExceptionHandling_IncorrectPipelineStage()
         {
             #region ARRANGE
 
             // Prepare the unit test mock target entity
-            Entity targetEntity = CreateExecutionContextEntity();
+            Entity targetEntity = CreateAccountEntity();
 
             // Setup the unit test mock context
             PluginExecutionContext context = CreatePluginExecutionContext(PlatformMessageHelper.Create, 
@@ -236,8 +242,7 @@
             #region ASSERT
 
             Assert.IsNotNull(ActualException);
-            Assert.AreEqual(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.IncorrectPipelineStage, 
-                Plugin.GetType().Name, (int)SdkMessageProcessingStepStage.PostOperation, -1), ActualException.Message);
+            Assert.AreEqual(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.IncorrectPipelineStage, Plugin.GetType().Name, (int)SdkMessageProcessingStepStage.PreOperation, -1), ActualException.Message);
 
             #endregion
         }
@@ -246,16 +251,17 @@
         /// Tests the exception thrown when the plugin pipeline stage is not the expected.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_ExceptionHandling_MaxDepthViolation()
+        public void InitializeEntityUponCreate_ExceptionHandling_MaxDepthViolation()
         {
             #region ARRANGE
 
             // Prepare the unit test mock target entity
-            Entity targetEntity = CreateExecutionContextEntity();
+            Entity targetEntity = CreateAccountEntity();
 
             // Setup the unit test mock context
             PluginExecutionContext context = CreatePluginExecutionContext(PlatformMessageHelper.Create,
-                8, targetEntity.LogicalName, (int)SdkMessageProcessingStepStage.PostOperation, targetEntity);
+                CustomPlugin.MaximumAllowedExecutionDepth + 1, targetEntity.LogicalName, 
+                (int)SdkMessageProcessingStepStage.PreOperation, targetEntity);
 
             // Initialize the unit test
             InitializeUnitTest(context);
@@ -288,20 +294,21 @@
         }
 
         /// <summary>
-        /// Tests the behavior of the plugin when ... .
+        /// Tests the behavior of the plugin when the current entity account number contains data.
         /// </summary>
         [TestMethod]
-        public void PostMessageUponCreate_PostMessageService_PostMessage_Dosomething()
+        public void InitializeEntityUponCreate_InitializeEntityService_InitializeEntity_CurrentAccountNumberContainsData()
         {
             #region ARRANGE
 
             // Prepare the unit test mock target entity
-            ExecutionContext account = CreateExecutionContext(_dummyText);
-            Entity targetEntity = CreateExecutionContextEntity(account);
+            Account account = CreateAccount(_dummyText);
+            Entity targetEntity = CreateAccountEntity(account);
 
             // Setup the unit test mock context
             PluginExecutionContext context = CreatePluginExecutionContext(PlatformMessageHelper.Create,
-                7, targetEntity.LogicalName, (int)SdkMessageProcessingStepStage.PostOperation, targetEntity);
+                CustomPlugin.MaximumAllowedExecutionDepth, targetEntity.LogicalName,
+                (int)SdkMessageProcessingStepStage.PreOperation, targetEntity);
 
             // Initialize the unit test
             InitializeUnitTest(context);
@@ -321,10 +328,56 @@
             // Load the modified plugin execution context
             IPluginExecutionContext pex = Plugin.PluginExecutionContext;
             Entity modifiedTargetEntity = (Entity)pex.InputParameters[PlatformConstants.TargetText];
-            ExecutionContext modifiedTarget = modifiedTargetEntity.ToEntity<ExecutionContext>();
+            Account modifiedTarget = modifiedTargetEntity.ToEntity<Account>();
 
             // Assertions
+            Assert.AreEqual(modifiedTarget.AccountNumber, _dummyText);
 
+            #endregion
+        }
+
+        /// <summary>
+        /// Tests the behavior of the plugin when the current entity account number is empty.
+        /// </summary>
+        [TestMethod]
+        public void InitializeEntityUponCreate_InitializeEntityService_InitializeEntity_CurrentAccountNumberIsEmpty()
+        {
+            #region ARRANGE
+
+            // Prepare the unit test mock target entity
+            Account account = CreateAccount(string.Empty);
+            Entity targetEntity = CreateAccountEntity(account);
+
+            // Setup the unit test mock context
+            PluginExecutionContext context = CreatePluginExecutionContext(PlatformMessageHelper.Create,
+                CustomPlugin.MaximumAllowedExecutionDepth, targetEntity.LogicalName,
+                (int)SdkMessageProcessingStepStage.PreOperation, targetEntity);
+
+            // Initialize the unit test
+            InitializeUnitTest(context);
+
+            // Setup the plugin mock objects
+            SetupMockObjectsForPlugin();
+
+            #endregion
+            #region ACT
+
+            // Execute the plugin step
+            Plugin.Execute(Plugin.ServiceProvider);
+
+            #endregion
+            #region ASSERT
+
+            // Load the modified plugin execution context
+            IPluginExecutionContext pex = Plugin.PluginExecutionContext;
+            Entity modifiedTargetEntity = (Entity)pex.InputParameters[PlatformConstants.TargetText];
+            Account modifiedTarget = modifiedTargetEntity.ToEntity<Account>();
+
+            // Assertions
+            Assert.AreNotEqual(modifiedTarget.AccountNumber, string.Empty);
+            Assert.AreEqual(modifiedTarget.AccountNumber, string.Format(CultureInfo.InvariantCulture, 
+                InitializeEntityService.TextFormat, modifiedTarget.CreatedOn.Value.ToString(InitializeEntityService.DateTimeFormat, 
+                CultureInfo.InvariantCulture)));
 
             #endregion
         }

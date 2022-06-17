@@ -1,9 +1,10 @@
-namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
+namespace Aylos.Xrm.Sdk.CodeActivities.MoqTests
 {
     using Aylos.Xrm.Sdk.Common;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Workflow;
-    using Rhino.Mocks;
+    using Moq;
+    using Moq.Protected;
     using System;
     using System.Activities;
     using System.Collections.Generic;
@@ -107,21 +108,55 @@ namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
         {
             CustomCodeActivity = customCodeActivity;
 
-            SetupMockObjects();
-            SetupWorkflowInvoker(customCodeActivity);
-            SetupMockResponseForWorkflowContext(context);
-            SetupMockResponseForOrganizationServiceFactory();
-        }
-
-        protected void SetupMockObjects()
-        {
-            SystemUserService = MockRepository.GenerateStub<IOrganizationService>();
-            CurrentUserService = MockRepository.GenerateStub<IOrganizationService>();
-            OrganizationServiceFactory = MockRepository.GenerateStub<IOrganizationServiceFactory>();
-            TracingService = MockRepository.GenerateStub<ITracingService>();
-            WorkflowContext = MockRepository.GenerateStub<IWorkflowContext>();
+            SystemUserService = Mock.Of<IOrganizationService>();
+            CurrentUserService = Mock.Of<IOrganizationService>();
+            TracingService = Mock.Of<ITracingService>();
+            WorkflowContext = Mock.Of<IWorkflowContext>();
             CodeActivityInput = new Dictionary<string, object>();
             CodeActivityOutput = new Dictionary<string, object>();
+
+            SetupMockResponseForWorkflowContext(context);
+            SetupWorkflowInvoker(customCodeActivity);
+            SetupMockForOrganizationServiceFactory();
+        }
+
+        protected void SetupMockResponseForWorkflowContext(WorkflowExecutionContext context)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            var mock = new Mock<IWorkflowContext>().SetupAllProperties();
+
+            mock.Setup(x => x.BusinessUnitId).Returns(context.BusinessUnitId);
+            mock.Setup(x => x.CorrelationId).Returns(context.CorrelationId);
+            mock.Setup(x => x.Depth).Returns(context.Depth);
+            mock.Setup(x => x.InitiatingUserId).Returns(context.InitiatingUserId);
+            mock.Setup(x => x.InputParameters).Returns(context.InputParameters);
+            mock.Setup(x => x.IsExecutingOffline).Returns(context.IsExecutingOffline);
+            mock.Setup(x => x.IsInTransaction).Returns(context.IsInTransaction);
+            mock.Setup(x => x.IsOfflinePlayback).Returns(context.IsOfflinePlayback);
+            mock.Setup(x => x.IsolationMode).Returns(context.IsolationMode);
+            mock.Setup(x => x.MessageName).Returns(context.MessageName);
+            mock.Setup(x => x.Mode).Returns(context.Mode);
+            mock.Setup(x => x.OperationCreatedOn).Returns(context.OperationCreatedOn);
+            mock.Setup(x => x.OperationId).Returns(context.OperationId);
+            mock.Setup(x => x.OrganizationId).Returns(context.OrganizationId);
+            mock.Setup(x => x.OrganizationName).Returns(context.OrganizationName);
+            mock.Setup(x => x.OutputParameters).Returns(context.OutputParameters);
+            mock.Setup(x => x.OwningExtension).Returns(context.OwningExtension);
+            mock.Setup(x => x.ParentContext).Returns(context.ParentContext);
+            mock.Setup(x => x.PostEntityImages).Returns(context.PostEntityImages);
+            mock.Setup(x => x.PreEntityImages).Returns(context.PreEntityImages);
+            mock.Setup(x => x.PrimaryEntityId).Returns(context.PrimaryEntityId);
+            mock.Setup(x => x.PrimaryEntityName).Returns(context.PrimaryEntityName);
+            mock.Setup(x => x.RequestId).Returns(context.RequestId);
+            mock.Setup(x => x.SecondaryEntityName).Returns(context.SecondaryEntityName);
+            mock.Setup(x => x.SharedVariables).Returns(context.SharedVariables);
+            mock.Setup(x => x.StageName).Returns(context.StageName);
+            mock.Setup(x => x.UserId).Returns(context.UserId);
+            mock.Setup(x => x.WorkflowCategory).Returns(context.WorkflowCategory);
+            mock.Setup(x => x.WorkflowMode).Returns(context.WorkflowMode);
+
+            WorkflowContext = mock.Object;
         }
 
         protected void SetupWorkflowInvoker(T codeActivity)
@@ -132,45 +167,23 @@ namespace Aylos.Xrm.Sdk.CodeActivities.RhinoMocks
             WorkflowInvoker.Extensions.Add(() => WorkflowContext);
         }
 
-        protected void SetupMockResponseForWorkflowContext(WorkflowExecutionContext context)
+        protected void SetupMockForOrganizationServiceFactory()
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            var mock = new Mock<IOrganizationServiceFactory>().SetupAllProperties();
 
-            WorkflowContext.Stub(x => x.BusinessUnitId).Return(context.BusinessUnitId);
-            WorkflowContext.Stub(x => x.CorrelationId).Return(context.CorrelationId);
-            WorkflowContext.Stub(x => x.Depth).Return(context.Depth);
-            WorkflowContext.Stub(x => x.InitiatingUserId).Return(context.InitiatingUserId);
-            WorkflowContext.Stub(x => x.InputParameters).Return(context.InputParameters);
-            WorkflowContext.Stub(x => x.IsExecutingOffline).Return(context.IsExecutingOffline);
-            WorkflowContext.Stub(x => x.IsInTransaction).Return(context.IsInTransaction);
-            WorkflowContext.Stub(x => x.IsOfflinePlayback).Return(context.IsOfflinePlayback);
-            WorkflowContext.Stub(x => x.IsolationMode).Return(context.IsolationMode);
-            WorkflowContext.Stub(x => x.MessageName).Return(context.MessageName);
-            WorkflowContext.Stub(x => x.Mode).Return(context.Mode);
-            WorkflowContext.Stub(x => x.OperationCreatedOn).Return(context.OperationCreatedOn);
-            WorkflowContext.Stub(x => x.OperationId).Return(context.OperationId);
-            WorkflowContext.Stub(x => x.OrganizationId).Return(context.OrganizationId);
-            WorkflowContext.Stub(x => x.OrganizationName).Return(context.OrganizationName);
-            WorkflowContext.Stub(x => x.OutputParameters).Return(context.OutputParameters);
-            WorkflowContext.Stub(x => x.OwningExtension).Return(context.OwningExtension);
-            WorkflowContext.Stub(x => x.ParentContext).Return(context.ParentContext);
-            WorkflowContext.Stub(x => x.PostEntityImages).Return(context.PostEntityImages);
-            WorkflowContext.Stub(x => x.PreEntityImages).Return(context.PreEntityImages);
-            WorkflowContext.Stub(x => x.PrimaryEntityId).Return(context.PrimaryEntityId);
-            WorkflowContext.Stub(x => x.PrimaryEntityName).Return(context.PrimaryEntityName);
-            WorkflowContext.Stub(x => x.RequestId).Return(context.RequestId);
-            WorkflowContext.Stub(x => x.SecondaryEntityName).Return(context.SecondaryEntityName);
-            WorkflowContext.Stub(x => x.SharedVariables).Return(context.SharedVariables);
-            WorkflowContext.Stub(x => x.StageName).Return(context.StageName);
-            WorkflowContext.Stub(x => x.UserId).Return(context.UserId);
-            WorkflowContext.Stub(x => x.WorkflowCategory).Return(context.WorkflowCategory);
-            WorkflowContext.Stub(x => x.WorkflowMode).Return(context.WorkflowMode);
-        }
+            mock.Setup(x => x.CreateOrganizationService(It.IsAny<Guid?>()))
+                .Returns((Guid? x) => {
+                    if (x == null)
+                    {
+                        return SystemUserService;
+                    }
+                    else
+                    {
+                        return CurrentUserService;
+                    }
+                });
 
-        protected void SetupMockResponseForOrganizationServiceFactory()
-        {
-            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(WorkflowContext.UserId)).Return(CurrentUserService);
-            OrganizationServiceFactory.Stub(x => x.CreateOrganizationService(null)).Return(SystemUserService);
+            OrganizationServiceFactory = mock.Object;
         }
 
         public abstract void SetupMockObjectsForCustomCodeActivity();

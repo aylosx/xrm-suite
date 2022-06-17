@@ -45,6 +45,9 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Packages\Castle.Core.5.0.0\lib\net462\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CommandLine, Version=1.9.72.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>\packages\CommandLineParser19.1.9.74\lib\net35\CommandLine.dll</HintPath>
     </Reference>
@@ -132,6 +135,9 @@
     </Reference>
     <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.9.1.0.110\lib\net462\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.18.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\Packages\Moq.4.18.1\lib\net462\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>\packages\\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -264,6 +270,7 @@
     <Compile Include="AzureFunctions\LoggerFactory.cs" />
     <Compile Include="AzureFunctions\TraceMessages.cs" />
     <Compile Include="CodeActivities\CustomCodeActivity.cs" />
+    <Compile Include="CodeActivities\Moq\CustomCodeActivityUnitTest.cs" />
     <Compile Include="CodeActivities\RhinoMocks\CustomCodeActivityUnitTest.cs" />
     <Compile Include="CodeActivities\WorkflowExecutionContext.cs" />
     <Compile Include="Common\AzureFile.cs" />
@@ -296,6 +303,7 @@
       <DependentUpon>FetchXML.xsd</DependentUpon>
     </Compile>
     <Compile Include="Plugins\CustomPlugin.cs" />
+    <Compile Include="Plugins\Moq\CustomPluginUnitTest.cs" />
     <Compile Include="Plugins\PluginExecutionContext.cs" />
     <Compile Include="Common\PlatformMessageHelper.cs" />
     <Compile Include="Plugins\RhinoMocks\CustomPluginUnitTest.cs" />
