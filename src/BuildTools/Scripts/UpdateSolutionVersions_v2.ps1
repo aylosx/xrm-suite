@@ -24,6 +24,8 @@ Write-Host Updating the version of the solutions
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
 Write-Host 
 
+$CurrentPath = Get-Location
+
 switch ($PSCmdlet.ParameterSetName)
 {
     "AsEncryptedText"
@@ -33,10 +35,22 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSchema" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSecurity" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosAnalytics" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosTemplates" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosExtensions" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosProcesses" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosUserInterface" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+<# using Common Functions #>
+."$CurrentPath\CommonFunctions.ps1"
+
+<# Initialise variables #>
+initializeEnvironmentVariables -envName $EnvironmentName
+if (!$env:D365_OrganizationUnitId) {
+	CD $CurrentPath
+	throw "The global variables have not been initialized."
+}
+
+$Version = "$MajorRelease." + ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.ddHHmm")
+
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSchema" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSecurity" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosAnalytics" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosTemplates" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosExtensions" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosProcesses" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosUserInterface" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText

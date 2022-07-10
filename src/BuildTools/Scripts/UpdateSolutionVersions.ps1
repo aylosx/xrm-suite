@@ -22,6 +22,8 @@ Write-Host Updating the version of the solutions
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
 Write-Host 
 
+$CurrentPath = Get-Location
+
 switch ($PSCmdlet.ParameterSetName)
 {
     "AsEncryptedText"
@@ -31,10 +33,22 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosSchema" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosSecurity" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosAnalytics" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosTemplates" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosExtensions" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosProcesses" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-.\UpdateSolutionVersion.ps1 -SolutionName "AylosUserInterface" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+<# using Common Functions #>
+."$CurrentPath\CommonFunctions.ps1"
+
+<# Initialise variables #>
+initializeEnvironmentVariables -envName $EnvironmentName
+if (!$env:D365_OrganizationUnitId) {
+	CD $CurrentPath
+	throw "The global variables have not been initialized."
+}
+
+$Version = "$MajorRelease." + ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.ddHHmm")
+
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosSchema" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosSecurity" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosAnalytics" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosTemplates" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosExtensions" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosProcesses" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\UpdateSolutionVersion.ps1 -SolutionName "AylosUserInterface" -Version "$Version" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
