@@ -45,7 +45,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
         private TraceLogger _logger = Helper.CreateTraceLogger("DataMigrationUtility.Export");
 #pragma warning restore IDE0044 // Add readonly modifier
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static ExportDataHandler()
         {
             _addProductIdFilters = false;
@@ -94,7 +93,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return null;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
         private DataMigCommon.DataModel.Data.entitiesEntity ConstructExportDataStructure(DataMigCommon.DataModel.Schema.entitiesEntity entity, Dictionary<string, Dictionary<string, object>> results)
         {
             entitiesEntityRecordFieldActivitypointerrecords[] array;
@@ -215,7 +213,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return flag;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String)")]
         internal bool ExportData(string schemaFileName, string outputFileName)
         {
             TimeSpan timeSpan;
@@ -890,8 +887,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return new Dictionary<string, Dictionary<string, object>>();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private bool ReadDataFromCrm(string schemaFileName)
         {
             bool flag;
@@ -923,7 +918,7 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
                 flag = false;
             }
             return flag;
-            Label0:
+        Label0:
             ProgressItemEventArgs progressItemEventArg = AddProgressItem(string.Format(CultureInfo.CurrentUICulture, Resources.BEGINING_EXPORT, (int)_schemaMap.entity.Length), ProgressItemStatus.Working);
             ProgressItemEventArgs progressItemEventArg1 = AddProgressItem(Resources.RUNNING_SCHEMA_VALIDATION, ProgressItemStatus.Working);
             SchemaValidator schemaValidator = new SchemaValidator();
@@ -976,8 +971,6 @@ namespace Microsoft.Xrm.Tooling.Dmt.ExportProcessor.DataInteraction
             return true;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Xrm.Tooling.Dmt.DataMigCommon.Utility.TraceLogger.Log(System.String,System.Diagnostics.TraceEventType)")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private bool SaveOutputToDisk(string schemaFileName, string outputFileName)
         {
             bool flag;
