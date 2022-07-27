@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <Mapping>
 	<FileToFile 
-		map="PluginAssemblies\**\GrgPluginsAccount.dll" 
-		to="..\..\..\..\Plugins\Grg.Plugins.Account\bin\Grg.Plugins.Account.dll" />  
+		map="PluginAssemblies\**\AylosPluginsAccount.dll" 
+		to="..\..\..\..\Plugins\Aylos.Plugins.Account\bin\Aylos.Plugins.Account.dll" />  
 	<FileToFile 
-		map="PluginAssemblies\**\GrgPluginsAny.dll" 
-		to="..\..\..\..\Plugins\Grg.Plugins.Any\bin\Grg.Plugins.Any.dll" />  
+		map="PluginAssemblies\**\AylosPluginsAny.dll" 
+		to="..\..\..\..\Plugins\Aylos.Plugins.Any\bin\Aylos.Plugins.Any.dll" />  
 	<FileToFile 
-		map="PluginAssemblies\**\GrgPluginsContact.dll" 
-		to="..\..\..\..\Plugins\Grg.Plugins.Contact\bin\Grg.Plugins.Contact.dll" />  
+		map="PluginAssemblies\**\AylosPluginsContact.dll" 
+		to="..\..\..\..\Plugins\Aylos.Plugins.Contact\bin\Aylos.Plugins.Contact.dll" />  
 	<FileToFile 
-		map="PluginAssemblies\**\GrgPluginsLead.dll" 
-		to="..\..\..\..\Plugins\Grg.Plugins.Lead\bin\Grg.Plugins.Lead.dll" />  
+		map="PluginAssemblies\**\AylosPluginsLead.dll" 
+		to="..\..\..\..\Plugins\Aylos.Plugins.Lead\bin\Aylos.Plugins.Lead.dll" />  
 </Mapping>
