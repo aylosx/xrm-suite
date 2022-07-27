@@ -4,6 +4,7 @@
 	{
 		"aylos" 
 		{
+			$env:D365_MajorReleaseNumber = "101"
 			$env:D365_AdministratorId = "bc7b9274-7577-4f19-8a47-3cd07f6d4cbb"
 			$env:D365_AdministratorName = "Platform Admin"
 			$env:D365_ABC_API_Endpoint = "https://web-hook-api-dev.aylos.com/api/dosomething"
