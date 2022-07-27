@@ -46,10 +46,10 @@ if (!$env:D365_OrganizationUnitId) {
 
 $Version = "$env:D365_MajorReleaseNumber." + ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.ddHHmm")
 
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCSchema" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCSecurity" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCAnalytics" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCTemplates" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCExtensions" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCProcesses" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCUserInterface" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSchema" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSecurity" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosAnalytics" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosTemplates" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosExtensions" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosProcesses" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosUserInterface" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
