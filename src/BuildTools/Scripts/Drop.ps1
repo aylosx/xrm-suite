@@ -12,11 +12,12 @@ $CurrentPath = Get-Location
 
 Remove-Item "$CurrentPath\..\..\Drop\*" -Recurse -Force
 
-Robocopy.exe "$CurrentPath\.." "$CurrentPath\..\..\Drop\BuildTools" *.exe *.dll *.ps1 *.bat *.config /COPY:DAT /E /PURGE /XD sdk obj domain properties services .nuget .tt .vs Logs *.BuildTools.* coretools *.CrmSvcUtilExtensions /XF packages.config app.config *.pdb nuget.*
+Robocopy.exe "$CurrentPath\.." "$CurrentPath\..\..\Drop\BuildTools" *.exe *.dll *.ps1 *.bat *.config /COPY:DAT /E /PURGE /XD sdk obj domain properties services Microsoft.PowerApps.CLI.* .nuget .tt .vs Logs *.BuildTools.* coretools *.CrmSvcUtilExtensions /XF app.config *.pdb
 Robocopy.exe "$CurrentPath\..\..\Metadata\Config" "$CurrentPath\..\..\Drop\Metadata\Config" data.zip /COPY:DAT /E /PURGE /XD data* .nuget .tt .vs
 Robocopy.exe "$CurrentPath\..\..\Metadata\Reference" "$CurrentPath\..\..\Drop\Metadata\Reference" data.zip /COPY:DAT /E /PURGE /XD data* .nuget .tt .vs
 Robocopy.exe "$CurrentPath\..\..\Metadata\Solutions\Managed" "$CurrentPath\..\..\Drop\Metadata\Solutions\Managed" *.zip /COPY:DAT /E /PURGE /XD *
 Robocopy.exe "$CurrentPath\..\..\Metadata\Solutions\Unmanaged" "$CurrentPath\..\..\Drop\Metadata\Solutions\Unmanaged" *.zip /COPY:DAT /E /PURGE /XD *
+Robocopy.exe "$CurrentPath\..\..\Portals" "$CurrentPath\..\..\Drop\Portals" *.* /COPY:DAT /E /PURGE /XD aylos_
 
 CD $CurrentPath
 

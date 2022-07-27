@@ -51,3 +51,5 @@ if ($PublishCustomizations) {
 .\ExtractConfigData_v2.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
 
 .\ExtractReferenceData_v2.ps1 -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+
+.\ExportPortals_v2.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText

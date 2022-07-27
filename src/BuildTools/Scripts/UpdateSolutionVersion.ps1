@@ -2,6 +2,7 @@
 	Example usage: 
 		.\UpdateSolutionVersion.ps1
 			-SolutionName "MySolution"
+			-Version "21.11.09.0856"
 			-Url="https://aylos.crm11.dynamics.com/"
 			-Username="jsmith@aylos.com"
 			-SecurePassword="***********" or [-Password="passcode" -AsPlainText]
@@ -11,6 +12,7 @@
 Param(
 	[parameter(Mandatory=$false)][String]$BuildToolsPath = "..",
 	[parameter(Mandatory=$true)][String]$SolutionName,
+	[parameter(Mandatory=$false)][String]$Version = ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.dd.HHmm"),
 	[parameter(Mandatory=$true)][String]$Url,
 	[parameter(Mandatory=$true)][String]$Username,
 	[parameter(Mandatory=$false, ParameterSetName="AsEncryptedText")][switch]$AsEncryptedText,
@@ -34,8 +36,7 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-$ConnectionString = "AuthType=Office365;Username=$Username;Password=$Password;Url=$Url"
-$Version = ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.dd.HHmm")
+$ConnectionString = "AuthType=OAuth;Url=$Url;Username=$Username;Password=$Password;AppId=51f81489-12ee-4a9e-aaae-a2591f45987d;RedirectUri=app://58145B91-0C36-4500-8554-080854F2AC97;LoginPrompt=Auto"
 
 CD "$BuildToolsPath\UpdateSolutionVersion\bin\"
 

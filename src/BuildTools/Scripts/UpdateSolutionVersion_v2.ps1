@@ -2,6 +2,7 @@
 	Example usage: 
 		.\UpdateSolutionVersion_v2.ps1
 			-SolutionName "MySolution"
+			-Version "21.11.09.0856"
 			-Url "https://aylos.crm11.dynamics.com/"
 			-TenantId "5bbf182b-e07d-4aa4-a752-094a5b8a019c"
 			-ServicePrincipalId "af3e5418-d265-40eb-995f-4586a29d5a89"
@@ -12,6 +13,7 @@
 Param(
 	[parameter(Mandatory=$false)][String]$BuildToolsPath = "..",
 	[parameter(Mandatory=$true)][String]$SolutionName,
+	[parameter(Mandatory=$false)][String]$Version = ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.dd.HHmm"),
 	[parameter(Mandatory=$true)][String]$Url,
 	[parameter(Mandatory=$true)][String]$TenantId,
 	[parameter(Mandatory=$true)][String]$ServicePrincipalId,
@@ -35,8 +37,6 @@ switch ($PSCmdlet.ParameterSetName)
 		$ServicePrincipalSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
     }
 }
-
-$Version = ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.dd.HHmm")
 
 CD "$BuildToolsPath\UpdateSolutionVersion\bin\"
 

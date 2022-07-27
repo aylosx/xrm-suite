@@ -68,3 +68,21 @@ if ($LastExitCode -gt 0) {
 CD $CurrentPath
 
 Write-Host
+
+<# Removes the timestamp attribute from the XML file #>
+Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
+Write-Host "Remove the timestamp attribute from the data file."
+Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
+
+CD "$BuildToolsPath\RemoveData\bin\"
+
+.\RemoveDataApp.exe --inputFile "$DataFile" --outputFile "$DataFile" --attributeName "noname" --attributeValue "novalue"
+
+if ($LastExitCode -gt 0) {
+	CD $CurrentPath
+	throw "An error occurred whilst removing the timestamp attribute from the data file."
+}
+
+CD $CurrentPath
+
+Write-Host

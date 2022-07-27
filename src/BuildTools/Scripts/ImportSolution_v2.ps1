@@ -48,7 +48,7 @@ $HoldingSolution = switch ($SolutionType.ToLower())
 	"unmanaged" { $false }
 }
 
-Write-Host $HoldingSolution 
+Write-Host Holding: $HoldingSolution 
 
 CD "$BuildToolsPath\ImportSolution\bin\"
 

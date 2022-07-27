@@ -24,6 +24,8 @@ Write-Host Updating the version of the solutions
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
 Write-Host 
 
+$CurrentPath = Get-Location
+
 switch ($PSCmdlet.ParameterSetName)
 {
     "AsEncryptedText"
@@ -33,10 +35,21 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSchema" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosSecurity" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosAnalytics" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosTemplates" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosExtensions" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosProcesses" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
-.\UpdateSolutionVersion_v2.ps1 -SolutionName "AylosUserInterface" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+."$CurrentPath\CommonFunctions.ps1"
+
+<# Initialise variables #>
+initializeEnvironmentVariables -envName $EnvironmentName
+if (!$env:D365_OrganizationUnitId) {
+	CD $CurrentPath
+	throw "The global variables have not been initialized."
+}
+
+$Version = "$env:D365_MajorReleaseNumber." + ([System.TimeZoneInfo]::ConvertTimeBySystemTimeZoneId((Get-Date), "GMT Standard Time")).tostring("yy.MM.ddHHmm")
+
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCSchema" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCSecurity" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCAnalytics" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCTemplates" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCExtensions" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCProcesses" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText
+.\UpdateSolutionVersion_v2.ps1 -SolutionName "WMBCUserInterface" -Version "$Version" -Url "$Url" -TenantId "$TenantId" -ServicePrincipalId "$ServicePrincipalId" -ServicePrincipalSecret "$ServicePrincipalSecret" -AsPlainText

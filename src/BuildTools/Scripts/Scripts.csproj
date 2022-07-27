@@ -138,6 +138,10 @@
     <Content Include="UpdateSolutionVersions_v2.ps1" />
     <Content Include="Backup.ps1" />
     <Content Include="Backup_v2.ps1" />
+    <Content Include="ExportPortal.ps1" />
+    <Content Include="ExportPortals.ps1" />
+    <Content Include="ExportPortals_v2.ps1" />
+    <Content Include="ExportPortal_v2.ps1" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

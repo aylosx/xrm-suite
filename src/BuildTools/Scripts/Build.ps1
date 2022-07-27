@@ -49,3 +49,5 @@ if ($PublishCustomizations) {
 .\ExtractConfigData.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
 
 .\ExtractReferenceData.ps1 -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+
+.\ExportPortals.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText

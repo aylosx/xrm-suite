@@ -28,8 +28,7 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-$ConnectionString = "AuthType=Office365;Username=$Username;Password=$Password;Url=$Url"
-
+$ConnectionString = "AuthType=OAuth;Url=$Url;Username=$Username;Password=$Password;AppId=51f81489-12ee-4a9e-aaae-a2591f45987d;RedirectUri=app://58145B91-0C36-4500-8554-080854F2AC97;LoginPrompt=Auto"
 $DataFolder = "..\..\..\Metadata\Reference"
 $DataFile = "$DataFolder\data\data.xml"
 
@@ -63,6 +62,24 @@ CD "$BuildToolsPath\DecompressFile\bin\"
 if ($LastExitCode -gt 0) {
 	CD $CurrentPath
 	throw "An error occurred whilst decompressing the Zip file."
+}
+
+CD $CurrentPath
+
+Write-Host
+
+<# Removes the timestamp attribute from the XML file #>
+Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
+Write-Host "Remove the timestamp attribute from the data file."
+Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
+
+CD "$BuildToolsPath\RemoveData\bin\"
+
+.\RemoveDataApp.exe --inputFile "$DataFile" --outputFile "$DataFile" --attributeName "noname" --attributeValue "novalue"
+
+if ($LastExitCode -gt 0) {
+	CD $CurrentPath
+	throw "An error occurred whilst removing the timestamp attribute from the data file."
 }
 
 CD $CurrentPath

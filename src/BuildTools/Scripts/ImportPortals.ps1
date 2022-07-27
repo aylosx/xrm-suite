@@ -1,16 +1,14 @@
-﻿<# 
+<# 
 	Example usage: 
-		.\Deploy.ps1
-			-Url="https://aylos.crm11.dynamics.com/"
-			-Username="jsmith@aylos.com"
+		.\ImportPortals.ps1
+			-Url "https://wmbc-ce.crm11.dynamics.com/"
+			-Username="jsmith@walsall.gov.uk"
 			-SecurePassword="***********" or [-Password="passcode" -AsPlainText]
 	#>
 
 [CmdletBinding(DefaultParameterSetName="AsEncryptedText")]
 Param(
-	[parameter(Mandatory=$false)][String]$BuildToolsPath = "..",
 	[parameter(Mandatory=$false)][String]$EnvironmentName = "none",
-	[parameter(Mandatory=$false)][String]$SolutionType = "Managed",
 	[parameter(Mandatory=$true)][String]$Url,
 	[parameter(Mandatory=$true)][String]$Username,
 	[parameter(Mandatory=$false, ParameterSetName="AsEncryptedText")][switch]$AsEncryptedText,
@@ -20,9 +18,12 @@ Param(
 )
 
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
-Write-Host "Deploying the components and the artifacts required by the release."
+Write-Host Importing the portals 
 Write-Host "*".PadRight($Host.UI.RawUI.WindowSize.Width, "*")
+
 Write-Host 
+
+$CurrentPath = Get-Location
 
 switch ($PSCmdlet.ParameterSetName)
 {
@@ -33,10 +34,13 @@ switch ($PSCmdlet.ParameterSetName)
     }
 }
 
-.\ImportSolutions.ps1 -SolutionType $SolutionType -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+."$CurrentPath\CommonFunctions.ps1"
 
-.\ImportConfigData.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+<# Initialise variables #>
+initializeEnvironmentVariables -envName $EnvironmentName
+if (!$env:D365_OrganizationUnitId) {
+	CD $CurrentPath
+	throw "The global variables have not been initialized."
+}
 
-.\ImportReferenceData.ps1 -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
-
-.\ImportPortals.ps1 -EnvironmentName $EnvironmentName -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
+.\ImportPortal.ps1 -EnvironmentName $EnvironmentName -PortalName "$env:PowerApps_CP_PortalName" -WebSiteId "$env:PowerApps_CP_WebsiteId" -Url "$Url" -Username "$Username" -Password "$Password" -AsPlainText
