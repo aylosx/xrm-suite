@@ -150,62 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\coretools\CrmSvcUtil.exe.config" />
-    <None Include="bin\coretools\LicenseTerms.docx" />
-    <None Include="bin\coretools\pacTelemetryUpload.exe.config" />
-    <None Include="bin\coretools\SolutionPackager.exe.config" />
-    <None Include="bin\Plugins.AnyEntity.dll.config" />
     <None Include="key.snk" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\coretools\CrmSvcUtil.exe" />
-    <Content Include="bin\coretools\CrmSvcUtil.xml" />
-    <Content Include="bin\coretools\Microsoft.ApplicationInsights.dll" />
-    <Content Include="bin\coretools\Microsoft.Crm.Sdk.Proxy.dll" />
-    <Content Include="bin\coretools\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
-    <Content Include="bin\coretools\Microsoft.PowerPlatform.Tooling.BatchedTelemetry.dll" />
-    <Content Include="bin\coretools\Microsoft.Rest.ClientRuntime.dll" />
-    <Content Include="bin\coretools\Microsoft.Xrm.Sdk.Deployment.dll" />
-    <Content Include="bin\coretools\Microsoft.Xrm.Sdk.dll" />
-    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.Connector.dll" />
-    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.CrmConnectControl.dll" />
-    <Content Include="bin\coretools\Microsoft.Xrm.Tooling.Ui.Styles.dll" />
-    <Content Include="bin\coretools\Newtonsoft.Json.dll" />
-    <Content Include="bin\coretools\Other Redistributable.txt" />
-    <Content Include="bin\coretools\pacTelemetryUpload.exe" />
-    <Content Include="bin\coretools\SolutionPackager.exe" />
-    <Content Include="bin\coretools\SolutionPackagerLib.dll" />
-    <Content Include="bin\coretools\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="bin\coretools\System.Text.Json.dll" />
-    <Content Include="bin\coretools\System.ValueTuple.dll" />
-    <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
-    <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.xml" />
-    <Content Include="bin\Microsoft.Crm.Sdk.Proxy.dll" />
-    <Content Include="bin\Microsoft.Crm.Sdk.Proxy.xml" />
-    <Content Include="bin\Microsoft.IdentityModel.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.Workflow.dll" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.Workflow.xml" />
-    <Content Include="bin\Microsoft.Xrm.Sdk.xml" />
-    <Content Include="bin\Plugins.AnyEntity.dll" />
-    <Content Include="bin\Plugins.AnyEntity.pdb" />
-    <Content Include="bin\System.Buffers.dll" />
-    <Content Include="bin\System.Buffers.xml" />
-    <Content Include="bin\System.Memory.dll" />
-    <Content Include="bin\System.Memory.xml" />
-    <Content Include="bin\System.Numerics.Vectors.dll" />
-    <Content Include="bin\System.Numerics.Vectors.xml" />
-    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
-    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
-    <Content Include="bin\System.Text.Encodings.Web.dll" />
-    <Content Include="bin\System.Text.Encodings.Web.xml" />
-    <Content Include="bin\System.Text.Json.dll" />
-    <Content Include="bin\System.Text.Json.xml" />
-    <Content Include="bin\System.Threading.Tasks.Extensions.dll" />
-    <Content Include="bin\System.Threading.Tasks.Extensions.xml" />
-    <Content Include="bin\System.ValueTuple.dll" />
-    <Content Include="bin\System.ValueTuple.xml" />
   </ItemGroup>
   <Import Project="..\..\Models\Shared.Models\Shared.Models.projitems" Label="Shared" />
   <Import Project="..\..\BusinessLogic\Shared.BusinessLogic\Shared.BusinessLogic.projitems" Label="Shared" />
