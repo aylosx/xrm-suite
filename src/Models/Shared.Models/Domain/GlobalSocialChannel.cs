@@ -15,7 +15,7 @@ namespace Shared.Models.Domain
 	
 	
 	[DataContractAttribute()]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.95")]
 	public enum GlobalSocialChannel
 	{
 		

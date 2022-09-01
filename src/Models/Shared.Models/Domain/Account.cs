@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("account")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.95")]
 	public partial class Account : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1164,6 +1164,78 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("adx_createdbyipaddress")]
+		public string CreatedByIPAddress
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("adx_createdbyipaddress");
+			}
+			set
+			{
+				this.OnPropertyChanging("CreatedByIPAddress");
+				this.SetAttributeValue("adx_createdbyipaddress", value);
+				this.OnPropertyChanged("CreatedByIPAddress");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("adx_createdbyusername")]
+		public string CreatedByUserName
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("adx_createdbyusername");
+			}
+			set
+			{
+				this.OnPropertyChanging("CreatedByUserName");
+				this.SetAttributeValue("adx_createdbyusername", value);
+				this.OnPropertyChanged("CreatedByUserName");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("adx_modifiedbyipaddress")]
+		public string ModifiedByIPAddress
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("adx_modifiedbyipaddress");
+			}
+			set
+			{
+				this.OnPropertyChanging("ModifiedByIPAddress");
+				this.SetAttributeValue("adx_modifiedbyipaddress", value);
+				this.OnPropertyChanged("ModifiedByIPAddress");
+			}
+		}
+		
+		/// <summary>
+		/// 
+		/// </summary>
+		[AttributeLogicalNameAttribute("adx_modifiedbyusername")]
+		public string ModifiedByUserName
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("adx_modifiedbyusername");
+			}
+			set
+			{
+				this.OnPropertyChanging("ModifiedByUserName");
+				this.SetAttributeValue("adx_modifiedbyusername", value);
+				this.OnPropertyChanged("ModifiedByUserName");
+			}
+		}
+		
+		/// <summary>
 		/// For system use only.
 		/// </summary>
 		[AttributeLogicalNameAttribute("aging30")]
@@ -1926,6 +1998,24 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Unique identifier for Account associated with Account.
+		/// </summary>
+		[AttributeLogicalNameAttribute("msa_managingpartnerid")]
+		public EntityReference ManagingPartner
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("msa_managingpartnerid");
+			}
+			set
+			{
+				this.OnPropertyChanging("ManagingPartner");
+				this.SetAttributeValue("msa_managingpartnerid", value);
+				this.OnPropertyChanged("ManagingPartner");
+			}
+		}
+		
+		/// <summary>
 		/// Describes whether account is opted out or not
 		/// </summary>
 		[AttributeLogicalNameAttribute("msdyn_gdproptout")]
@@ -1940,6 +2030,42 @@ namespace Shared.Models.Domain
 				this.OnPropertyChanging("GDPROptout");
 				this.SetAttributeValue("msdyn_gdproptout", value);
 				this.OnPropertyChanged("GDPROptout");
+			}
+		}
+		
+		/// <summary>
+		/// Sales Acceleration Insights ID
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_salesaccelerationinsightid")]
+		public EntityReference SalesAccelerationInsightsID
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("msdyn_salesaccelerationinsightid");
+			}
+			set
+			{
+				this.OnPropertyChanging("SalesAccelerationInsightsID");
+				this.SetAttributeValue("msdyn_salesaccelerationinsightid", value);
+				this.OnPropertyChanged("SalesAccelerationInsightsID");
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier for Segment associated with account.
+		/// </summary>
+		[AttributeLogicalNameAttribute("msdyn_segmentid")]
+		public EntityReference SegmentId
+		{
+			get
+			{
+				return this.GetAttributeValue<EntityReference>("msdyn_segmentid");
+			}
+			set
+			{
+				this.OnPropertyChanging("SegmentId");
+				this.SetAttributeValue("msdyn_segmentid", value);
+				this.OnPropertyChanged("SegmentId");
 			}
 		}
 		
@@ -3041,6 +3167,14 @@ namespace Shared.Models.Domain
 			
 			public static string AddressTwoUTCOffset = "address2_utcoffset";
 			
+			public static string CreatedByIPAddress = "adx_createdbyipaddress";
+			
+			public static string CreatedByUserName = "adx_createdbyusername";
+			
+			public static string ModifiedByIPAddress = "adx_modifiedbyipaddress";
+			
+			public static string ModifiedByUserName = "adx_modifiedbyusername";
+			
 			public static string AgingThirty = "aging30";
 			
 			public static string AgingThirtyBase = "aging30_base";
@@ -3127,7 +3261,13 @@ namespace Shared.Models.Domain
 			
 			public static string ModifiedOn = "modifiedon";
 			
+			public static string ManagingPartner = "msa_managingpartnerid";
+			
 			public static string GDPROptout = "msdyn_gdproptout";
+			
+			public static string SalesAccelerationInsightsID = "msdyn_salesaccelerationinsightid";
+			
+			public static string SegmentId = "msdyn_segmentid";
 			
 			public static string AccountName = "name";
 			

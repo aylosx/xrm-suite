@@ -195,9 +195,13 @@
                     {
                         foreach (CodeTypeDeclaration codeTypeDeclaration in codeNamespace.Types)
                         {
-                            var cn = new CodeNamespace(codeNamespace.Name); cn.Types.Add(codeTypeDeclaration);
+                            var cn = new CodeNamespace(codeNamespace.Name); 
+                            
+                            cn.Types.Add(codeTypeDeclaration);
 
-                            var ccu = new CodeCompileUnit(); ccu.Namespaces.Add(cn);
+                            var ccu = new CodeCompileUnit(); 
+                            
+                            ccu.Namespaces.Add(cn);
 
                             if (codeTypeDeclaration.IsEnum)
                             {

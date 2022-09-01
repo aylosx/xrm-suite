@@ -25,7 +25,7 @@ namespace Shared.Models.Domain
 	/// </summary>
 	[DataContractAttribute()]
 	[EntityLogicalNameAttribute("activitypointer")]
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.95")]
 	public partial class Activity : Entity, INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		

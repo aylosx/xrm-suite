@@ -139,51 +139,6 @@
             Generate Field Constants for entities
             </summary>
         </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.EntityNamesFilter">
-            <summary>
-            Provides a means to provide a filtered list of entities. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.MessageNamesFilter">
-            <summary>
-            Provides a means to provide a filtered list of entities. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.SplitFilesByObject">
-            <summary>
-            Askes the system to emit a file per type. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.OutDirectory">
-            <summary>
-            Sets the output directory for files when split files are setup
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.EntityFolderName">
-            <summary>
-            Sets the folder name for Entity files. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.MessagesFolderName">
-            <summary>
-            Sets the folder name for Messages files. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.OptionSetFolderName">
-            <summary>
-            Sets the folder name for OptionSets files. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.GenerateGlobalOptionSets">
-            <summary>
-            If set, Causes Global optionsets to be read from the server and emitted. 
-            </summary>
-        </member>
-        <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.LegacyMode">
-            <summary>
-            if Set, Causes the system to behave as the CrmServiceUtil did pre Feb/2022. 
-            </summary>
-        </member>
         <member name="P:Microsoft.Crm.Services.Utility.CrmSvcUtilParameters.ConnectionProfileName">
             <summary>
             Used by devToolkit to set the Connection profile to use for this call.
@@ -199,17 +154,6 @@
             Gets Dictionary of parameters
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:Microsoft.Crm.Services.Utility.IOrganizationMetadata2">
-            <summary>
-            Extends the OrganizationServiceMetadata interface to allow for adding optionsets. 
-            </summary>
-        </member>
-        <member name="M:Microsoft.Crm.Services.Utility.IOrganizationMetadata2.AddOptionSetInfo(Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata)">
-            <summary>
-            Adds an OptionSet Metadata Object to the Global OptionSets array 
-            </summary>
-            <param name="optionSet"></param>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.ArgumentType">
             <remarks>
@@ -351,12 +295,6 @@
             <summary>
             All SdkMessages for the Organization.
             </summary>
-        </member>
-        <member name="M:Microsoft.Crm.Services.Utility.OrganizationMetadata.AddOptionSetInfo(Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata)">
-            <summary>
-            Add OptionSet to OptionSets list. 
-            </summary>
-            <param name="optionSet"></param>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.Result">
             <summary>
@@ -845,17 +783,6 @@
                            &lt;condition alias=&apos;sdkmessagepair&apos; attribute=&apos;endpoint&apos; operator=&apos;eq&apos; value=&apos;201 [rest of string was truncated]&quot;;.
             </summary>
         </member>
-        <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.BuildAttributeOptionSet(Microsoft.Xrm.Sdk.Metadata.EntityMetadata,Microsoft.Xrm.Sdk.Metadata.AttributeMetadata,System.CodeDom.CodeTypeMember,Microsoft.Crm.Services.Utility.ServiceProvider,System.Boolean)">
-            <summary>
-            Builds OptionSet Enum and returns that class. 
-            </summary>
-            <param name="entity"></param>
-            <param name="attribute"></param>
-            <param name="attributeMember"></param>
-            <param name="serviceProvider"></param>
-            <param name="useLegacyMode"></param>
-            <returns></returns>
-        </member>
         <member name="M:Microsoft.Crm.Services.Utility.CodeGenerationService.GetAttributeConstantLogicalName(System.CodeDom.CodeMemberProperty)">
             <summary>
             Generate the Constant name for an attribute property.
@@ -881,11 +808,6 @@
         <member name="M:Microsoft.Crm.Services.Utility.CodeWriterFilterService.IsNotExposedChildAttribute(Microsoft.Xrm.Sdk.Metadata.AttributeMetadata)">
             <summary>
             If true a child attribute cannot be published or externally consumed.
-            </summary>
-        </member>
-        <member name="M:Microsoft.Crm.Services.Utility.DefaultCustomziations.EnumPropertyGenerator.#ctor">
-            <summary>
-            default implementation. 
             </summary>
         </member>
         <member name="T:Microsoft.Crm.Services.Utility.DeviceIdManager">
@@ -1226,6 +1148,11 @@
         <member name="F:Microsoft.Crm.Services.Utility.NamingService._reservedSystemAttributeNames">
             <summary>
             List of attribute names that will conflict with system properties.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.SetConnectionTimeoutValues">
+            <summary>
+            Updates the timeout value to extend the amount of item that a request will wait.
             </summary>
         </member>
         <member name="M:Microsoft.Crm.Services.Utility.SdkMetadataProviderService.GetConnectionString">

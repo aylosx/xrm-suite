@@ -19,8 +19,6 @@
 
         private IList<string> EntityBlackList { get; set; }
 
-        private EntityMetadata EntityMetadata { get; set; }
-
         private IList<string> EntityWhiteList { get; set; }
 
         private IList<string> FieldBlackList { get; set; }
@@ -144,8 +142,6 @@
 
             Console.WriteLine(string.Empty);
             Console.Write("Processing entity '{0}'", entityMetadata.LogicalName);
-
-            EntityMetadata = entityMetadata;
 
             if (EntityBlackList.Contains(entityMetadata.LogicalName))
             {

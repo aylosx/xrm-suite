@@ -23,7 +23,7 @@ namespace Shared.Models.Domain
 	/// <summary>
 	/// Represents a source of entities bound to a CRM service. It tracks and manages changes made to the retrieved entities.
 	/// </summary>
-	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.91")]
+	[GeneratedCodeAttribute("CrmSvcUtil", "9.1.0.95")]
 	public partial class CrmServiceContext : OrganizationServiceContext
 	{
 		
@@ -91,6 +91,17 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="BookingStatus"/> entities.
+		/// </summary>
+		public IQueryable<BookingStatus> BookingStatusSet
+		{
+			get
+			{
+				return this.CreateQuery<BookingStatus>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Contact"/> entities.
 		/// </summary>
 		public IQueryable<Contact> ContactSet
@@ -98,6 +109,28 @@ namespace Shared.Models.Domain
 			get
 			{
 				return this.CreateQuery<Contact>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Case"/> entities.
+		/// </summary>
+		public IQueryable<Case> CaseSet
+		{
+			get
+			{
+				return this.CreateQuery<Case>();
+			}
+		}
+		
+		/// <summary>
+		/// Gets a binding to the set of all <see cref="Lead"/> entities.
+		/// </summary>
+		public IQueryable<Lead> LeadSet
+		{
+			get
+			{
+				return this.CreateQuery<Lead>();
 			}
 		}
 		
