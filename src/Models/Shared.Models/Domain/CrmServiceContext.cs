@@ -69,6 +69,17 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Gets a binding to the set of all <see cref="Note"/> entities.
+		/// </summary>
+		public IQueryable<Note> NoteSet
+		{
+			get
+			{
+				return this.CreateQuery<Note>();
+			}
+		}
+		
+		/// <summary>
 		/// Gets a binding to the set of all <see cref="Appointment"/> entities.
 		/// </summary>
 		public IQueryable<Appointment> AppointmentSet

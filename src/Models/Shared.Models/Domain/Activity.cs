@@ -396,6 +396,30 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Formatted scheduled end time of the activity.
+		/// </summary>
+		[AttributeLogicalNameAttribute("formattedscheduledend")]
+		public Nullable<DateTime> FormattedEndDate
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("formattedscheduledend");
+			}
+		}
+		
+		/// <summary>
+		/// Formatted scheduled start time of the activity.
+		/// </summary>
+		[AttributeLogicalNameAttribute("formattedscheduledstart")]
+		public Nullable<DateTime> FormattedStartDate
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("formattedscheduledstart");
+			}
+		}
+		
+		/// <summary>
 		/// Type of instance of a recurring series.
 		/// </summary>
 		[AttributeLogicalNameAttribute("instancetypecode")]
@@ -1036,6 +1060,10 @@ namespace Shared.Models.Domain
 			public static string ExchangeRate = "exchangerate";
 			
 			public static string ExchangeWebLink = "exchangeweblink";
+			
+			public static string FormattedEndDate = "formattedscheduledend";
+			
+			public static string FormattedStartDate = "formattedscheduledstart";
 			
 			public static string RecurringInstanceType = "instancetypecode";
 			

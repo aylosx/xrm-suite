@@ -260,18 +260,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureFunctions\ApplicationInsightsLogger.cs" />
-    <Compile Include="AzureFunctions\ConfigurationHelper.cs" />
-    <Compile Include="AzureFunctions\ConfigurationKeys.cs" />
-    <Compile Include="AzureFunctions\Constants.cs" />
-    <Compile Include="AzureFunctions\ExceptionHelper.cs" />
-    <Compile Include="AzureFunctions\ILogger.cs" />
-    <Compile Include="AzureFunctions\ILoggerFactory.cs" />
-    <Compile Include="AzureFunctions\LoggerFactory.cs" />
-    <Compile Include="AzureFunctions\TraceMessages.cs" />
     <Compile Include="CodeActivities\CustomCodeActivity.cs" />
     <Compile Include="CodeActivities\Moq\CustomCodeActivityUnitTest.cs" />
     <Compile Include="CodeActivities\RhinoMocks\CustomCodeActivityUnitTest.cs" />
+    <Compile Include="CodeActivities\TraceHelper.cs" />
     <Compile Include="CodeActivities\WorkflowExecutionContext.cs" />
     <Compile Include="Common\AzureFile.cs" />
     <Compile Include="Common\AzureHelper.cs" />
@@ -287,7 +279,7 @@
     <Compile Include="Common\PlatformEnums.cs" />
     <Compile Include="Common\SerializationHelper.cs" />
     <Compile Include="Common\ImportJobComponent.cs" />
-    <Compile Include="Common\TraceHelper.cs" />
+    <Compile Include="Plugins\TraceHelper.cs" />
     <Compile Include="Common\TraceMessageHelper.cs" />
     <Compile Include="ConsoleApps\CommandLineOptions.cs" />
     <Compile Include="ConsoleApps\ConsoleApp.cs" />
@@ -358,9 +350,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AzureBlobStorage\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\CodeAnalysis.props" Condition="Exists('..\CodeAnalysis.props')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

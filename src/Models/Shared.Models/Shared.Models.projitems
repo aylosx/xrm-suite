@@ -100,6 +100,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalLeadGrade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalLeadSalesStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalLeadScoreTrend.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalModelStatus1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalModelTrainingStatus1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalModelTrainingStatus2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalNeed.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalObjectType1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\GlobalOnlineMeetingType.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Domain\LeadSalesStage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\LeadState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\LeadStatusReason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Domain\Note.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\Task.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\TaskPriority.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Domain\TaskState.cs" />

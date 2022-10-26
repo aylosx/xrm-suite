@@ -1,0 +1,14 @@
+{
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    },
+    "logLevel": {
+      "Sample.MicroServices": "Information"
+    }
+  },
+  "version": "2.0"
+}

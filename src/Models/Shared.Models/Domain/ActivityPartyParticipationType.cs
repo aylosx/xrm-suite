@@ -51,5 +51,8 @@ namespace Shared.Models.Domain
 		
 		[EnumMemberAttribute()]
 		Customer = 11,
+		
+		[EnumMemberAttribute()]
+		ChatParticipant = 12,
 	}
 }

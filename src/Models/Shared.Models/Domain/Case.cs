@@ -594,7 +594,7 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
-		/// Shows the date time when the Case was cancelled.
+		/// Shows the date time when the Case was resolved.
 		/// </summary>
 		[AttributeLogicalNameAttribute("deactivatedon")]
 		public Nullable<DateTime> DeactivatedOn

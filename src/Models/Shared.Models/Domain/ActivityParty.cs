@@ -373,6 +373,24 @@ namespace Shared.Models.Domain
 			}
 		}
 		
+		/// <summary>
+		/// The name of the party to be used when the party is not resolved to an entity.
+		/// </summary>
+		[AttributeLogicalNameAttribute("unresolvedpartyname")]
+		public string UnresolvedPartyName
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("unresolvedpartyname");
+			}
+			set
+			{
+				this.OnPropertyChanging("UnresolvedPartyName");
+				this.SetAttributeValue("unresolvedpartyname", value);
+				this.OnPropertyChanged("UnresolvedPartyName");
+			}
+		}
+		
 		public struct Fields
 		{
 			
@@ -413,6 +431,8 @@ namespace Shared.Models.Domain
 			public static string ScheduledEnd = "scheduledend";
 			
 			public static string ScheduledStart = "scheduledstart";
+			
+			public static string UnresolvedPartyName = "unresolvedpartyname";
 		}
 	}
 }

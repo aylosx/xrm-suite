@@ -20,6 +20,51 @@ namespace Shared.Models.Domain
 	{
 		
 		[EnumMemberAttribute()]
+		Cortana = 5,
+		
+		[EnumMemberAttribute()]
+		DirectLine = 6,
+		
+		[EnumMemberAttribute()]
+		MicrosoftTeams = 7,
+		
+		[EnumMemberAttribute()]
+		DirectLineSpeech = 8,
+		
+		[EnumMemberAttribute()]
+		Email = 9,
+		
+		[EnumMemberAttribute()]
+		GroupMe = 10,
+		
+		[EnumMemberAttribute()]
+		Kik = 11,
+		
+		[EnumMemberAttribute()]
+		Telegram = 12,
+		
+		[EnumMemberAttribute()]
+		Skype = 13,
+		
+		[EnumMemberAttribute()]
+		Slack = 14,
+		
+		[EnumMemberAttribute()]
+		WhatsApp = 15,
+		
+		[EnumMemberAttribute()]
+		AppleMessagesForBusiness = 16,
+		
+		[EnumMemberAttribute()]
+		GoogleSBusinessMessages = 17,
+		
+		[EnumMemberAttribute()]
+		Line = 3,
+		
+		[EnumMemberAttribute()]
+		Wechat = 4,
+		
+		[EnumMemberAttribute()]
 		Facebook = 1,
 		
 		[EnumMemberAttribute()]

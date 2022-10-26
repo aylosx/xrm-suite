@@ -6,6 +6,7 @@
   	-->
   <entities>
     <entity>account</entity>
+	<entity>annotation</entity>
     <entity>appointment</entity>
     <entity>bookingstatus</entity>
     <entity>contact</entity>

@@ -324,6 +324,30 @@ namespace Shared.Models.Domain
 		}
 		
 		/// <summary>
+		/// Formatted scheduled end time of the appointment.
+		/// </summary>
+		[AttributeLogicalNameAttribute("formattedscheduledend")]
+		public Nullable<DateTime> FormattedEndDate
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("formattedscheduledend");
+			}
+		}
+		
+		/// <summary>
+		/// Formatted scheduled start time of the appointment.
+		/// </summary>
+		[AttributeLogicalNameAttribute("formattedscheduledstart")]
+		public Nullable<DateTime> FormattedStartDate
+		{
+			get
+			{
+				return this.GetAttributeValue<Nullable<DateTime>>("formattedscheduledstart");
+			}
+		}
+		
+		/// <summary>
 		/// Shows the ID of the appointment in Microsoft Office Outlook. The ID is used to synchronize the appointment between Microsoft Dynamics 365 and the correct Exchange account.
 		/// </summary>
 		[AttributeLogicalNameAttribute("globalobjectid")]
@@ -1255,6 +1279,10 @@ namespace Shared.Models.Domain
 			public static string Description = "description";
 			
 			public static string ExchangeRate = "exchangerate";
+			
+			public static string FormattedEndDate = "formattedscheduledend";
+			
+			public static string FormattedStartDate = "formattedscheduledstart";
 			
 			public static string OutlookAppointment = "globalobjectid";
 			

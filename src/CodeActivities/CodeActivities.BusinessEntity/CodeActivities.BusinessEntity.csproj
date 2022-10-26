@@ -117,6 +117,9 @@
     <Compile Include="..\..\Sdk\CodeActivities\CustomCodeActivity.cs">
       <Link>Sdk\CodeActivities\CustomCodeActivity.cs</Link>
     </Compile>
+    <Compile Include="..\..\Sdk\CodeActivities\TraceHelper.cs">
+      <Link>Sdk\CodeActivities\TraceHelper.cs</Link>
+    </Compile>
     <Compile Include="..\..\Sdk\CodeActivities\WorkflowExecutionContext.cs">
       <Link>Sdk\CodeActivities\WorkflowExecutionContext.cs</Link>
     </Compile>
@@ -137,9 +140,6 @@
     </Compile>
     <Compile Include="..\..\Sdk\Common\SerializationHelper.cs">
       <Link>Sdk\Common\SerializationHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Sdk\Common\TraceHelper.cs">
-      <Link>Sdk\Common\TraceHelper.cs</Link>
     </Compile>
     <Compile Include="..\..\Sdk\Common\TraceMessageHelper.cs">
       <Link>Sdk\Common\TraceMessageHelper.cs</Link>

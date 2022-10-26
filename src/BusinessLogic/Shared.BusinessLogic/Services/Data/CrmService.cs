@@ -1,18 +1,18 @@
 ﻿namespace Shared.BusinessLogic.Services.Data
 {
+    using Aylos.Xrm.Sdk.Common;
+
+    using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Client;
+    using Microsoft.Xrm.Sdk.Messages;
+
+    using Shared.Models.Domain;
+
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
-
-    using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Client;
-
-    using Aylos.Xrm.Sdk.Common;
-
-    using Shared.Models.Domain;
-    using Microsoft.Xrm.Sdk.Messages;
 
     /// <summary>
     /// This class service provides access to the CRM database.
@@ -48,7 +48,7 @@
         /// CrmService Constructor
         /// </summary>
         /// <param name="tracingService">ITracingService</param>
-        public CrmService(ITracingService tracingService)
+        private CrmService(ITracingService tracingService)
         {
             TracingService = tracingService;
         }

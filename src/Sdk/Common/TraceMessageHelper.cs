@@ -20,6 +20,7 @@ namespace Aylos.Xrm.Sdk.Common
         public const string ExecutionContextTracingCompleted = "{0} | Tracing execution context completed at {1}.";
         public const string ExecutionTime = "{0} | The module execution required {1} milliseconds.";
         public const string ExitingMethod = "{0} | Exiting | {1}.";
+        public const string HttpRequestExceptionMessage = "{0} | A HTTP request exception occurred. Error: {1} - Stack: {2}.";
         public const string IncorrectMessageName = "{0} | The module is not running under the correct message type. Message type {1} expected but currently is {2}.";
         public const string IncorrectPipelineStage = "{0} | The module is not running in the expected pipeline stage. Stage {1} expected but currently is {2}.";
         public const string InvalidExecutionContext = "{0} | Execution context is not valid. Check the module registration details.";

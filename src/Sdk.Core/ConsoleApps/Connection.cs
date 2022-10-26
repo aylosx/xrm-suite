@@ -1,7 +1,6 @@
-﻿namespace Aylos.Xrm.Sdk.Core.Common
+﻿namespace Aylos.Xrm.Sdk.Core.ConsoleApps
 {
     using Aylos.Xrm.Sdk.Common;
-    using Aylos.Xrm.Sdk.Core.ConsoleApps;
     using Aylos.Xrm.Sdk.Exceptions;
     using Microsoft.Crm.Sdk.Messages;
     using Microsoft.Xrm.Sdk.Client;
@@ -48,7 +47,7 @@
             Logger.Info(CultureInfo.InvariantCulture, "The XRM Tooling version : {0}", xrmToolingVersion);
 
             ServiceClient.MaxConnectionTimeout = TimeSpan.FromSeconds(ConnectionTimeout);
-            
+
             Logger.Info(CultureInfo.InvariantCulture, "The maximum connection timeout is set to {0} seconds", ServiceClient.MaxConnectionTimeout.Seconds);
 
             Logger.Trace(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name);

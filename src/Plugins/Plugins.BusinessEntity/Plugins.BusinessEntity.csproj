@@ -132,9 +132,6 @@
     <Compile Include="..\..\Sdk\Common\SerializationHelper.cs">
       <Link>Sdk\Common\SerializationHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\Sdk\Common\TraceHelper.cs">
-      <Link>Sdk\Common\TraceHelper.cs</Link>
-    </Compile>
     <Compile Include="..\..\Sdk\Common\TraceMessageHelper.cs">
       <Link>Sdk\Common\TraceMessageHelper.cs</Link>
     </Compile>
@@ -143,6 +140,9 @@
     </Compile>
     <Compile Include="..\..\Sdk\Plugins\PluginExecutionContext.cs">
       <Link>Sdk\Plugins\PluginExecutionContext.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Sdk\Plugins\TraceHelper.cs">
+      <Link>Sdk\Plugins\TraceHelper.cs</Link>
     </Compile>
     <Compile Include="ManageEntityDeletionUponDelete.cs" />
     <Compile Include="GlobalSuppressions.cs" />

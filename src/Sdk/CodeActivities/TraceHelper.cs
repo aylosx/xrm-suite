@@ -1,4 +1,4 @@
-namespace Aylos.Xrm.Sdk.Common
+namespace Aylos.Xrm.Sdk.CodeActivities
 {
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
@@ -8,7 +8,7 @@ namespace Aylos.Xrm.Sdk.Common
     using System.Globalization;
     using System.Text;
 
-    internal static class TraceHelper
+    public static class TraceHelper
     {
         internal static string Trace(StringBuilder sb)
         {
@@ -371,47 +371,7 @@ namespace Aylos.Xrm.Sdk.Common
             return Trace(sb);
         }
 
-        internal static string Trace(IPluginExecutionContext executionContext)
-        {
-            if (executionContext == null) return Environment.NewLine;
-
-            var sb = new StringBuilder();
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, BusinessUnitIdText, executionContext.BusinessUnitId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, CorrelationIdText, executionContext.CorrelationId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, DepthText, executionContext.Depth));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, InitiatingUserIdText, executionContext.InitiatingUserId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, IsExecutingOfflineText, executionContext.IsExecutingOffline));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, IsInTransactionText, executionContext.IsInTransaction));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, IsOfflinePlaybackText, executionContext.IsOfflinePlayback));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, IsolationModeText, executionContext.IsolationMode));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, MessageNameText, executionContext.MessageName));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, ModeText, executionContext.Mode));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OperationCreatedOnText, executionContext.OperationCreatedOn.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OperationIdText, executionContext.OperationId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OrganizationIdText, executionContext.OrganizationId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OrganizationNameText, executionContext.OrganizationName));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OwningExtensionLogicalNameText, executionContext.OwningExtension.LogicalName));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OwningExtensionNameText, executionContext.OwningExtension.Name));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OwningExtensionIdText, executionContext.OwningExtension.Id));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, PrimaryEntityIdText, executionContext.PrimaryEntityId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, PrimaryEntityNameText, executionContext.PrimaryEntityName));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, RequestIdText, (executionContext.RequestId.HasValue ? executionContext.RequestId.Value.ToString() : NullText)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, SecondaryEntityNameText, executionContext.SecondaryEntityName));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, StageText, executionContext.Stage));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, UserIdText, executionContext.UserId));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, SharedVariablesText, Environment.NewLine + Trace(executionContext.SharedVariables)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, InputParametersText, Environment.NewLine + Trace(executionContext.InputParameters)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, OutputParametersText, Environment.NewLine + Trace(executionContext.OutputParameters)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, PreEntityImagesText, Environment.NewLine + Trace(executionContext.PreEntityImages)));
-            sb.AppendLine(string.Format(CultureInfo.InvariantCulture, PostEntityImagesText, Environment.NewLine + Trace(executionContext.PostEntityImages)));
-            if (executionContext.ParentContext != null)
-            {
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, ParentContextText, Environment.NewLine + Trace(executionContext.ParentContext)));
-            }
-            return sb.ToString().Length > TraceMessageMaxLength ? sb.ToString().Substring(0, TraceMessageMaxLength - 4) + MoreText : sb.ToString();
-        }
-        
-        internal static string Trace(IWorkflowContext executionContext)
+        public static string Trace(IWorkflowContext executionContext)
         {
             if (executionContext == null) return Environment.NewLine;
 
