@@ -176,51 +176,6 @@
   <Import Project="..\..\CodeAnalysis.props" Condition="Exists('..\..\CodeAnalysis.props')" />
   <PropertyGroup>
     <PostBuildEvent>ECHO %25CD%25
-RMDIR /Q /S bin
-RMDIR /Q /S ar-SA
-RMDIR /Q /S bg-BG
-RMDIR /Q /S ca-ES
-RMDIR /Q /S cs-CZ
-RMDIR /Q /S da-DK
-RMDIR /Q /S de-DE
-RMDIR /Q /S el-GR
-RMDIR /Q /S es-ES
-RMDIR /Q /S et-EE
-RMDIR /Q /S eu-ES
-RMDIR /Q /S fi-FI
-RMDIR /Q /S fr-FR
-RMDIR /Q /S gl-ES
-RMDIR /Q /S he-IL
-RMDIR /Q /S hi-IN
-RMDIR /Q /S hr-HR
-RMDIR /Q /S hu-HU
-RMDIR /Q /S id-ID
-RMDIR /Q /S it-IT
-RMDIR /Q /S ja-JP
-RMDIR /Q /S kk-KZ
-RMDIR /Q /S ko-KR
-RMDIR /Q /S lt-LT
-RMDIR /Q /S lv-LV
-RMDIR /Q /S ms-MY
-RMDIR /Q /S nb-NO
-RMDIR /Q /S nl-NL
-RMDIR /Q /S pl-PL
-RMDIR /Q /S pt-BR
-RMDIR /Q /S pt-PT
-RMDIR /Q /S ro-RO
-RMDIR /Q /S ru-RU
-RMDIR /Q /S sk-SK
-RMDIR /Q /S sl-SI
-RMDIR /Q /S sr-Cyrl-RS
-RMDIR /Q /S sr-Latn-RS
-RMDIR /Q /S sv-SE
-RMDIR /Q /S th-TH
-RMDIR /Q /S tr-TR
-RMDIR /Q /S uk-UA
-RMDIR /Q /S vi-VN
-RMDIR /Q /S zh-CN
-RMDIR /Q /S zh-HK
-RMDIR /Q /S zh-TW
 </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

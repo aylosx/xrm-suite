@@ -1,0 +1,28 @@
+{
+  "logging": {
+    "applicationInsights": {
+      "enableDependencyTracking": true,
+      "enableLiveMetrics": true,
+      "enablePerformanceCountersCollection": true,
+      "httpAutoCollectionOptions": {
+        "enableHttpTriggerExtendedInfoCollection": true,
+        "enableW3CDistributedTracing": true,
+        "enableResponseHeaderInjection": true
+      },
+      "samplingSettings": {
+        "excludedTypes": "Dependency;Event",
+        "includedTypes": "PageView;Trace",
+        "isEnabled": true
+      }
+    },
+    "console": {
+      "disableColors": false,
+      "isEnabled": true
+    },
+    "fileLoggingMode": "debugOnly",
+    "logLevel": {
+      "default": "Trace"
+    }
+  },
+  "version": "2.0"
+}

@@ -118,13 +118,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Canvas Apps", "Canvas Apps"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aylos.Xrm.Sdk.Core", "Sdk.Core\Aylos.Xrm.Sdk.Core.csproj", "{36A01C59-60AD-4986-8199-B76A9A7F169C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Hooks", "Web Hooks", "{47D39614-8B1E-40C6-BD6E-153A2946B5FE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Webhook Plugins", "Webhook Plugins", "{47D39614-8B1E-40C6-BD6E-153A2946B5FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.MicroServices", "WebHooks\Sample.MicroService\Sample.MicroServices.csproj", "{5B8840E0-B21E-44AF-9060-681F488FEC69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.MicroServices", "WebhookPlugins\Sample.MicroService\Sample.MicroServices.csproj", "{5B8840E0-B21E-44AF-9060-681F488FEC69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHooks.BusinessLogic", "BusinessLogic\WebHooks.BusinessLogic\WebHooks.BusinessLogic.csproj", "{4549B147-0354-4223-8E45-E615C93E623F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhook.Plugins.BusinessLogic", "BusinessLogic\Webhook.Plugins.BusinessLogic\Webhook.Plugins.BusinessLogic.csproj", "{4549B147-0354-4223-8E45-E615C93E623F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHooks.Functions", "WebHooks\WebHooks.Functions\WebHooks.Functions.csproj", "{4B42206B-5556-4870-8550-CC3B73B02C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhook.Plugins", "WebhookPlugins\Webhook.Plugins\Webhook.Plugins.csproj", "{4B42206B-5556-4870-8550-CC3B73B02C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -447,12 +447,6 @@ Global
 		{504183E7-C193-4C46-95AA-ED2D40B27EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{504183E7-C193-4C46-95AA-ED2D40B27EA2}.Release|x86.ActiveCfg = Release|Any CPU
 		{504183E7-C193-4C46-95AA-ED2D40B27EA2}.Release|x86.Build.0 = Release|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Development|Any CPU.ActiveCfg = Debug|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Development|x86.ActiveCfg = Debug|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E51FCAAC-BE3F-4738-B994-F7E54F4D54F1}.Release|x86.ActiveCfg = Release|Any CPU
 		{00000000-0000-0000-0000-100000000021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{00000000-0000-0000-0000-100000000021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00000000-0000-0000-0000-100000000021}.Debug|x86.ActiveCfg = Debug|Any CPU
