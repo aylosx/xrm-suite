@@ -6,6 +6,7 @@ namespace Webhook.Plugins.Account
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.Extensions.Logging;
+    using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
 
     using Shared.Models.Domain;
@@ -23,8 +24,8 @@ namespace Webhook.Plugins.Account
     {
         #region Constructors
 
-        public DoSomethingUponRetrieve(ICrmService crmService, IOrganizationService organizationService, ILoggerFactory loggerFactory) 
-            : base(organizationService, loggerFactory)
+        public DoSomethingUponRetrieve(ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
+            : base(serviceClient, loggerFactory)
         {
             CrmService = crmService ?? throw new ArgumentNullException(nameof(crmService));
 
@@ -61,13 +62,13 @@ namespace Webhook.Plugins.Account
 
         #endregion
 
-        #region Override Base Plugin Methods
+        #region Override Base Methods
 
         protected override void Execute()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            using (DoSomethingService ??= new DoSomethingService(CrmService, OrganizationService, RemoteExecutionContext, LoggerFactory))
+            using (DoSomethingService ??= new DoSomethingService(CrmService, ServiceClient, RemoteExecutionContext, LoggerFactory))
             {
                 Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "{0} | {1} started at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
                 DoSomethingService.DoSomething(HttpRequestMessage);

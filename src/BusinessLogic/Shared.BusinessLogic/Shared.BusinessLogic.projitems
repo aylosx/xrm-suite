@@ -21,6 +21,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ExecutionContext\ManageExecutionContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\None\IInitializeEntityService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\None\InitializeEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Note\IInitializeEntityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Note\InitializeEntityService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Services\Account\" />

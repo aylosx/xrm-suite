@@ -4,8 +4,8 @@
     using Aylos.Xrm.Sdk.Core.WebhookPlugins;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Client;
 
     using Shared.Models.Domain;
 
@@ -38,8 +38,8 @@
 
         #region Constructor
 
-        public FileHandlingService(HttpClient httpClient, ICrmService crmService, IOrganizationService organizationService, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
-            : base(organizationService, remoteExecutionContext, loggerFactory)
+        public FileHandlingService(HttpClient httpClient, ICrmService crmService, ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
+            : base(serviceClient, remoteExecutionContext, loggerFactory)
         {
             HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
@@ -60,58 +60,46 @@
 
             HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
 
-            switch (RemoteExecutionContext.MessageName)
-            {
-                case PlatformMessageHelper.Create:
+            /*
+            var serviceClient = CrmService.ServiceClient;
+            serviceClient.CallerId = new Guid("65484825-2be0-ec11-bb3d-0022481a94f4"); // RemoteExecutionContext.InitiatingUserId;
+            */
 
-                    break;
+            Note annotation = CrmService.GetNoteByKey(RemoteExecutionContext.PrimaryEntityId, RemoteExecutionContext.InitiatingUserId);
+            if (annotation == null) throw new InvalidPluginExecutionException(NoteNotExistMessage);
 
-                default: throw new InvalidOperationException();
-            }
-
-            Note updatedNote = null;
             if (HttpMessageSizeExceeded)
             {
-                Note annotation = CrmService.GetNoteByKey(RemoteExecutionContext.PrimaryEntityId);
+                /*
+                Note annotation = CrmService.GetNoteByKey(RemoteExecutionContext.PrimaryEntityId, RemoteExecutionContext.InitiatingUserId);
                 if (annotation == null) throw new InvalidPluginExecutionException(NoteNotExistMessage);
+                */
 
-                if (!string.IsNullOrWhiteSpace(annotation.Document))
+                if (annotation.IsDocument.GetValueOrDefault(true) && !string.IsNullOrWhiteSpace(annotation.Document))
                 {
+                    string mimeType = annotation.MimeType;
+                    string base64Body = annotation.Document;
+
                     // TO-DO: Upload the content to the AV scanning microservice
                     // virtual
                     // TO-DO: Upload the content to the Azure BLOB storage
                     // virtual
-                    // TO-DO: Remove the content from the Dataverse storage
-                    updatedNote = new Note
-                    {
-                        AnnotationId = annotation.AnnotationId,
-                        Document = annotation.Document,
-                    };
+                    // TO-DO: Remove the content from the Dataverse storage in the pre-create plugin
                 }
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(TargetBusinessEntity.Document))
+                if (TargetBusinessEntity.IsDocument.GetValueOrDefault(true) && !string.IsNullOrWhiteSpace(TargetBusinessEntity.Document))
                 {
+                    string mimeType = TargetBusinessEntity.MimeType;
+                    string base64Body = TargetBusinessEntity.Document;
+
                     // TO-DO: Upload the content to the AV scanning microservice
                     // virtual
                     // TO-DO: Upload the content to the Azure BLOB storage
                     // virtual
-                    // TO-DO: Remove the content from the Dataverse storage
-                    updatedNote = new Note
-                    {
-                        AnnotationId = TargetBusinessEntity.Id,
-                        Document = TargetBusinessEntity.Document,
-                    };
+                    // TO-DO: Remove the content from the Dataverse storage in the pre-create plugin
                 }
-            }
-
-            if (updatedNote != null)
-            {
-                CrmService.OrganizationServiceContext.ClearChanges();
-                CrmService.OrganizationServiceContext.Attach(updatedNote);
-                CrmService.OrganizationServiceContext.UpdateObject(updatedNote);
-                CrmService.SaveChanges(SaveChangesOptions.None);
             }
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
@@ -127,14 +115,6 @@
 
             HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
 
-            switch (RemoteExecutionContext.MessageName)
-            {
-                case PlatformMessageHelper.Delete:
-                    break;
-
-                default: throw new InvalidOperationException();
-            }
-
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
@@ -147,14 +127,6 @@
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
             HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
-
-            switch (RemoteExecutionContext.MessageName)
-            {
-                case PlatformMessageHelper.Retrieve:
-                    break;
-
-                default: throw new InvalidOperationException();
-            }
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }

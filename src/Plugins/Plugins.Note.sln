@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Note", "Plugins.Note\Plugins.Note.csproj", "{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Note.UnitTest", "Plugins.Note.UnitTest\Plugins.Note.UnitTest.csproj", "{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D26A582-20F3-47E7-9026-46D734B86E33}
+	EndGlobalSection
+EndGlobal

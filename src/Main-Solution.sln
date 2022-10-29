@@ -126,6 +126,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhook.Plugins.BusinessLog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Webhook.Plugins", "WebhookPlugins\Webhook.Plugins\Webhook.Plugins.csproj", "{4B42206B-5556-4870-8550-CC3B73B02C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Note", "Plugins\Plugins.Note\Plugins.Note.csproj", "{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.Note.UnitTest", "Plugins\Plugins.Note.UnitTest\Plugins.Note.UnitTest.csproj", "{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -614,6 +618,30 @@ Global
 		{4B42206B-5556-4870-8550-CC3B73B02C34}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B42206B-5556-4870-8550-CC3B73B02C34}.Release|x86.ActiveCfg = Release|Any CPU
 		{4B42206B-5556-4870-8550-CC3B73B02C34}.Release|x86.Build.0 = Release|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Development|x86.ActiveCfg = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Development|x86.Build.0 = Debug|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1}.Release|x86.Build.0 = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Development|x86.ActiveCfg = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Development|x86.Build.0 = Debug|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -661,6 +689,8 @@ Global
 		{5B8840E0-B21E-44AF-9060-681F488FEC69} = {47D39614-8B1E-40C6-BD6E-153A2946B5FE}
 		{4549B147-0354-4223-8E45-E615C93E623F} = {199C2411-0457-4672-995F-E40762C5DCCA}
 		{4B42206B-5556-4870-8550-CC3B73B02C34} = {47D39614-8B1E-40C6-BD6E-153A2946B5FE}
+		{B4B8A3D6-6743-4863-A6B7-54736FAFBEC1} = {906AE0A3-DE7C-47A6-8EA9-093ECFEDFDF6}
+		{DEE82304-2AA4-4A3D-AEC6-96548EA3C4C0} = {906AE0A3-DE7C-47A6-8EA9-093ECFEDFDF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00000000-0000-0000-0000-100000000011}
@@ -677,6 +707,8 @@ Global
 		Models\Shared.Models\Shared.Models.projitems*{7f964aac-2b71-4e44-8d0b-b33a87f3fa99}*SharedItemsImports = 4
 		BusinessLogic\Shared.BusinessLogic\Shared.BusinessLogic.projitems*{98109166-573f-40d2-bf6c-218e90bd7c92}*SharedItemsImports = 4
 		Models\Shared.Models\Shared.Models.projitems*{98109166-573f-40d2-bf6c-218e90bd7c92}*SharedItemsImports = 4
+		BusinessLogic\Shared.BusinessLogic\Shared.BusinessLogic.projitems*{b4b8a3d6-6743-4863-a6b7-54736fafbec1}*SharedItemsImports = 4
+		Models\Shared.Models\Shared.Models.projitems*{b4b8a3d6-6743-4863-a6b7-54736fafbec1}*SharedItemsImports = 4
 		Models\Shared.Models\Shared.Models.projitems*{e51fcaac-be3f-4738-b994-f7e54f4d54f1}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

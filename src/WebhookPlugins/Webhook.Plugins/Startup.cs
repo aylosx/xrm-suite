@@ -26,22 +26,19 @@ namespace Webhook.Plugins
 {
     public class Startup : FunctionsStartup
     {
-        DataverseServiceConfig _dataverseServiceConfig;
-        FileHandlingServiceConfig _fileApiConfig;
-
         public override void Configure(IFunctionsHostBuilder builder)
         {
             FunctionsHostBuilderContext context = builder.GetContext();
 
-            _dataverseServiceConfig = new DataverseServiceConfig();
-            context.Configuration.Bind(DataverseServiceConfig.DataverseApiConfig, _dataverseServiceConfig);
+            var dataverseServiceConfig = new DataverseServiceConfig();
+            context.Configuration.Bind(DataverseServiceConfig.DataverseApiConfig, dataverseServiceConfig);
 
-            _fileApiConfig = new FileHandlingServiceConfig();
-            context.Configuration.Bind(FileHandlingServiceConfig.FileApiConfig, _fileApiConfig);
+            var fileApiConfig = new FileHandlingServiceConfig();
+            context.Configuration.Bind(FileHandlingServiceConfig.FileApiConfig, fileApiConfig);
 
             builder.Services.AddHttpClient<IFileHandlingService, FileHandlingService>("fileapi", client =>
             {
-                client.BaseAddress = new Uri(_fileApiConfig.BaseAddress);
+                client.BaseAddress = new Uri(fileApiConfig.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));
                 client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
@@ -64,26 +61,35 @@ namespace Webhook.Plugins
 
             builder.Services.AddSingleton(new DefaultAzureCredential());
 
-            builder.Services.AddSingleton<IOrganizationService, ServiceClient>(provider =>
+            builder.Services.AddSingleton(provider => // DataverseServiceClient
             {
-                var cache = provider.GetService<IMemoryCache>();
+                var cache = provider.GetRequiredService<IMemoryCache>();
                 var credential = provider.GetRequiredService<DefaultAzureCredential>();
-                return new ServiceClient(
-                    tokenProviderFunction: f => GetDataverseToken(_dataverseServiceConfig.OrganizationUrl, _dataverseServiceConfig.TokenExpiryTime, credential, cache),
-                    instanceUrl: new Uri(_dataverseServiceConfig.OrganizationUrl),
-                    useUniqueInstance: true
-                );
+                var dataverseServiceClient = new DataverseServiceClient(dataverseServiceConfig, credential, cache);
+                return dataverseServiceClient;
             });
 
-            builder.Services.AddSingleton(provider => {
-                var organizationService = provider.GetRequiredService<IOrganizationService>();
-                return new CrmServiceContext(organizationService);
+            builder.Services.AddTransient(provider => // ServiceClient
+            { 
+                var dataverseServiceClient = provider.GetRequiredService<DataverseServiceClient>();
+                var serviceClient = dataverseServiceClient.instance.Clone();
+                return serviceClient;
             });
 
-            builder.Services.AddSingleton<ICrmService>(provider => {
+            builder.Services.AddTransient(provider => // CrmServiceContext
+            {
+                var serviceClient = provider.GetRequiredService<ServiceClient>();
+                var organizationServiceContext = new CrmServiceContext(serviceClient);
+                return organizationServiceContext;
+            });
+
+            builder.Services.AddTransient<ICrmService>(provider => // CrmService
+            {
+                var serviceClient = provider.GetRequiredService<ServiceClient>();
                 var organizationServiceContext = provider.GetRequiredService<CrmServiceContext>();
                 var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
-                return new CrmService(organizationServiceContext, loggerFactory);
+                var crmService = new CrmService(serviceClient, organizationServiceContext, loggerFactory);
+                return crmService;
             });
         }
 
@@ -96,18 +102,9 @@ namespace Webhook.Plugins
             builder.ConfigurationBuilder
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(Path.Combine(context.ApplicationRootPath, "appsettings.json"), optional: false, reloadOnChange: true)
-                .AddJsonFile(Path.Combine(context.ApplicationRootPath, "local.settings.json"), optional: false, reloadOnChange: true)
+                .AddJsonFile(Path.Combine(context.ApplicationRootPath, "local.settings.json"), optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
-        }
-
-        private static async Task<string> GetDataverseToken(string dataverseUrl, int dataverseTokenExpiryTime, DefaultAzureCredential credential, IMemoryCache cache)
-        {
-            var accessToken = await cache.GetOrCreateAsync(dataverseUrl, async (cacheEntry) => {
-                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(dataverseTokenExpiryTime);
-                return await credential.GetTokenAsync(new TokenRequestContext(new[] { $"{dataverseUrl}.default" }));
-            });
-            return accessToken.Token;
         }
     }
 }

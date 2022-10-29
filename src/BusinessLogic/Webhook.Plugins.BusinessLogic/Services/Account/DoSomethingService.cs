@@ -4,6 +4,7 @@
     using Aylos.Xrm.Sdk.Core.WebhookPlugins;
 
     using Microsoft.Extensions.Logging;
+    using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Client;
 
@@ -37,8 +38,8 @@
 
         #region Constructor
 
-        public DoSomethingService(ICrmService crmService, IOrganizationService organizationService, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
-            : base(organizationService, remoteExecutionContext, loggerFactory)
+        public DoSomethingService(ICrmService crmService, ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
+            : base(serviceClient, remoteExecutionContext, loggerFactory)
         {
             CrmService = crmService ?? throw new ArgumentNullException(nameof(crmService));
         }

@@ -5,6 +5,7 @@
     using Microsoft.Azure.WebJobs.Logging;
     using Microsoft.Crm.Sdk.Messages;
     using Microsoft.Extensions.Logging;
+    using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
 
     using System;
@@ -24,15 +25,15 @@
     {
         #region Constructor
 
-        public DataverseWebhookPlugin(IOrganizationService organizationService, ILoggerFactory loggerFactory)
+        public DataverseWebhookPlugin(ServiceClient serviceClient, ILoggerFactory loggerFactory)
         {
-            OrganizationService = organizationService ?? throw new ArgumentNullException(nameof(organizationService));
+            ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
 
             LoggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
 
             Logger = loggerFactory.CreateLogger(LogCategories.CreateFunctionUserCategory(UnderlyingSystemTypeName));
 
-            WhoAmI(organizationService);
+            WhoAmI(serviceClient);
         }
 
         #endregion
@@ -59,7 +60,7 @@
 
         public HttpRequestMessage HttpRequestMessage { get; private set; }
 
-        public IOrganizationService OrganizationService { get; private set; }
+        public ServiceClient ServiceClient { get; private set; }
 
         public RemoteExecutionContext RemoteExecutionContext { get; private set; }
 
@@ -165,6 +166,7 @@
                 Logger.LogInformation("Size Exceeded: ", HttpMessageSizeExceeded);
 
                 string body = await HttpRequestMessage.Content.ReadAsStringAsync();
+                if (string.IsNullOrWhiteSpace(body)) throw new InvalidOperationException(nameof(body));
 
                 RemoteExecutionContext = DeserializeJson<RemoteExecutionContext>(body);
                 if (RemoteExecutionContext == null) throw new InvalidOperationException(RemoteExecutionContextMessage);

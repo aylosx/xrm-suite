@@ -4,8 +4,8 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 
     using Microsoft.Azure.WebJobs.Logging;
     using Microsoft.Extensions.Logging;
+    using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Client;
 
     using System;
     using System.Globalization;
@@ -17,11 +17,13 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     {
         #region Constructor
 
-        public DataverseService(IOrganizationService organizationService, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory)
+        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory)
         {
-            OrganizationService = organizationService ?? throw new ArgumentNullException(nameof(organizationService));
+            ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
 
             RemoteExecutionContext = remoteExecutionContext ?? throw new ArgumentNullException(nameof(remoteExecutionContext));
+
+            ServiceClient.SessionTrackingId = RemoteExecutionContext.CorrelationId;
 
             LoggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
 
@@ -32,11 +34,11 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 
         #region Properties
 
-        public ILoggerFactory LoggerFactory { get; private set; }
-
         public static ILogger Logger { get; private set; }
 
-        public IOrganizationService OrganizationService { get; private set; }
+        public ILoggerFactory LoggerFactory { get; private set; }
+
+        public ServiceClient ServiceClient { get; private set; }
 
         public RemoteExecutionContext RemoteExecutionContext { get; private set; }
 
@@ -105,8 +107,8 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     {
         #region Constructor
 
-        public DataverseService(IOrganizationService organizationService, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
-            : base(organizationService, remoteExecutionContext, loggerFactory)
+        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
+            : base(serviceClient, remoteExecutionContext, loggerFactory)
         {
 
         }
