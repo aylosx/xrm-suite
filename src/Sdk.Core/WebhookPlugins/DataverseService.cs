@@ -1,6 +1,7 @@
 namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 {
     using Aylos.Xrm.Sdk.Common;
+    using Aylos.Xrm.Sdk.Core.Common;
 
     using Microsoft.Azure.WebJobs.Logging;
     using Microsoft.Extensions.Logging;
@@ -16,6 +17,8 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     public abstract class DataverseService
     {
         #region Constructor
+
+        public DataverseService() { }
 
         public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory)
         {
@@ -34,13 +37,13 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 
         #region Properties
 
-        public static ILogger Logger { get; private set; }
+        public static ILogger Logger { get; set; }
 
-        public ILoggerFactory LoggerFactory { get; private set; }
+        public ILoggerFactory LoggerFactory { get; set; }
 
-        public ServiceClient ServiceClient { get; private set; }
+        public ServiceClient ServiceClient { get; set; }
 
-        public RemoteExecutionContext RemoteExecutionContext { get; private set; }
+        public RemoteExecutionContext RemoteExecutionContext { get; set; }
 
         public HttpRequestMessage HttpRequestMessage { get; protected set; }
 
@@ -49,9 +52,9 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
             get
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-organization"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsOrganizationName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-organization").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsOrganizationName).SingleOrDefault();
                 }
                 return ret;
             }
@@ -62,9 +65,9 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
             get
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-entity-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsEntityName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-entity-name").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsEntityName).SingleOrDefault();
                 }
                 return ret;
             }
@@ -75,9 +78,9 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
             get
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-request-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsRequestName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-request-name").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsRequestName).SingleOrDefault();
                 }
                 return ret;
             }
@@ -88,15 +91,15 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
             get
             {
                 Guid? ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-request-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.CorrelationRequestId))
                 {
-                    ret = Guid.Parse(HttpRequestMessage.Headers.GetValues("x-ms-correlation-request-id").SingleOrDefault());
+                    ret = Guid.Parse(HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.CorrelationRequestId).SingleOrDefault());
                 }
                 return ret;
             }
         }
 
-        public bool HttpMessageSizeExceeded => HttpRequestMessage.Headers.Contains("x-ms-dynamics-msg-size-exceeded");
+        public bool HttpMessageSizeExceeded => HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsMessageSizeExceeded);
 
         public string UnderlyingSystemTypeName { get { return GetType().UnderlyingSystemType.Name; } }
 

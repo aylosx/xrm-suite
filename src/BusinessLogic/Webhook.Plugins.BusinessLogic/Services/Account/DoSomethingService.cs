@@ -6,7 +6,6 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Client;
 
     using Shared.Models.Domain;
 

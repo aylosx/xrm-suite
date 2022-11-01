@@ -1,21 +1,29 @@
 namespace Aylos.Xrm.Sdk.Plugins
 {
+    using Aylos.Xrm.Sdk.Common;
+
+    using Microsoft.Xrm.Sdk;
+
     using System;
     using System.Diagnostics;
     using System.Globalization;
     using System.ServiceModel;
     using System.Text;
-    using Microsoft.Xrm.Sdk;
-    using Aylos.Xrm.Sdk.Common;
 
     public abstract class CustomPlugin : IPlugin
     {
+        #region Constants 
+
         public const string TracingServiceMessage = "Unable to get tracing service from the service manager.";
         public const string PluginExecutionContextMessage = "Unable to get plugin execution context from the service manager.";
         public const string OrganizationServiceFactoryMessage = "Unable to get organization service factory from the service manager.";
         public const string NotificationServiceMessage = "Unable to get service endpoint notification service from the service manager.";
         public const string CurrentUserServiceMessage = "Unable to create the current user service.";
         public const string SystemUserServiceMessage = "Unable to create the system user service.";
+
+        #endregion
+
+        #region Properties
 
         public static string PrimaryEntityLogicalName { get; set; }
 
@@ -35,6 +43,7 @@ namespace Aylos.Xrm.Sdk.Plugins
 
         public IServiceEndpointNotificationService NotificationService { get; set; }
 
+        /*
         public PluginExecutionContext ExecutionContext
         {
             get
@@ -69,7 +78,7 @@ namespace Aylos.Xrm.Sdk.Plugins
                     UserId = PluginExecutionContext.UserId
                 };
             }
-        }
+        }*/
 
         public ITracingService TracingService { get; set; }
         
@@ -82,6 +91,10 @@ namespace Aylos.Xrm.Sdk.Plugins
         public bool? ThrowsException { get; set; }
 
         public string ExceptionMessage { get; set; }
+
+        #endregion
+
+        #region Methods
 
         public void Execute(IServiceProvider serviceProvider)
         {
@@ -194,8 +207,14 @@ namespace Aylos.Xrm.Sdk.Plugins
             TracingService.Trace(message);
         }
 
+        #endregion
+
+        #region Overriden Methods
+
         public abstract void Execute();
 
         public abstract void Validate();
+
+        #endregion
     }
 }

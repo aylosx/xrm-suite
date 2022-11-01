@@ -24,24 +24,33 @@ namespace Webhook.Plugins.Account
     {
         #region Constructors
 
+        public DoSomethingUponCreate() { }
+
         public DoSomethingUponCreate(ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
             : base(serviceClient, loggerFactory)
         {
             CrmService = crmService ?? throw new ArgumentNullException(nameof(crmService));
-
-            PrimaryEntityLogicalName = Account.EntityLogicalName;
-            PluginMessageName = PlatformMessageHelper.Create;
-            PluginPipelineStage = (int)SdkMessageProcessingStepStage.PostOperation;
-            MaximumAllowedExecutionDepth = 7;
         }
+
+        #endregion
+
+        #region Constants 
+
+        public const string PrimaryEntityLogicalName = Account.EntityLogicalName;
+
+        public const string PluginMessageName = PlatformMessageHelper.Create;
+
+        public const int PluginPipelineStage = (int)SdkMessageProcessingStepStage.PostOperation;
+
+        public const int MaximumAllowedExecutionDepth = 7;
 
         #endregion
 
         #region Properties
 
-        public ICrmService CrmService { get; private set; }
+        public ICrmService CrmService { get; set; }
 
-        public IDoSomethingService DoSomethingService { get; private set; }
+        public IDoSomethingService DoSomethingService { get; set; }
 
         #endregion
 
@@ -64,7 +73,7 @@ namespace Webhook.Plugins.Account
 
         #region Override Base Methods
 
-        protected override void Execute()
+        public override void Execute()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
@@ -78,7 +87,7 @@ namespace Webhook.Plugins.Account
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
-        protected override void Validate()
+        public override void Validate()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 

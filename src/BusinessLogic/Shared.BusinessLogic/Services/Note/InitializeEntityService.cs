@@ -20,6 +20,8 @@
         public const string DateTimeFormat = "yyyyMMddHHmmss";
         public static readonly DateTime DateTimeNow = DateTime.UtcNow;
 
+        public const string ExcludedEntities = "adx_";
+
         #endregion
 
         #region Properties
@@ -91,8 +93,10 @@
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            // TO-DO: Call the Azure Function and upload the file contents
-            // TO-DO: Clear the body of the documentb nj
+            // TO-DO: Check excluded entities - exit
+            // TO-DO: Check access of the parent entity - throw exception
+            // TO-DO: Call the Webhook Plugin (Azure Function) - upload the file
+            // TO-DO: Clear the body of the document - update the Plugin execution context
             PluginExecutionContext.InputParameters[PlatformConstants.TargetText] = TargetBusinessEntity.ToEntity<Entity>();
 
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));

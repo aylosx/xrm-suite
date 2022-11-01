@@ -24,29 +24,37 @@ namespace Webhook.Plugins.Note
     {
         #region Constructors
 
+        public HandleFileUploadUponCreate() { }
+
         public HandleFileUploadUponCreate(IHttpClientFactory httpClientFactory, ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
             : base(serviceClient, loggerFactory)
         {
             if (httpClientFactory == null) throw new ArgumentNullException(nameof(httpClientFactory));
             HttpClient = httpClientFactory.CreateClient("fileapi");
-
             CrmService = crmService ?? throw new ArgumentNullException(nameof(crmService));
-
-            PrimaryEntityLogicalName = Note.EntityLogicalName;
-            PluginMessageName = PlatformMessageHelper.Create;
-            PluginPipelineStage = (int)SdkMessageProcessingStepStage.PostOperation;
-            MaximumAllowedExecutionDepth = 7;
         }
+
+        #endregion
+
+        #region Constants 
+
+        public const string PrimaryEntityLogicalName = Note.EntityLogicalName;
+
+        public const string PluginMessageName = PlatformMessageHelper.Create;
+
+        public const int PluginPipelineStage = (int)SdkMessageProcessingStepStage.PreOperation;
+
+        public const int MaximumAllowedExecutionDepth = 7;
 
         #endregion
 
         #region Properties
 
-        public ICrmService CrmService { get; private set; }
+        public ICrmService CrmService { get; set; }
 
-        public IFileHandlingService FileHandlingService { get; private set; }
+        public IFileHandlingService FileHandlingService { get; set; }
 
-        public HttpClient HttpClient { get; private set; }
+        public HttpClient HttpClient { get; set; }
 
         #endregion
 
@@ -69,7 +77,7 @@ namespace Webhook.Plugins.Note
 
         #region Override Base Methods
 
-        protected override void Execute()
+        public override void Execute()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
@@ -83,7 +91,7 @@ namespace Webhook.Plugins.Note
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
-        protected override void Validate()
+        public override void Validate()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
@@ -124,11 +132,11 @@ namespace Webhook.Plugins.Note
             }
 
             // Check if the plugin current pipeline stage is the expected one
-            if (RemoteExecutionContext.Stage != (int)SdkMessageProcessingStepStage.PostOperation)
+            if (RemoteExecutionContext.Stage != (int)SdkMessageProcessingStepStage.PreOperation)
             {
                 throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
                     TraceMessageHelper.IncorrectPipelineStage, UnderlyingSystemTypeName,
-                    (int)SdkMessageProcessingStepStage.PostOperation, RemoteExecutionContext.Stage));
+                    (int)SdkMessageProcessingStepStage.PreOperation, RemoteExecutionContext.Stage));
             }
 
             // Check if the plugin depth is not exiting the max depth limit expectation

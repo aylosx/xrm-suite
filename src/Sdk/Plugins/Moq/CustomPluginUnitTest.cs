@@ -13,7 +13,7 @@ namespace Aylos.Xrm.Sdk.Plugins.MoqTests
 
         protected PluginExecutionContext CreatePluginExecutionContext()
         {
-            PluginExecutionContext pec = new PluginExecutionContext
+            var pec = new PluginExecutionContext
             {
                 BusinessUnitId = Guid.NewGuid(),
                 CorrelationId = Guid.NewGuid(),
@@ -118,7 +118,7 @@ namespace Aylos.Xrm.Sdk.Plugins.MoqTests
             return pec;
         }
 
-        protected PluginExecutionContext CreatePluginUnitTestContextEntityMoniker(EntityReference entityMoniker, Entity preEntity, Entity postEntity)
+        protected PluginExecutionContext CreatePluginExecutionContextEntityMoniker(EntityReference entityMoniker, Entity preEntity, Entity postEntity)
         {
             PluginExecutionContext pec = CreatePluginExecutionContext();
             if (entityMoniker != null) pec.InputParameters[PlatformConstants.EntityMonikerText] = entityMoniker;

@@ -1,6 +1,5 @@
 ﻿namespace Aylos.Xrm.Sdk.Core.ConsoleApps.TestConnectionCore
 {
-    using Connection = Common.Connection;
     using NLog;
     using System;
     using System.Globalization;

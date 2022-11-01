@@ -1,6 +1,7 @@
 ﻿namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 {
     using Aylos.Xrm.Sdk.Common;
+    using Aylos.Xrm.Sdk.Core.Common;
 
     using Microsoft.Azure.WebJobs.Logging;
     using Microsoft.Crm.Sdk.Messages;
@@ -25,7 +26,11 @@
     {
         #region Constructor
 
-        public DataverseWebhookPlugin(ServiceClient serviceClient, ILoggerFactory loggerFactory)
+        public DataverseWebhookPlugin() 
+        {
+        }
+
+        public DataverseWebhookPlugin(ServiceClient serviceClient, ILoggerFactory loggerFactory) : this()
         {
             ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
 
@@ -46,23 +51,15 @@
 
         #region Properties
 
-        public string PrimaryEntityLogicalName { get; protected set; }
+        public ILogger Logger { get; set; }
 
-        public string PluginMessageName { get; protected set; }
+        public ILoggerFactory LoggerFactory { get; set; }
 
-        public int PluginPipelineStage { get; protected set; }
+        public HttpRequestMessage HttpRequestMessage { get; set; }
 
-        public int MaximumAllowedExecutionDepth { get; protected set; }
+        public ServiceClient ServiceClient { get; set; }
 
-        public ILoggerFactory LoggerFactory { get; private set; }
-
-        public ILogger Logger { get; private set; }
-
-        public HttpRequestMessage HttpRequestMessage { get; private set; }
-
-        public ServiceClient ServiceClient { get; private set; }
-
-        public RemoteExecutionContext RemoteExecutionContext { get; private set; }
+        public RemoteExecutionContext RemoteExecutionContext { get; set; }
 
         protected Stopwatch Stopwatch { get; private set; }
 
@@ -73,9 +70,9 @@
             get 
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-organization"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsOrganizationName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-organization").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsOrganizationName).SingleOrDefault();
                 }
                 return ret; 
             } 
@@ -86,9 +83,9 @@
             get
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-entity-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsEntityName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-entity-name").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsEntityName).SingleOrDefault();
                 }
                 return ret; 
             } 
@@ -99,9 +96,9 @@
             get
             {
                 string ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-request-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsRequestName))
                 {
-                    ret = HttpRequestMessage.Headers.GetValues("x-ms-dynamics-request-name").SingleOrDefault();
+                    ret = HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.DynamicsRequestName).SingleOrDefault();
                 }
                 return ret; 
             } 
@@ -112,15 +109,15 @@
             get
             {
                 Guid? ret = null;
-                if (HttpRequestMessage.Headers.Contains("x-ms-dynamics-request-name"))
+                if (HttpRequestMessage.Headers.Contains(HttpRequestHeaders.CorrelationRequestId))
                 {
-                    ret = Guid.Parse(HttpRequestMessage.Headers.GetValues("x-ms-correlation-request-id").SingleOrDefault());
+                    ret = Guid.Parse(HttpRequestMessage.Headers.GetValues(HttpRequestHeaders.CorrelationRequestId).SingleOrDefault());
                 }
                 return ret;
             }
         }
 
-        public bool HttpMessageSizeExceeded => HttpRequestMessage.Headers.Contains("x-ms-dynamics-msg-size-exceeded");
+        public bool HttpMessageSizeExceeded => HttpRequestMessage.Headers.Contains(HttpRequestHeaders.DynamicsMessageSizeExceeded);
 
         #endregion
 
@@ -183,15 +180,13 @@
 
                 res = new HttpResponseMessage(HttpStatusCode.OK)
                 {
-                    Content = new StringContent(rec), // TO-DO: Performance Considerations
+                    Content = new StringContent(rec, Encoding.UTF8, "application/json"), // TO-DO: Performance Considerations
                     RequestMessage = req,
                 };
             }
             catch (Exception ex)
             {
                 var sb = new StringBuilder();
-
-                sb.AppendLine(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.UndefinedFault, UnderlyingSystemTypeName, ex.Message, ex.StackTrace));
 
                 void le(Exception ex) { sb.AppendLine(ex.Message); sb.AppendLine(ex.StackTrace); if (ex.InnerException != null) le(ex.InnerException); }
 
@@ -201,7 +196,7 @@
 
                 res = new HttpResponseMessage(HttpStatusCode.InternalServerError)
                 {
-                    Content = new StringContent(sb.ToString()),
+                    Content = new StringContent(ex.Message, Encoding.UTF8),
                     RequestMessage = req,
                 };
             }
@@ -222,20 +217,20 @@
             return res;
         }
 
-        private void WhoAmI(IOrganizationService organizationService)
+        public virtual void WhoAmI(ServiceClient serviceClient)
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Connection established successfully."));
 
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Retrieving current user, business unit and organization."));
-            var whoAmIResponse = (WhoAmIResponse)organizationService.Execute(new WhoAmIRequest());
+            var whoAmIResponse = (WhoAmIResponse)serviceClient.Execute(new WhoAmIRequest());
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Business unit: {0}", whoAmIResponse.BusinessUnitId));
-            Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Organization: {0}", whoAmIResponse.OrganizationId));
+            Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "DynamicsOrganizationName: {0}", whoAmIResponse.OrganizationId));
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "User: {0}", whoAmIResponse.UserId));
 
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Retrieving the instance version."));
-            var versionResponse = (RetrieveVersionResponse)organizationService.Execute(new RetrieveVersionRequest());
+            var versionResponse = (RetrieveVersionResponse)serviceClient.Execute(new RetrieveVersionRequest());
             Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "Instance version {0}.", versionResponse.Version));
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
@@ -245,9 +240,9 @@
 
         #region Overriden Methods
 
-        protected abstract void Execute();
+        public abstract void Execute();
 
-        protected abstract void Validate();
+        public abstract void Validate();
 
         #endregion
     }
