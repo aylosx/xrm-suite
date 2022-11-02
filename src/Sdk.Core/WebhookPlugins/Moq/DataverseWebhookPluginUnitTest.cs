@@ -187,6 +187,6 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins.MoqTests
             DataverseWebhookPlugin.ServiceClient = CreateMockForServiceClient(new ServiceClient());
         }
 
-        protected abstract void SetupMockObjectsForPlugin();
+        protected abstract void SetupMockObjectsForService();
     }
 }

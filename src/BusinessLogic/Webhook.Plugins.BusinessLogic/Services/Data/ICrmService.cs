@@ -3,6 +3,7 @@
     using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Client;
+    using Microsoft.Xrm.Sdk.Query;
 
     using Shared.Models.Domain;
 
@@ -13,6 +14,8 @@
         public CrmServiceContext OrganizationServiceContext { get; set; }
 
         ServiceClient ServiceClient { get; set; }
+
+        Entity GetEntityByKey(Guid primaryKey, string entityName, ColumnSet columnSet, Guid callerId);
 
         Note GetNoteByKey(Guid primaryKey, Guid callerId);
 

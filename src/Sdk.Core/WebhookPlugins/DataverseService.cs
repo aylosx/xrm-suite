@@ -18,8 +18,6 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     {
         #region Constructor
 
-        public DataverseService() { }
-
         public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory)
         {
             ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
@@ -37,7 +35,7 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
 
         #region Properties
 
-        public static ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
         public ILoggerFactory LoggerFactory { get; set; }
 

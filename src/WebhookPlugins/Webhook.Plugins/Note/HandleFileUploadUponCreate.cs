@@ -95,32 +95,25 @@ namespace Webhook.Plugins.Note
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            if (HttpMessageSizeExceeded)
-            {
-                // Check if the target entity logical name is the expected one
-                if (HttpMessageEntityName != PrimaryEntityLogicalName)
-                {
-                    throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
-                        TraceMessageHelper.WrongRegisteredEntity, UnderlyingSystemTypeName, HttpMessageEntityName));
-                }
-            }
-            else 
-            {
-                // Check if the plugin execution context contains target entity
-                if (!(RemoteExecutionContext.InputParameters.Contains(PlatformConstants.TargetText)) ||
-                    !(RemoteExecutionContext.InputParameters[PlatformConstants.TargetText] is Entity))
-                {
-                    throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
-                        TraceMessageHelper.TargetEntityIsRequired, UnderlyingSystemTypeName));
-                }
+            /**
+             * The azure function is expected to be called by a Dataverse Plug-in instead of a platform registered webhook. Therefore, 
+             * we are expecting the full remote execution context but no HTTP headers regarding the request - e.g. HttpMessageSizeExceeded.
+             */
 
-                // Check if the target entity logical name is the expected one
-                Entity target = (Entity)RemoteExecutionContext.InputParameters[PlatformConstants.TargetText];
-                if (target.LogicalName != PrimaryEntityLogicalName)
-                {
-                    throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
-                        TraceMessageHelper.WrongRegisteredEntity, UnderlyingSystemTypeName, target.LogicalName));
-                }
+            // Check if the plugin execution context contains target entity
+            if (!RemoteExecutionContext.InputParameters.Contains(PlatformConstants.TargetText) ||
+                RemoteExecutionContext.InputParameters[PlatformConstants.TargetText] is not Entity)
+            {
+                throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
+                    TraceMessageHelper.TargetEntityIsRequired, UnderlyingSystemTypeName));
+            }
+
+            // Check if the target entity logical name is the expected one
+            Entity target = (Entity)RemoteExecutionContext.InputParameters[PlatformConstants.TargetText];
+            if (target.LogicalName != PrimaryEntityLogicalName)
+            {
+                throw new InvalidPluginExecutionException(string.Format(CultureInfo.InvariantCulture,
+                    TraceMessageHelper.WrongRegisteredEntity, UnderlyingSystemTypeName, target.LogicalName));
             }
 
             // Check if the running message is the expected one

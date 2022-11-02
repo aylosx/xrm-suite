@@ -32,11 +32,11 @@
 
         public DataverseWebhookPlugin(ServiceClient serviceClient, ILoggerFactory loggerFactory) : this()
         {
-            ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
-
             LoggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
 
             Logger = loggerFactory.CreateLogger(LogCategories.CreateFunctionUserCategory(UnderlyingSystemTypeName));
+
+            ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
 
             WhoAmI(serviceClient);
         }
@@ -45,7 +45,8 @@
 
         #region Constants 
 
-        public const string RemoteExecutionContextMessage = "Unable to get the remote execution context.";
+        public const string HttpRequestMessageBodyIsEmpty = "Looks like the HTTP request message is empty but it is required.";
+        public const string RemoteExecutionContextIsEmpty = "Looks like the remote execution context is empty but it is required.";
 
         #endregion
 
@@ -163,18 +164,18 @@
                 Logger.LogInformation("Size Exceeded: ", HttpMessageSizeExceeded);
 
                 string body = await HttpRequestMessage.Content.ReadAsStringAsync();
-                if (string.IsNullOrWhiteSpace(body)) throw new InvalidOperationException(nameof(body));
+                if (string.IsNullOrWhiteSpace(body)) throw new InvalidOperationException(HttpRequestMessageBodyIsEmpty);
 
                 RemoteExecutionContext = DeserializeJson<RemoteExecutionContext>(body);
-                if (RemoteExecutionContext == null) throw new InvalidOperationException(RemoteExecutionContextMessage);
+                if (RemoteExecutionContext == null) throw new InvalidOperationException(RemoteExecutionContextIsEmpty);
 
                 Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.StartTracing, UnderlyingSystemTypeName, Stopwatch.ElapsedMilliseconds));
                 Logger.LogTrace(TraceHelper.Trace(RemoteExecutionContext)); // Trace the remote execution context
                 Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExecutionContextTracingCompleted, UnderlyingSystemTypeName, Stopwatch.ElapsedMilliseconds));
 
-                Validate(); // Call the overriden validate method
+                Validate(); // Calls the overriden validate method
 
-                Execute(); // Call the overriden execute method
+                Execute(); // Calls the overriden execute method
 
                 string rec = SerializationHelper.SerializeJson(RemoteExecutionContext);
 

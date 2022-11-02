@@ -27,11 +27,13 @@
     {
         #region Members
 
+        public ILogger Logger { get; set; }
+
+        public ILoggerFactory LoggerFactory { get; set; }
+
         public CrmServiceContext OrganizationServiceContext { get; set; }
 
         public ServiceClient ServiceClient { get; set; }
-
-        public static ILogger Logger { get; private set; }
 
         public string UnderlyingSystemTypeName { get { return GetType().UnderlyingSystemType.Name; } }
 
@@ -41,7 +43,7 @@
 
         private CrmService(ILoggerFactory loggerFactory)
         {
-            if (loggerFactory == null) throw new ArgumentNullException(nameof(loggerFactory));
+            LoggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
 
             Logger = loggerFactory.CreateLogger(LogCategories.CreateFunctionUserCategory(UnderlyingSystemTypeName));
         }
@@ -60,13 +62,31 @@
 
         #region Methods
 
+        public virtual Entity GetEntityByKey(Guid primaryKey, string entityName, ColumnSet columnSet, Guid callerId)
+        {
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            if (Guid.Empty.Equals(primaryKey)) throw new ArgumentNullException(nameof(primaryKey));
+            if (Guid.Empty.Equals(callerId)) throw new ArgumentNullException(nameof(callerId));
+
+            ServiceClient.CallerId = callerId;
+
+            columnSet ??= new ColumnSet { AllColumns = true };
+
+            Entity entity = ServiceClient.Retrieve(entityName, primaryKey, columnSet);
+
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            return entity;
+        }
+
         public virtual Note GetNoteByKey(Guid primaryKey, Guid callerId)
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
             if (Guid.Empty.Equals(primaryKey)) throw new ArgumentNullException(nameof(primaryKey));
 
-            ServiceClient.CallerId = callerId;
+            if (!Guid.Empty.Equals(callerId)) ServiceClient.CallerId = callerId;
 
             var columnSet = new ColumnSet { AllColumns = true };
 

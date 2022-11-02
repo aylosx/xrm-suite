@@ -4,8 +4,10 @@
     using Aylos.Xrm.Sdk.Core.Common;
     using Aylos.Xrm.Sdk.Core.WebhookPlugins.MoqTests;
 
+    using Microsoft.Extensions.Logging;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
 
     using Moq;
 
@@ -28,6 +30,15 @@
         const string _dummyText = "Dummy";
         const int _dummyNumber = -1;
 
+        readonly Guid _regardingEntityId = Guid.NewGuid();
+        const string _regardingEntityName = "entityname";
+        
+        Mock<CrmServiceContext>? _cscMock;
+        Mock<CrmService>? _csMock;
+        Mock<HttpClient>? _httpMock;
+        Mock<FileHandlingService>? _iesMock;
+
+
         #endregion
 
         #region Setup Mocks & Stubs
@@ -35,18 +46,18 @@
         /// <summary>
         /// Sets up the mock objects of the derived unit test class
         /// </summary>
-        protected override void SetupMockObjectsForPlugin()
+        protected override void SetupMockObjectsForService()
         {
-            var cscMock = new Mock<CrmServiceContext>(DataverseWebhookPlugin.ServiceClient).SetupAllProperties();
+            _cscMock = new Mock<CrmServiceContext>(DataverseWebhookPlugin.ServiceClient).SetupAllProperties();
+            _csMock = new Mock<CrmService>(DataverseWebhookPlugin.ServiceClient, _cscMock.Object, DataverseWebhookPlugin.LoggerFactory).SetupAllProperties();
+            DataverseWebhookPlugin.CrmService = _csMock.Object;
 
-            var csMock = new Mock<CrmService>(DataverseWebhookPlugin.ServiceClient, cscMock.Object, DataverseWebhookPlugin.LoggerFactory).SetupAllProperties();
-            DataverseWebhookPlugin.CrmService = csMock.Object;
+            _httpMock = new Mock<HttpClient>().SetupAllProperties();
+            DataverseWebhookPlugin.HttpClient = _httpMock.Object;
 
-            var httpMock = new Mock<HttpClient>().SetupAllProperties();
-            DataverseWebhookPlugin.HttpClient = httpMock.Object;
-
-            var iesMock = new Mock<FileHandlingService>(DataverseWebhookPlugin.HttpClient, DataverseWebhookPlugin.CrmService, DataverseWebhookPlugin.ServiceClient, DataverseWebhookPlugin.RemoteExecutionContext, DataverseWebhookPlugin.LoggerFactory).SetupAllProperties();
-            DataverseWebhookPlugin.FileHandlingService = iesMock.Object;
+            _iesMock = new Mock<FileHandlingService>(DataverseWebhookPlugin.HttpClient, DataverseWebhookPlugin.CrmService, DataverseWebhookPlugin.ServiceClient, DataverseWebhookPlugin.RemoteExecutionContext, DataverseWebhookPlugin.LoggerFactory).SetupAllProperties();
+            _iesMock.Object.Logger = Mock.Of<ILogger>();
+            DataverseWebhookPlugin.FileHandlingService = _iesMock.Object;
         }
 
         #endregion
@@ -57,31 +68,26 @@
 
         #region Helper Methods
 
-        private static Note CreateNote(string base64body)
+        private static Entity CreateNoteEntity(Guid id)
         {
-            var annotation = new Note
-            {
-                Id = Guid.NewGuid(),
-                CreatedOn = FileHandlingService.DateTimeNow
-            };
-            if (!string.IsNullOrWhiteSpace(base64body)) 
-            {
-                annotation.Document = base64body;
-            }
-            return annotation;
+            return CreateEntity(Note.EntityLogicalName, id);
         }
 
-        private static Entity CreateNoteEntity()
+        private static Entity CreateEntity(string logicalName)
         {
-            return new Entity
-            {
-                LogicalName = Note.EntityLogicalName
-            };
+            if (string.IsNullOrWhiteSpace(logicalName)) throw new ArgumentNullException(nameof(logicalName));
+
+            return new Entity { LogicalName = logicalName };
         }
 
-        private static Entity CreateNoteEntity(Note annotation)
+        private static Entity CreateEntity(string logicalName, Guid id)
         {
-            return annotation.ToEntity<Entity>();
+            if (Guid.Empty.Equals(id)) throw new ArgumentException(nameof(id));
+
+            Entity entity = CreateEntity(logicalName);
+            entity.Id = id;
+
+            return entity;
         }
 
         #endregion
@@ -89,7 +95,7 @@
         #region Unit Tests
 
         /// <summary>
-        /// Tests the exception thrown when a target annotation is not available in the plugin execution context.
+        /// Tests the exception thrown when a target annotation is not available in the webhook plugin execution context.
         /// </summary>
         [TestMethod]
         public async System.Threading.Tasks.Task HandleFileUploadUponCreate_ExceptionHandling_TargetEntityIsRequiredAsync()
@@ -105,8 +111,8 @@
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -133,7 +139,7 @@
             #region ARRANGE
 
             // Prepare the unit test mock target annotation
-            Entity targetEntity = new Entity { LogicalName = _dummyText };
+            Entity targetEntity = CreateEntity(_dummyText);
 
             // Setup the unit test mock context
             RemoteExecutionContext context = CreateRemoteExecutionContext(targetEntity);
@@ -147,8 +153,8 @@
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -167,7 +173,7 @@
         }
 
         /// <summary>
-        /// Tests the exception thrown when the plugin message is not the expected.
+        /// Tests the exception thrown when the webhook plugin message is not the expected.
         /// </summary>
         [TestMethod]
         public async System.Threading.Tasks.Task HandleFileUploadUponCreate_ExceptionHandling_IncorrectMessageNameAsync()
@@ -175,11 +181,10 @@
             #region ARRANGE
 
             // Prepare the unit test mock target annotation
-            Entity targetEntity = CreateNoteEntity();
+            Entity targetEntity = CreateNoteEntity(Guid.NewGuid());
 
             // Setup the unit test mock context
-            RemoteExecutionContext context = CreateRemoteExecutionContext(_dummyText, _dummyNumber, 
-                targetEntity.LogicalName, _dummyNumber, targetEntity);
+            RemoteExecutionContext context = CreateRemoteExecutionContext(_dummyText, _dummyNumber, targetEntity.LogicalName, _dummyNumber, targetEntity);
 
             // Setup the HTTP request
             var headers = new Dictionary<string, string>
@@ -190,8 +195,8 @@
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -210,7 +215,7 @@
         }
 
         /// <summary>
-        /// Tests the exception thrown when the plugin pipeline stage is not the expected.
+        /// Tests the exception thrown when the webhook plugin pipeline stage is not the expected.
         /// </summary>
         [TestMethod]
         public async System.Threading.Tasks.Task HandleFileUploadUponCreate_ExceptionHandling_IncorrectPipelineStageAsync()
@@ -218,11 +223,10 @@
             #region ARRANGE
 
             // Prepare the unit test mock target annotation
-            Entity targetEntity = CreateNoteEntity();
+            Entity targetEntity = CreateNoteEntity(Guid.NewGuid());
 
             // Setup the unit test mock context
-            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create, _dummyNumber, 
-                targetEntity.LogicalName, _dummyNumber, targetEntity);
+            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create, _dummyNumber, targetEntity.LogicalName, _dummyNumber, targetEntity);
 
             // Setup the HTTP request
             var headers = new Dictionary<string, string>
@@ -233,8 +237,8 @@
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -253,7 +257,7 @@
         }
 
         /// <summary>
-        /// Tests the exception thrown when the plugin pipeline stage is not the expected.
+        /// Tests the exception thrown when the webhook plugin pipeline stage is not the expected.
         /// </summary>
         [TestMethod]
         public async System.Threading.Tasks.Task HandleFileUploadUponCreate_ExceptionHandling_MaxDepthViolationAsync()
@@ -261,7 +265,7 @@
             #region ARRANGE
 
             // Prepare the unit test mock target annotation
-            Entity targetEntity = CreateNoteEntity();
+            Entity targetEntity = CreateNoteEntity(Guid.NewGuid());
 
             // Setup the unit test mock context
             RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create,
@@ -277,8 +281,8 @@
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -299,34 +303,46 @@
         }
 
         /// <summary>
-        /// Tests the behavior of the plugin when the current annotation document body contains data.
+        /// Tests the behavior of the webhook plugin when the current annotation document body contains data.
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task HandleFileUploadUponCreate_FileHandlingService_InitializeEntity_CurrentNoteNumberContainsDataAsync()
+        public async System.Threading.Tasks.Task HandleFileUploadUponCreate_FileHandlingService_HandleFileUpload_CurrentNoteContainsDataAsync()
         {
             #region ARRANGE
 
-            // Prepare the unit test mock target annotation
-            Note annotation = CreateNote(_dummyText);
-            Entity targetEntity = CreateNoteEntity(annotation);
+            // Prepare the unit test mock target
+            var annotation = new Note
+            {
+                Id = Guid.NewGuid(),
+                CreatedOn = FileHandlingService.DateTimeNow,
+                Document = _dummyText,
+                FileName = _dummyText,
+                IsDocument = true,
+                MimeType = _dummyText,
+                Regarding = new EntityReference(_regardingEntityName, _regardingEntityId),
+            };
 
             // Setup the unit test mock context
-            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create,
-                HandleFileUploadUponCreate.MaximumAllowedExecutionDepth, targetEntity.LogicalName,
-                (int)SdkMessageProcessingStepStage.PreOperation, targetEntity);
+            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create, HandleFileUploadUponCreate.MaximumAllowedExecutionDepth, 
+                annotation.LogicalName, (int)SdkMessageProcessingStepStage.PreOperation, annotation.ToEntity<Entity>());
 
             // Setup the HTTP request
             var headers = new Dictionary<string, string>
             {
-                { HttpRequestHeaders.DynamicsEntityName, targetEntity.LogicalName }
+                { HttpRequestHeaders.DynamicsEntityName, annotation.LogicalName }
             };
 
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
+            // Stub the local mock objects
+            _csMock?.Setup(x => x
+                .GetEntityByKey(_regardingEntityId, _regardingEntityName, It.IsAny<ColumnSet>(), DataverseWebhookPlugin.RemoteExecutionContext.InitiatingUserId))
+                .Returns(CreateEntity(_regardingEntityName, _regardingEntityId)).Verifiable();
+            
             #endregion
             #region ACT
 
@@ -335,6 +351,15 @@
 
             #endregion
             #region ASSERT
+
+            // Verifications
+            _csMock?.Verify(x => x.GetEntityByKey(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<ColumnSet>(), It.IsAny<Guid>()), Times.Once());
+            _iesMock?.Verify(x => x.SubmitFileToAV(It.IsAny<Note>()), Times.Once);
+            _iesMock?.Verify(x => x.UploadFileToStorage(It.IsAny<Note>()), Times.Once);
+
+            // Assertions
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HttpStatusCode.OK, res.StatusCode);
 
             // Load the modified plugin execution context
             IPluginExecutionContext rec = DataverseWebhookPlugin.RemoteExecutionContext;
@@ -348,33 +373,37 @@
         }
 
         /// <summary>
-        /// Tests the behavior of the plugin when the current annotation document body is empty.
+        /// Tests the behavior of the webhook plugin when the current annotation document body is empty.
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task HandleFileUploadUponCreate_FileHandlingService_InitializeEntity_CurrentNoteNumberIsEmptyAsync()
+        public async System.Threading.Tasks.Task HandleFileUploadUponCreate_FileHandlingService_HandleFileUpload_CurrentNoteIsEmptyAsync()
         {
             #region ARRANGE
 
-            // Prepare the unit test mock target annotation
-            Note annotation = CreateNote(string.Empty);
-            Entity targetEntity = CreateNoteEntity(annotation);
+            // Prepare the unit test mock target
+            var annotation = new Note
+            {
+                Id = Guid.NewGuid(),
+                CreatedOn = FileHandlingService.DateTimeNow,
+                //Document = _dummyText,
+                IsDocument = true,
+            };
 
             // Setup the unit test mock context
-            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create,
-                HandleFileUploadUponCreate.MaximumAllowedExecutionDepth, targetEntity.LogicalName,
-                (int)SdkMessageProcessingStepStage.PreOperation, targetEntity);
+            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create, HandleFileUploadUponCreate.MaximumAllowedExecutionDepth,
+                annotation.LogicalName, (int)SdkMessageProcessingStepStage.PreOperation, annotation.ToEntity<Entity>());
 
             // Setup the HTTP request
             var headers = new Dictionary<string, string>
             {
-                { HttpRequestHeaders.DynamicsEntityName, targetEntity.LogicalName }
+                { HttpRequestHeaders.DynamicsEntityName, annotation.LogicalName }
             };
 
             // Initialize the unit test
             InitializeUnitTest(headers, context);
 
-            // Setup the plugin mock objects
-            SetupMockObjectsForPlugin();
+            // Setup the local mock objects
+            SetupMockObjectsForService();
 
             #endregion
             #region ACT
@@ -385,18 +414,70 @@
             #endregion
             #region ASSERT
 
-            // Load the modified plugin execution context
-            IPluginExecutionContext rec = DataverseWebhookPlugin.RemoteExecutionContext;
-            Entity modifiedTargetEntity = (Entity)rec.InputParameters[PlatformConstants.TargetText];
-            Note modifiedTarget = modifiedTargetEntity.ToEntity<Note>();
+            // Verifications
+            _csMock?.Verify(x => x.GetEntityByKey(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<ColumnSet>(), It.IsAny<Guid>()), Times.Never);
+            _iesMock?.Verify(x => x.SubmitFileToAV(It.IsAny<Note>()), Times.Never);
+            _iesMock?.Verify(x => x.UploadFileToStorage(It.IsAny<Note>()), Times.Never);
 
             // Assertions
-            Assert.AreNotEqual(modifiedTarget.Document, string.Empty);
-            /*
-            Assert.AreEqual(modifiedTarget.Document, string.Format(CultureInfo.InvariantCulture, 
-                FileHandlingService.TextFormat, modifiedTarget.CreatedOn.Value.ToString(FileHandlingService.DateTimeFormat, 
-                CultureInfo.InvariantCulture)));
-            */
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, res.StatusCode);
+            Assert.AreEqual(FileHandlingService.AnnotationContentIsEmpty, res.Content.ReadAsStringAsync().Result);
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Tests the behavior of the webhook plugin when the current annotation is not a document.
+        /// </summary>
+        [TestMethod]
+        public async System.Threading.Tasks.Task HandleFileUploadUponCreate_FileHandlingService_HandleFileUpload_CurrentNoteIsNotDocumentAsync()
+        {
+            #region ARRANGE
+
+            // Prepare the unit test mock target
+            var annotation = new Note
+            {
+                Id = Guid.NewGuid(),
+                CreatedOn = FileHandlingService.DateTimeNow,
+                IsDocument = false,
+            };
+
+            // Setup the unit test mock context
+            RemoteExecutionContext context = CreateRemoteExecutionContext(PlatformMessageHelper.Create, HandleFileUploadUponCreate.MaximumAllowedExecutionDepth,
+                annotation.LogicalName, (int)SdkMessageProcessingStepStage.PreOperation, annotation.ToEntity<Entity>());
+
+            // Setup the HTTP request
+            var headers = new Dictionary<string, string>
+            {
+                { HttpRequestHeaders.DynamicsEntityName, annotation.LogicalName }
+            };
+
+            // Initialize the unit test
+            InitializeUnitTest(headers, context);
+
+            // Setup the local mock objects
+            SetupMockObjectsForService();
+
+            #endregion
+            #region ACT
+
+            // Execute the webhook plugin step
+            HttpResponseMessage res = await DataverseWebhookPlugin.Execute(DataverseWebhookPlugin.HttpRequestMessage);
+
+            #endregion
+            #region ASSERT
+
+            // Verifications
+            _csMock?.Verify(x => x.GetEntityByKey(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<ColumnSet>(), It.IsAny<Guid>()), Times.Never);
+            _iesMock?.Verify(x => x.SubmitFileToAV(It.IsAny<Note>()), Times.Never);
+            _iesMock?.Verify(x => x.UploadFileToStorage(It.IsAny<Note>()), Times.Never);
+
+            // Assertions
+            Assert.IsNotNull(res);
+            Assert.AreEqual(HttpStatusCode.InternalServerError, res.StatusCode);
+            Assert.AreEqual(FileHandlingService.AnnotationIsNotDocument, res.Content.ReadAsStringAsync().Result);
+
             #endregion
         }
 

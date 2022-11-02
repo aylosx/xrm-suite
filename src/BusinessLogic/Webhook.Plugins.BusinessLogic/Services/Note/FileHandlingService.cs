@@ -6,6 +6,7 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
 
     using Shared.Models.Domain;
 
@@ -23,8 +24,11 @@
         public const string TextFormat = "Code-{0}";
         public const string DateTimeFormat = "yyyyMMddHHmmss";
         public static readonly DateTime DateTimeNow = DateTime.UtcNow;
-        
-        public const string NoteNotExistMessage = "Oups, we were not able to find a note for the given key.";
+
+        public const string AnnotationContentIsEmpty = "The annotation content is empty, only documents with content will be processed by the handler.";
+        public const string AnnotationIsNotDocument = "The annotation is not a document, only documents will be processed by the handler.";
+        public const string RegardingEntityNotExist = "Oups, we were not able to find a record for the given key.";
+        public const string RetrieveEntityFailed = "Oups, an error has occured whilst trying to retrieve the parent record.";
 
         #endregion
 
@@ -51,64 +55,44 @@
         #region Methods
 
         /// <summary>
-        /// Called when a new annotation is create, and handle 
-        /// all the activities related to a new file upload. 
+        /// Called when a new annotation is created, and handles all the activities related to a new file upload. 
         /// </summary>
+        /// <remarks>Throws exception if an error occurs.</remarks>
         public void HandleFileUpload(HttpRequestMessage req)
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
             HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
 
-            /*
-            var serviceClient = CrmService.ServiceClient;
-            serviceClient.CallerId = new Guid("65484825-2be0-ec11-bb3d-0022481a94f4"); // RemoteExecutionContext.InitiatingUserId;
-            */
+            // Non documents are not expected
+            if (!TargetBusinessEntity.IsDocument.GetValueOrDefault(true)) throw new InvalidOperationException(AnnotationIsNotDocument);
 
-            Note annotation = CrmService.GetNoteByKey(RemoteExecutionContext.PrimaryEntityId, RemoteExecutionContext.InitiatingUserId);
-            if (annotation == null) throw new InvalidPluginExecutionException(NoteNotExistMessage);
+            // Documents with no content are not expected
+            if (string.IsNullOrWhiteSpace(TargetBusinessEntity.Document)) throw new InvalidOperationException(AnnotationContentIsEmpty);
 
-            if (HttpMessageSizeExceeded)
-            {
-                /*
-                Note annotation = CrmService.GetNoteByKey(RemoteExecutionContext.PrimaryEntityId, RemoteExecutionContext.InitiatingUserId);
-                if (annotation == null) throw new InvalidPluginExecutionException(NoteNotExistMessage);
-                */
+            // Initiating user must have access to the regarding entity
+            Entity entity = CrmService.GetEntityByKey(TargetBusinessEntity.Regarding.Id, TargetBusinessEntity.Regarding.LogicalName, new ColumnSet(true), RemoteExecutionContext.InitiatingUserId);
+            if (entity == null) throw new InvalidOperationException(RegardingEntityNotExist);
 
-                if (annotation.IsDocument.GetValueOrDefault(true) && !string.IsNullOrWhiteSpace(annotation.Document))
-                {
-                    string mimeType = annotation.MimeType;
-                    string base64Body = annotation.Document;
+            // Upload the content to the AV scanning microservice
+            SubmitFileToAV(TargetBusinessEntity);
 
-                    // TO-DO: Upload the content to the AV scanning microservice
-                    // virtual
-                    // TO-DO: Upload the content to the Azure BLOB storage
-                    // virtual
-                    // TO-DO: Remove the content from the Dataverse storage in the pre-create plugin
-                }
-            }
-            else
-            {
-                if (TargetBusinessEntity.IsDocument.GetValueOrDefault(true) && !string.IsNullOrWhiteSpace(TargetBusinessEntity.Document))
-                {
-                    string mimeType = TargetBusinessEntity.MimeType;
-                    string base64Body = TargetBusinessEntity.Document;
+            // Upload the content to the Azure BLOB storage
+            UploadFileToStorage(TargetBusinessEntity);
 
-                    // TO-DO: Upload the content to the AV scanning microservice
-                    // virtual
-                    // TO-DO: Upload the content to the Azure BLOB storage
-                    // virtual
-                    // TO-DO: Remove the content from the Dataverse storage in the pre-create plugin
-                }
-            }
+            // Clear the content of the document
+            TargetBusinessEntity.Document = null;
+
+            // Amend the target entity with all the updates
+            RemoteExecutionContext.InputParameters[PlatformConstants.TargetText] = TargetBusinessEntity.ToEntity<Entity>();
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
 
         /// <summary>
-        /// Called when an annotation is deleted, and handles 
-        /// all the activities related to a file deletion. 
+        /// Called when an annotation is deleted, and handles all the activities related to a file deletion. 
         /// </summary>
+        /// <remarks>Throws exception if an error occurs.</remarks>
         public void HandleFileDeletion(HttpRequestMessage req)
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
@@ -119,9 +103,9 @@
         }
 
         /// <summary>
-        /// Called when an annotation is retrieved, and handles 
-        /// all the activities related to a file download. 
+        /// Called when an annotation is retrieved, and handles all the activities related to a file download. 
         /// </summary>
+        /// <remarks>Throws exception if an error occurs.</remarks>
         public void HandleFileDownload(HttpRequestMessage req)
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
@@ -133,7 +117,51 @@
 
         #endregion
 
-        #region Private Members
+        #region Virtual Members
+
+        /// <summary>
+        /// Submits a file to the AV scanning microservice.
+        /// </summary>
+        /// <param name="annotation">The annotation entity.</param>
+        /// <remarks>Throws exception if an error occurs.</remarks>
+        public virtual void SubmitFileToAV(Note annotation)
+        {
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            /**
+             * TO-DO: Upload the content to the AV scanning microservice
+             * Throw error if the AV microservice reports an issue with the file
+             * Consider implementing auto-repeat if a connection issue occurs
+             **/
+
+            throw new NotImplementedException("SubmitFileToAV");
+
+#pragma warning disable CS0162 // Unreachable code detected
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+#pragma warning restore CS0162 // Unreachable code detected
+        }
+
+        /// <summary>
+        /// Submits a file to the upload storage microservice.
+        /// </summary>
+        /// <param name="annotation">The annotation entity.</param>
+        /// <remarks>Throws exception if an error occurs.</remarks>
+        public virtual void UploadFileToStorage(Note annotation)
+        {
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            /**
+             * TO-DO: Upload the file to the storage microservice
+             * Throw error if the storage microservice reports an issue
+             * Consider implementing auto-repeat if a connection issue occurs
+             **/
+
+            throw new NotImplementedException("UploadFileToStorage");
+
+#pragma warning disable CS0162 // Unreachable code detected
+            Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+#pragma warning restore CS0162 // Unreachable code detected
+        }
 
         #endregion
 
