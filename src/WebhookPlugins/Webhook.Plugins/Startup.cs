@@ -1,5 +1,5 @@
 ﻿using Aylos.Xrm.Sdk.Core.WebhookPlugins;
-using Azure.Core;
+
 using Azure.Identity;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
@@ -8,14 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.PowerPlatform.Dataverse.Client;
-using Microsoft.Xrm.Sdk;
 
 using Shared.Models.Domain;
 
 using System;
 using System.IO;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 using Webhook.Plugins.BusinessLogic.Services.Data;
 using Webhook.Plugins.BusinessLogic.Services.Note;

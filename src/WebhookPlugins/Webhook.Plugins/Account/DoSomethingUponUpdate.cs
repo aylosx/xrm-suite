@@ -5,6 +5,7 @@ namespace Webhook.Plugins.Account
 
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.PowerPlatform.Dataverse.Client;
     using Microsoft.Xrm.Sdk;
@@ -26,6 +27,7 @@ namespace Webhook.Plugins.Account
 
         public DoSomethingUponUpdate() { }
 
+        [ActivatorUtilitiesConstructor]
         public DoSomethingUponUpdate(ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
             : base(serviceClient, loggerFactory)
         {

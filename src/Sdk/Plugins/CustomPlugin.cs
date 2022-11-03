@@ -43,43 +43,6 @@ namespace Aylos.Xrm.Sdk.Plugins
 
         public IServiceEndpointNotificationService NotificationService { get; set; }
 
-        /*
-        public PluginExecutionContext ExecutionContext
-        {
-            get
-            {
-                return new PluginExecutionContext
-                {
-                    BusinessUnitId = PluginExecutionContext.BusinessUnitId,
-                    CorrelationId = PluginExecutionContext.CorrelationId,
-                    Depth = PluginExecutionContext.Depth,
-                    InitiatingUserId = PluginExecutionContext.InitiatingUserId,
-                    InputParameters = PluginExecutionContext.InputParameters,
-                    IsExecutingOffline = PluginExecutionContext.IsExecutingOffline,
-                    IsInTransaction = PluginExecutionContext.IsInTransaction,
-                    IsOfflinePlayback = PluginExecutionContext.IsOfflinePlayback,
-                    IsolationMode = PluginExecutionContext.IsolationMode,
-                    MessageName = PluginExecutionContext.MessageName,
-                    Mode = PluginExecutionContext.Mode,
-                    OperationCreatedOn = PluginExecutionContext.OperationCreatedOn,
-                    OperationId = PluginExecutionContext.OperationId,
-                    OrganizationId = PluginExecutionContext.OrganizationId,
-                    OrganizationName = PluginExecutionContext.OrganizationName,
-                    OutputParameters = PluginExecutionContext.OutputParameters,
-                    OwningExtension = PluginExecutionContext.OwningExtension,
-                    PostEntityImages = PluginExecutionContext.PostEntityImages,
-                    PreEntityImages = PluginExecutionContext.PreEntityImages,
-                    PrimaryEntityId = PluginExecutionContext.PrimaryEntityId,
-                    PrimaryEntityName = PluginExecutionContext.PrimaryEntityName,
-                    RequestId = PluginExecutionContext.RequestId,
-                    SecondaryEntityName = PluginExecutionContext.SecondaryEntityName,
-                    SharedVariables = PluginExecutionContext.SharedVariables,
-                    Stage = PluginExecutionContext.Stage,
-                    UserId = PluginExecutionContext.UserId
-                };
-            }
-        }*/
-
         public ITracingService TracingService { get; set; }
         
         public IServiceProvider ServiceProvider { get; set; }

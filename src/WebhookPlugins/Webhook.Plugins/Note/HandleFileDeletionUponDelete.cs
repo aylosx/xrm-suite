@@ -19,6 +19,7 @@ namespace Webhook.Plugins.Note
 
     using Webhook.Plugins.BusinessLogic.Services.Note;
     using Webhook.Plugins.BusinessLogic.Services.Data;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class HandleFileDeletionUponDelete : DataverseWebhookPlugin
     {
@@ -26,6 +27,7 @@ namespace Webhook.Plugins.Note
 
         public HandleFileDeletionUponDelete() { }
 
+        [ActivatorUtilitiesConstructor]
         public HandleFileDeletionUponDelete(IHttpClientFactory httpClientFactory, ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
             : base(serviceClient, loggerFactory)
         {

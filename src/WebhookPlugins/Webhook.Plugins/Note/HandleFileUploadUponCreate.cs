@@ -6,6 +6,7 @@ namespace Webhook.Plugins.Note
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Extensions.Http;
     using Microsoft.PowerPlatform.Dataverse.Client;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Xrm.Sdk;
 
@@ -26,6 +27,7 @@ namespace Webhook.Plugins.Note
 
         public HandleFileUploadUponCreate() { }
 
+        [ActivatorUtilitiesConstructor]
         public HandleFileUploadUponCreate(IHttpClientFactory httpClientFactory, ICrmService crmService, ServiceClient serviceClient, ILoggerFactory loggerFactory) 
             : base(serviceClient, loggerFactory)
         {
