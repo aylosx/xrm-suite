@@ -32,7 +32,7 @@ namespace Webhook.Plugins.Note
             : base(serviceClient, loggerFactory)
         {
             if (httpClientFactory == null) throw new ArgumentNullException(nameof(httpClientFactory));
-            HttpClient = httpClientFactory.CreateClient("fileapi");
+            HttpClient = httpClientFactory.CreateClient(FileHandlingServiceConfig.FileApiConfig);
             CrmService = crmService ?? throw new ArgumentNullException(nameof(crmService));
         }
 
@@ -83,10 +83,10 @@ namespace Webhook.Plugins.Note
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            using (FileHandlingService ??= new FileHandlingService(HttpClient, CrmService, ServiceClient, RemoteExecutionContext, LoggerFactory))
+            using (FileHandlingService ??= new FileHandlingService(HttpClient, CrmService, ServiceClient, RemoteExecutionContext, HttpRequestMessage, LoggerFactory))
             {
                 Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "{0} | {1} started at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
-                FileHandlingService.HandleFileDeletion(HttpRequestMessage);
+                FileHandlingService.HandleFileDeletion();
                 Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "{0} | {1} ended at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
             }
 

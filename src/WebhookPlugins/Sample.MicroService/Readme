@@ -1,0 +1,16 @@
+﻿For debugging create the local.settings.json and add the following and anything else that 
+would need in your development environment but should not be pushed into the repository.
+
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  }
+}
+
+The local.settings.json has been added in the .gitignore file to be ignored by Git commits
+
+The following command has been added in the Startup.cs 
+
+.AddJsonFile(Path.Combine(context.ApplicationRootPath, "local.settings.json"), optional: true, reloadOnChange: true)

@@ -422,7 +422,6 @@
             // Assertions
             Assert.IsNotNull(res);
             Assert.AreEqual(HttpStatusCode.InternalServerError, res.StatusCode);
-            Assert.AreEqual(FileHandlingService.AnnotationContentIsEmpty, res.Content.ReadAsStringAsync().Result);
 
             #endregion
         }
@@ -476,7 +475,6 @@
             // Assertions
             Assert.IsNotNull(res);
             Assert.AreEqual(HttpStatusCode.InternalServerError, res.StatusCode);
-            Assert.AreEqual(FileHandlingService.AnnotationIsNotDocument, res.Content.ReadAsStringAsync().Result);
 
             #endregion
         }

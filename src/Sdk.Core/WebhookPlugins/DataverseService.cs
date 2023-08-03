@@ -18,11 +18,13 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     {
         #region Constructor
 
-        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory)
+        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, HttpRequestMessage requestMessage, ILoggerFactory loggerFactory)
         {
             ServiceClient = serviceClient ?? throw new ArgumentNullException(nameof(serviceClient));
 
             RemoteExecutionContext = remoteExecutionContext ?? throw new ArgumentNullException(nameof(remoteExecutionContext));
+
+            HttpRequestMessage = requestMessage ?? throw new ArgumentNullException(nameof(requestMessage));
 
             ServiceClient.SessionTrackingId = RemoteExecutionContext.CorrelationId;
 
@@ -108,8 +110,8 @@ namespace Aylos.Xrm.Sdk.Core.WebhookPlugins
     {
         #region Constructor
 
-        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
-            : base(serviceClient, remoteExecutionContext, loggerFactory)
+        public DataverseService(ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, HttpRequestMessage requestMessage, ILoggerFactory loggerFactory) 
+            : base(serviceClient, remoteExecutionContext, requestMessage, loggerFactory)
         {
 
         }

@@ -1,7 +1,6 @@
 ﻿namespace Plugins.Note
 {
     using Aylos.Xrm.Sdk.Common;
-    using Aylos.Xrm.Sdk.Plugins;
 
     using Microsoft.Xrm.Sdk;
 
@@ -11,11 +10,12 @@
 
     using System.Globalization;
     using System.Reflection;
+    using System.Net.Http;
 
     /// <summary>
     /// Initializes the entity upon creation. 
     /// </summary>
-    public class InitializeEntityUponCreate : CustomPlugin
+    public class InitializeEntityUponCreate : HttpCustomPlugin
     {
         #region Constructors
 
@@ -65,7 +65,7 @@
 
             using (OrganizationServiceContext = OrganizationServiceContext ?? new CrmServiceContext(CurrentUserService))
             using (CrmService = CrmService ?? new CrmService(OrganizationServiceContext, TracingService))
-            using (InitializeEntityService = InitializeEntityService ?? new InitializeEntityService(CrmService, OrganizationServiceContext, PluginExecutionContext, TracingService))
+            using (InitializeEntityService = InitializeEntityService ?? new InitializeEntityService(CrmService, OrganizationServiceContext, PluginExecutionContext, TracingService, HttpClientFactory.CreateClient()))
             {
                 Trace(string.Format(CultureInfo.InvariantCulture, "{0} | {1} started at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
                 InitializeEntityService.InitializeEntity();

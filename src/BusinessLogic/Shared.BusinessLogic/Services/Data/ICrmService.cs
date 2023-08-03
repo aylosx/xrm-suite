@@ -1,12 +1,13 @@
 ﻿namespace Shared.BusinessLogic.Services.Data
 {
-    using System;
-    using System.Collections.Generic;
-
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Client;
+    using Microsoft.Xrm.Sdk.Query;
 
     using Shared.Models.Domain;
+
+    using System;
+    using System.Collections.Generic;
 
     public interface ICrmService : IDisposable
     {
@@ -17,6 +18,23 @@
         /// <param name="primaryKey">The entity's primary key</param>
         /// <returns>BusinessEntity entity</returns>
         void DeleteEntity(string logicalName, Guid primaryKey);
+
+        /// <summary>
+        /// Retrieves the entity for the given primary key and logical name.
+        /// </summary>
+        /// <param name="logicalName">The entity's logical name</param>
+        /// <param name="primaryKey">The entity's primary key</param>
+        /// <returns>Entity entity</returns>
+        Entity RetrieveEntity(string logicalName, Guid primaryKey);
+
+        /// <summary>
+        /// Retrieves the entity for the given primary key and logical name.
+        /// </summary>
+        /// <param name="logicalName">The entity's logical name</param>
+        /// <param name="primaryKey">The entity's primary key</param>
+        /// <param name="columnSet">The set of the columns to be retrieved</param>
+        /// <returns>Entity entity</returns>
+        Entity RetrieveEntity(string logicalName, Guid primaryKey, ColumnSet columnSet);
 
         /// <summary>
         /// Retrieves Account entity for the given primary key

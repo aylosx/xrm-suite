@@ -5,6 +5,7 @@
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Client;
     using Microsoft.Xrm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk.Query;
 
     using Shared.Models.Domain;
 
@@ -73,7 +74,7 @@
         /// </summary>
         /// <param name="logicalName">The entity's logical name</param>
         /// <param name="primaryKey">The entity's primary key</param>
-        /// <returns>BusinessEntity entity</returns>
+        /// <returns>void()</returns>
         public virtual void DeleteEntity(string logicalName, Guid primaryKey)
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
@@ -86,6 +87,42 @@
             OrganizationServiceContext.Execute(req);
 
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+        }
+
+        /// <summary>
+        /// Retrieves the entity for the given primary key and logical name.
+        /// </summary>
+        /// <param name="logicalName">The entity's logical name</param>
+        /// <param name="primaryKey">The entity's primary key</param>
+        /// <returns>Entity entity</returns>
+        public virtual Entity RetrieveEntity(string logicalName, Guid primaryKey)
+        {
+            return RetrieveEntity(logicalName, primaryKey, null);
+        }
+
+        /// <summary>
+        /// Retrieves the entity for the given primary key and logical name.
+        /// </summary>
+        /// <param name="logicalName">The entity's logical name</param>
+        /// <param name="primaryKey">The entity's primary key</param>
+        /// <param name="columnSet">The set of the columns to be retrieved</param>
+        /// <returns>Entity entity</returns>
+        public virtual Entity RetrieveEntity(string logicalName, Guid primaryKey, ColumnSet columnSet)
+        {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            if (string.IsNullOrWhiteSpace(logicalName)) throw new ArgumentNullException(nameof(logicalName));
+            if (Guid.Empty.Equals(primaryKey)) throw new ArgumentNullException(nameof(primaryKey));
+
+            RetrieveRequest req = columnSet == null 
+                ? new RetrieveRequest { Target = new EntityReference(logicalName, primaryKey) }
+                : new RetrieveRequest { Target = new EntityReference(logicalName, primaryKey), ColumnSet = columnSet };
+
+            RetrieveResponse res = (RetrieveResponse)OrganizationServiceContext.Execute(req);
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, SystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            return res?.Entity;
         }
 
         /// <summary>

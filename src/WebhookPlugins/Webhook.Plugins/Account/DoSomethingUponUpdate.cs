@@ -52,7 +52,7 @@ namespace Webhook.Plugins.Account
 
         public ICrmService CrmService { get; set; }
 
-        public IDoSomethingService DoSomethingService { get; set; }
+        public ISampleService SampleService { get; set; }
 
         #endregion
 
@@ -79,10 +79,10 @@ namespace Webhook.Plugins.Account
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            using (DoSomethingService ??= new DoSomethingService(CrmService, ServiceClient, RemoteExecutionContext, LoggerFactory))
+            using (SampleService ??= new SampleService(CrmService, ServiceClient, RemoteExecutionContext, HttpRequestMessage, LoggerFactory))
             {
                 Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "{0} | {1} started at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
-                DoSomethingService.DoSomething(HttpRequestMessage);
+                SampleService.DoSomething();
                 Logger.LogInformation(string.Format(CultureInfo.InvariantCulture, "{0} | {1} ended at {2} milliseconds", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, Stopwatch.ElapsedMilliseconds));
             }
 

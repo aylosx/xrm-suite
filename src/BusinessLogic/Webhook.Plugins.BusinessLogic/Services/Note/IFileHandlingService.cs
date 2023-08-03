@@ -11,11 +11,11 @@
     {
         ICrmService CrmService { get; set; }
 
-        void HandleFileUpload(HttpRequestMessage req);
+        void HandleFileUpload();
 
-        void HandleFileDeletion(HttpRequestMessage req);
+        void HandleFileDeletion();
 
-        void HandleFileDownload(HttpRequestMessage req);
+        void HandleFileDownload();
 
         void SubmitFileToAV(Note annotation);
 

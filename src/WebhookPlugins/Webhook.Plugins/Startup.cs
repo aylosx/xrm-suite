@@ -34,7 +34,7 @@ namespace Webhook.Plugins
             var fileApiConfig = new FileHandlingServiceConfig();
             context.Configuration.Bind(FileHandlingServiceConfig.FileApiConfig, fileApiConfig);
 
-            builder.Services.AddHttpClient<IFileHandlingService, FileHandlingService>("fileapi", client =>
+            builder.Services.AddHttpClient<IFileHandlingService, FileHandlingService>(FileHandlingServiceConfig.FileApiConfig, client =>
             {
                 client.BaseAddress = new Uri(fileApiConfig.BaseAddress);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

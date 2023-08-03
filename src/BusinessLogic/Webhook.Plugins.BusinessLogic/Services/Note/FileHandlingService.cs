@@ -25,8 +25,6 @@
         public const string DateTimeFormat = "yyyyMMddHHmmss";
         public static readonly DateTime DateTimeNow = DateTime.UtcNow;
 
-        public const string AnnotationContentIsEmpty = "The annotation content is empty, only documents with content will be processed by the handler.";
-        public const string AnnotationIsNotDocument = "The annotation is not a document, only documents will be processed by the handler.";
         public const string RegardingEntityNotExist = "Oups, we were not able to find a record for the given key.";
         public const string RetrieveEntityFailed = "Oups, an error has occured whilst trying to retrieve the parent record.";
 
@@ -42,8 +40,8 @@
 
         #region Constructor
 
-        public FileHandlingService(HttpClient httpClient, ICrmService crmService, ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, ILoggerFactory loggerFactory) 
-            : base(serviceClient, remoteExecutionContext, loggerFactory)
+        public FileHandlingService(HttpClient httpClient, ICrmService crmService, ServiceClient serviceClient, RemoteExecutionContext remoteExecutionContext, HttpRequestMessage requestMessage, ILoggerFactory loggerFactory) 
+            : base(serviceClient, remoteExecutionContext, requestMessage, loggerFactory)
         {
             HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
@@ -58,33 +56,15 @@
         /// Called when a new annotation is created, and handles all the activities related to a new file upload. 
         /// </summary>
         /// <remarks>Throws exception if an error occurs.</remarks>
-        public void HandleFileUpload(HttpRequestMessage req)
+        public void HandleFileUpload()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
-
-            HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
-
-            // Non documents are not expected
-            if (!TargetBusinessEntity.IsDocument.GetValueOrDefault(true)) throw new InvalidOperationException(AnnotationIsNotDocument);
-
-            // Documents with no content are not expected
-            if (string.IsNullOrWhiteSpace(TargetBusinessEntity.Document)) throw new InvalidOperationException(AnnotationContentIsEmpty);
-
-            // Initiating user must have access to the regarding entity
-            Entity entity = CrmService.GetEntityByKey(TargetBusinessEntity.Regarding.Id, TargetBusinessEntity.Regarding.LogicalName, new ColumnSet(true), RemoteExecutionContext.InitiatingUserId);
-            if (entity == null) throw new InvalidOperationException(RegardingEntityNotExist);
 
             // Upload the content to the AV scanning microservice
             SubmitFileToAV(TargetBusinessEntity);
 
             // Upload the content to the Azure BLOB storage
             UploadFileToStorage(TargetBusinessEntity);
-
-            // Clear the content of the document
-            TargetBusinessEntity.Document = null;
-
-            // Amend the target entity with all the updates
-            RemoteExecutionContext.InputParameters[PlatformConstants.TargetText] = TargetBusinessEntity.ToEntity<Entity>();
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
@@ -93,11 +73,9 @@
         /// Called when an annotation is deleted, and handles all the activities related to a file deletion. 
         /// </summary>
         /// <remarks>Throws exception if an error occurs.</remarks>
-        public void HandleFileDeletion(HttpRequestMessage req)
+        public void HandleFileDeletion()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
-
-            HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
@@ -106,11 +84,9 @@
         /// Called when an annotation is retrieved, and handles all the activities related to a file download. 
         /// </summary>
         /// <remarks>Throws exception if an error occurs.</remarks>
-        public void HandleFileDownload(HttpRequestMessage req)
+        public void HandleFileDownload()
         {
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
-
-            HttpRequestMessage = req ?? throw new ArgumentNullException(nameof(req));
 
             Logger.LogTrace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }

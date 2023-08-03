@@ -1,16 +1,19 @@
 ﻿namespace Shared.BusinessLogic.Services.Note
 {
     using Aylos.Xrm.Sdk.Common;
+    using Aylos.Xrm.Sdk.Plugins;
 
     using Microsoft.Xrm.Sdk;
-    using Microsoft.Xrm.Sdk.Client;
 
     using Shared.BusinessLogic.Services.Data;
     using Shared.Models.Domain;
 
     using System;
     using System.Globalization;
+    using System.Net.Http;
     using System.Reflection;
+    using System.Text;
+    using System.Web;
 
     public class InitializeEntityService : GenericService<CrmServiceContext, Note>, IInitializeEntityService
     {
@@ -20,7 +23,7 @@
         public const string DateTimeFormat = "yyyyMMddHHmmss";
         public static readonly DateTime DateTimeNow = DateTime.UtcNow;
 
-        public const string ExcludedEntities = "adx_";
+        public const string PortalEntitiesPrefix = "adx_";
 
         #endregion
 
@@ -32,6 +35,12 @@
         /// <value>The CRM service object instance.</value>
         public ICrmService CrmService { get; set; }
 
+        /// <summary>
+        /// Gets or sets the HTTP client.
+        /// </summary>
+        /// <value>The HTTP client object instance.</value>
+        public HttpClient HttpClient { get; set; }
+
         #endregion
 
         #region Constructor
@@ -40,9 +49,10 @@
         /// InitializeEntityService Constructor
         /// </summary>
         /// <param name="tracingService">ITracingService</param>
-        public InitializeEntityService(ITracingService tracingService)
+        public InitializeEntityService(ITracingService tracingService, HttpClient httpClient)
         {
             TracingService = tracingService;
+            HttpClient = httpClient;
         }
 
         /// <summary>
@@ -50,8 +60,8 @@
         /// </summary>
         /// <param name="pluginExecutionContext">IPluginExecutionContext</param>
         /// <param name="tracingService">ITracingService</param>
-        public InitializeEntityService(IPluginExecutionContext pluginExecutionContext, ITracingService tracingService)
-            : this(tracingService)
+        public InitializeEntityService(IPluginExecutionContext pluginExecutionContext, ITracingService tracingService, HttpClient httpClient)
+            : this(tracingService, httpClient)
         {
             PluginExecutionContext = pluginExecutionContext;
         }
@@ -62,8 +72,8 @@
         /// <param name="crmService">ICrmService</param>
         /// <param name="pluginExecutionContext">IPluginExecutionContext</param>
         /// <param name="tracingService">ITracingService</param>
-        public InitializeEntityService(ICrmService crmService, IPluginExecutionContext pluginExecutionContext, ITracingService tracingService)
-            : this(pluginExecutionContext, tracingService)
+        public InitializeEntityService(ICrmService crmService, IPluginExecutionContext pluginExecutionContext, ITracingService tracingService, HttpClient httpClient)
+            : this(pluginExecutionContext, tracingService, httpClient)
         {
             CrmService = crmService;
         }
@@ -75,8 +85,8 @@
         /// <param name="organizationServiceContext">OrganizationServiceContext</param>
         /// <param name="pluginExecutionContext">IPluginExecutionContext</param>
         /// <param name="tracingService">ITracingService</param>
-        public InitializeEntityService(ICrmService crmService, CrmServiceContext organizationServiceContext, IPluginExecutionContext pluginExecutionContext, ITracingService tracingService)
-            : this(crmService, pluginExecutionContext, tracingService)
+        public InitializeEntityService(ICrmService crmService, CrmServiceContext organizationServiceContext, IPluginExecutionContext pluginExecutionContext, ITracingService tracingService, HttpClient httpClient)
+            : this(crmService, pluginExecutionContext, tracingService, httpClient)
         {
             OrganizationServiceContext = organizationServiceContext;
         }
@@ -86,18 +96,70 @@
         #region Methods
 
         /// <summary>
-        /// Initializes the entity, by updating the target entity in the execution context.
-        /// Initializes the annotation number
+        /// Initializes the entity, by updating the target entity as defined in the business logic. Submits 
+        /// the annotation body for scanning and uploads it to the storage, then clears the body and
+        /// updates the execution context with the new version of the annotation.
         /// </summary>
         public void InitializeEntity()
         {
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
 
-            // TO-DO: Check excluded entities - exit
-            // TO-DO: Check access of the parent entity - throw exception
-            // TO-DO: Call the Webhook Plugin (Azure Function) - upload the file
-            // TO-DO: Clear the body of the document - update the Plugin execution context
+            // Exit if the annotation is not an attachment
+            if (TargetBusinessEntity.IsDocument.GetValueOrDefault(false))
+            {
+                Trace(string.Format(CultureInfo.InvariantCulture, "{0} | Annotation is not an attachment rule applied | {1}.", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.AbortingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+
+            // Exit if the parent entity is excluded
+            if (TargetBusinessEntity.Regarding.LogicalName.StartsWith(PortalEntitiesPrefix)) 
+            {
+                Trace(string.Format(CultureInfo.InvariantCulture, "{0} | Excluded entity rule applied | {1}.", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.AbortingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+
+            // Exit if the parent entity cannot be accessed
+            Entity parentEntity = CrmService.RetrieveEntity(TargetBusinessEntity.Regarding.LogicalName, TargetBusinessEntity.Regarding.Id);
+            if (parentEntity == null) 
+            {
+                Trace(string.Format(CultureInfo.InvariantCulture, "{0} | Parent entity access rule applied | {1}.", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.AbortingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+                return;
+            }
+
+            // Call the Webhook Plugin (upload the file)
+            UploadExecutionContext(ExecutionContext);
+
+            // Clear the body of the document
+            TargetBusinessEntity.Document = null; 
+
+            // Update the Plugin execution context
             PluginExecutionContext.InputParameters[PlatformConstants.TargetText] = TargetBusinessEntity.ToEntity<Entity>();
+
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+        }
+
+        public virtual async void UploadExecutionContext(PluginExecutionContext executionContext)
+        {
+            Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.EnteredMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
+
+            var payload = new StringContent(SerializationHelper.SerializeJson(executionContext), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await HttpClient.PostAsync("api/webhook/plugins/annotation/handle-file-upload", payload);
+            var statusCode = response.StatusCode;
+            string responseJson = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw
+                    new InvalidPluginExecutionException("An error occured whilst trying to upload the file.",
+                    new HttpException(string.Format(CultureInfo.InvariantCulture, "Status: {0} | {1}", statusCode, responseJson)));
+            }
+            else 
+            {
+                Trace(string.Format(CultureInfo.InvariantCulture, "HTTP Status: {0} | {1} | {2}", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, statusCode));
+                Trace(string.Format(CultureInfo.InvariantCulture, "HTTP Response: {0} | {1} | {2}", UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name, responseJson));
+            }
 
             Trace(string.Format(CultureInfo.InvariantCulture, TraceMessageHelper.ExitingMethod, UnderlyingSystemTypeName, MethodBase.GetCurrentMethod().Name));
         }
